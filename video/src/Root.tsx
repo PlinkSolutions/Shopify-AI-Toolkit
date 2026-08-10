@@ -5,12 +5,25 @@ import { Logo, myCompSchema2 } from "./HelloWorld/Logo";
 import { MyComp } from "./MyComp";
 import { Hello } from "./Hello";
 import { SkyHello } from "./SkyHello";
+import { HelloSound } from "./HelloSound";
 
 // Each <Composition> is an entry in the sidebar!
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="HelloSound"
+        component={HelloSound}
+        durationInFrames={90}
+        fps={30}
+        width={1920}
+        height={1080}
+        defaultProps={{
+          text: "hello",
+          audioFile: "chime.wav",
+        }}
+      />
       <Composition
         id="SkyHello"
         component={SkyHello}
