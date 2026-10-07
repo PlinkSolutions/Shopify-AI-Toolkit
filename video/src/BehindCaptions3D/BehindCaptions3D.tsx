@@ -19,7 +19,7 @@ import { CaptionPage, CaptionWord, PAGES } from "./pages";
 // Keep in sync with scripts/behind-captions/make_pages_3d.py
 const LINE_HEIGHT = 0.8;
 const LETTER_SPACING = -0.01;
-const SPACE_EM = 0.22;
+const SPACE_EM = 0.3;
 
 const FILL = "#ffe100";
 const EXTRUDE_FROM = "#d9a800";
@@ -59,7 +59,8 @@ const Word: React.FC<{
   const s = spring({
     frame: local,
     fps,
-    config: { damping: 12, stiffness: 190, mass: 0.6 },
+    // light bounce only: a big overshoot makes neighbouring words collide
+    config: { damping: 16, stiffness: 190, mass: 0.6 },
   });
   const opacity = interpolate(local, [0, 2], [0, 1], {
     extrapolateLeft: "clamp",

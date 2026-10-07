@@ -40,7 +40,8 @@ Big Gluten 900 captions in yellow `#ffe100` with a dark-gold 3D extrusion,
 1–2 lines per page, behind the speaker. `make_pages_3d.py` tries 1/2-line
 layouts, sizes and heights, rasterises every glyph and measures with the
 matte how much of each letter's ink the speaker hides (soft hair counts):
-no letter loses more than 30 %, and the layout aims for ~10 % overlap so
+no letter loses more than 30 % (nor more than half of an ascender or
+descender, so a p never turns into an o), and the layout aims for ~10 % overlap so
 the text clearly passes behind them. Pages never end on a function word
 (el, la, de, a, y, que…). Needs `fonttools` and `Pillow`.
 `make_pages_3d.py words.json matte.mp4 ffmpeg

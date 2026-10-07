@@ -22,12 +22,13 @@ CUTS = [0, 240, 480, 720]
 # Must match BehindCaptions3D.tsx
 LINE_HEIGHT = 0.8          # em, tight like a poster title
 LETTER_SPACING = -0.01     # em
-SPACE_EM = 0.22            # gap between words, em
+SPACE_EM = 0.30            # gap between words, em
 
 SIDE_MARGIN = 40
 TOP_MARGIN = 120
 MAX_FONT, MIN_FONT = 330, 80
 MAX_LETTER_COVER = 0.30    # never hide more than this share of any letter's ink
+MAX_ZONE_COVER = 0.50      # ...nor more than half of an ascender / descender (b, d, l, p, g, j...)
 TARGET_COVER = 0.10        # overlap we aim for, so the text reads as "behind"
 HIDDEN_SHARE = 0.1         # a pixel counts as hidden if the speaker covers it in >= 10% of the page's frames
 MAX_CHARS = 16             # per page
@@ -119,8 +120,9 @@ def glyph_em(c):
     return (hmtx[cmap[ord(c)]][0] if ord(c) in cmap else upm * 0.5) / upm + LETTER_SPACING
 
 def letter_covers(hidden, lines, fs, top):
-    """Share of each letter's ink hidden by the speaker, plus ink areas."""
-    covs, areas = [], []
+    """Share of each letter's ink hidden by the speaker, the worst hidden
+    share of its ascender/descender zones, and ink areas."""
+    covs, zones, areas = [], [], []
     for li, line in enumerate(lines):
         texts = [show(w["text"]) for w in line]
         total = sum(word_em(t) for t in texts) * fs + SPACE_EM * fs * (len(line) - 1)
@@ -128,15 +130,23 @@ def letter_covers(hidden, lines, fs, top):
         base = top + li * LINE_HEIGHT * fs + BASELINE_IN_LINE * fs
         for t in texts:
             for c in t:
-                ys, xs = glyph_ink(c, int(fs))
-                if len(ys):
-                    ys = ys + int(round(base / 4)); xs = xs + int(round(x / 4))
+                gy, gx = glyph_ink(c, int(fs))
+                if len(gy):
+                    ys = gy + int(round(base / 4)); xs = gx + int(round(x / 4))
                     ok = (ys >= 0) & (ys < 480) & (xs >= 0) & (xs < 270)
-                    covs.append(hidden[ys[ok], xs[ok]].mean() if ok.any() else 0.0)
+                    hid = np.zeros(len(ys), np.float32)
+                    hid[ok] = hidden[ys[ok], xs[ok]]
+                    covs.append(float(hid.mean()))
+                    xh = -XH * fs / 4                      # glyph y is relative to the baseline
+                    worst = 0.0
+                    for zone in (gy < xh * 1.05, gy > 1):  # ascender, descender
+                        if zone.sum() >= 4:
+                            worst = max(worst, float(hid[zone].mean()))
+                    zones.append(worst)
                     areas.append(len(ys))
                 x += glyph_em(c) * fs
             x += SPACE_EM * fs
-    return covs, areas
+    return covs, zones, areas
 
 result = []
 for pi, p in enumerate(pages):
@@ -156,12 +166,13 @@ for pi, p in enumerate(pages):
         for fs in np.arange(fs_cap, MIN_FONT - 1, -10):
             block_h = LINE_HEIGHT * fs * len(lines)
             for top in range(TOP_MARGIN, int(H * 0.6 - block_h), 10):
-                covs, areas = letter_covers(hidden, lines, fs, top)
+                covs, zones, areas = letter_covers(hidden, lines, fs, top)
                 total = float(np.dot(covs, areas) / sum(areas))
-                cand = (max(covs), -float(fs), top, lines, total)
+                worst = max(max(covs) / MAX_LETTER_COVER, max(zones) / MAX_ZONE_COVER)
+                cand = (worst, -float(fs), top, lines, total)
                 if fallback is None or cand[:2] < fallback[:2]:
                     fallback = cand
-                if max(covs) > MAX_LETTER_COVER:
+                if worst > 1:
                     continue
                 score = fs - 300 * abs(total - TARGET_COVER) - (25 if len(lines) == 2 and len(p) < 2 else 0)
                 if best is None or score > best[0]:
