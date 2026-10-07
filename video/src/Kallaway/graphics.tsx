@@ -123,6 +123,7 @@ export const Stamp: React.FC<{ text: string; color?: string; rotate?: number; de
         fontWeight: 800,
         fontSize: size,
         letterSpacing: "0.06em",
+        whiteSpace: "nowrap",
         opacity: opacity * 0.92,
         transform: `rotate(${rotate}deg) scale(${scale})`,
         background: "rgba(255,255,255,0.55)",
@@ -144,7 +145,8 @@ export const HandNote: React.FC<{ text: string; delay?: number; rotate?: number;
   style,
 }) => {
   const frame = useCurrentFrame();
-  const p = interpolate(frame - delay, [0, Math.max(8, text.length * 1.2)], [0, 100], clamp);
+  // written quickly (~0.55 frame per letter) so it finishes inside short scenes
+  const p = interpolate(frame - delay, [0, Math.max(6, text.length * 0.55)], [0, 100], clamp);
   return (
     <div
       style={{
@@ -154,7 +156,8 @@ export const HandNote: React.FC<{ text: string; delay?: number; rotate?: number;
         fontSize: size,
         color,
         transform: `rotate(${rotate}deg)`,
-        clipPath: `inset(-20% ${100 - p}% -20% -5%)`,
+        // negative right inset once done, so the slanted last letter is not clipped
+        clipPath: `inset(-30% ${p >= 100 ? -15 : 100 - p}% -30% -10%)`,
         whiteSpace: "nowrap",
         ...style,
       }}
@@ -174,6 +177,9 @@ export const TypeText: React.FC<{ text: string; delay?: number; cps?: number; ca
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  if (frame < delay) {
+    return null; // no lonely caret before typing starts
+  }
   const n = Math.max(0, Math.floor(((frame - delay) / fps) * cps));
   const done = n >= text.length;
   const blink = Math.floor(frame / 15) % 2 === 0;

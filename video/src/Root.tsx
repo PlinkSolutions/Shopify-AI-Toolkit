@@ -10,12 +10,21 @@ import { BehindCaptions } from "./BehindCaptions/BehindCaptions";
 import { BehindCaptionsTop } from "./BehindCaptionsTop/BehindCaptionsTop";
 import { BehindCaptions3D } from "./BehindCaptions3D/BehindCaptions3D";
 import { KallawayDemo } from "./Kallaway/KallawayDemo";
+import { KallawayReel, REEL_FRAMES } from "./Kallaway/reel/KallawayReel";
 
 // Each <Composition> is an entry in the sidebar!
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="KallawayReel"
+        component={KallawayReel}
+        durationInFrames={REEL_FRAMES}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
       <Composition
         id="KallawayDemo"
         component={KallawayDemo}
