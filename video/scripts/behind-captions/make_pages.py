@@ -3,7 +3,21 @@ the person's head (so the head/buns overlap the lower part of the letters)."""
 import json, re, sys, subprocess
 import numpy as np
 
-words_path, matte_path, ffmpeg, out_ts = sys.argv[1:5]
+words_path, matte_path, ffmpeg, out_ts, font_path = sys.argv[1:6]
+
+# exact Anton advance widths, so every page fits the frame width
+from fontTools.ttLib import TTFont
+_font = TTFont(font_path)
+_cmap, _hmtx, _upm = _font.getBestCmap(), _font["hmtx"], _font["head"].unitsPerEm
+def width_em(label, gap_em=0.22):
+    em = 0.0
+    for ch in label:
+        if ch == " ":
+            em += gap_em
+            continue
+        g = _cmap.get(ord(ch))
+        em += (_hmtx[g][0] if g else _upm * 0.5) / _upm
+    return em
 FPS, W, H, N = 24, 1080, 1920, 720
 
 FIXES = {(14.08, "¿A"): "¿A", (14.42, "qué"): "que"}
@@ -68,7 +82,7 @@ for i, p in enumerate(pages):
     f0, f1 = int(start * FPS), max(int(start * FPS) + 1, int(end * FPS))
     top = float(np.median(head_top[f0:min(f1, N)]))
     label = " ".join(clean(x["text"]) for x in p)
-    font = float(min(250, 1000 / (0.5 * max(4, len(label)))))
+    font = float(min(250, 900 / width_em(label)))
     # text centre sits slightly below the head top -> head overlaps lower letters
     cy = max(font * 0.65 + 50, top + 0.12 * font)
     out.append({

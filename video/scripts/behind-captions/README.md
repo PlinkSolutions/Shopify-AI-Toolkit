@@ -14,8 +14,9 @@ speaker, with a 3D look. Layers: full video → captions → person cutout.
    Models: MODNet from `@rmbg/model-modnet`, ISNet from
    `@imgly/background-removal-node` (both npm).
 4. **Lay out captions** with `make_pages.py words.json matte.mp4 ffmpeg
-   ../../src/BehindCaptions/pages.ts` — groups words into 1–2 word pages
-   and places each page just below the top of the head so the head
+   ../../src/BehindCaptions/pages.ts <anton.woff>` — groups words into 1–2
+   word pages, sizes each page from the real Anton glyph widths (needs
+   `fonttools`), and places it just below the top of the head so the head
    overlaps the lower part of the letters.
 
 `public/joined.mp4` and `public/person.webm` are gitignored (large media).

@@ -18,6 +18,10 @@ import { CaptionPage, CaptionWord, PAGES } from "./pages";
 const WHITE_FILL = "#ffffff";
 const GOLD_FILL = "#ffd54a";
 
+// Clip 3 (from frame 480) is shot from above: tilt the text back further so
+// it reads as lying on the floor behind the speaker.
+const TOP_DOWN_FROM_FRAME = 480;
+
 // Stacked hard shadows fake an extruded 3D slab under the letters.
 const extrusion = (fontSize: number, from: string, to: string) => {
   const depth = 14;
@@ -88,6 +92,7 @@ const Page: React.FC<{ page: CaptionPage }> = ({ page }) => {
   });
   // gentle idle drift so the text feels like it floats in the room
   const drift = Math.sin(frame / 9) * 6;
+  const leanBack = page.startFrame >= TOP_DOWN_FROM_FRAME ? 34 : 12;
 
   // the most recently spoken word on this page is highlighted
   const activeIndex = page.words.reduce(
@@ -97,7 +102,7 @@ const Page: React.FC<{ page: CaptionPage }> = ({ page }) => {
 
   return (
     <AbsoluteFill
-      style={{ perspective: 1100, perspectiveOrigin: `50% ${page.centerY}px` }}
+      style={{ perspective: 1500, perspectiveOrigin: `50% ${page.centerY}px` }}
     >
       <div
         style={{
@@ -115,7 +120,7 @@ const Page: React.FC<{ page: CaptionPage }> = ({ page }) => {
           whiteSpace: "nowrap",
           transformStyle: "preserve-3d",
           opacity: 1 - exit,
-          transform: `translateY(-50%) translateY(${drift}px) rotateX(14deg) rotateY(${page.tilt * 10}deg) rotateZ(${page.tilt * -2}deg) translateZ(${exit * -350}px)`,
+          transform: `translateY(-50%) translateY(${drift}px) rotateX(${leanBack}deg) rotateY(${page.tilt * 6}deg) rotateZ(${page.tilt * -2}deg) translateZ(${exit * -350}px)`,
         }}
       >
         {page.words.map((w, i) => (

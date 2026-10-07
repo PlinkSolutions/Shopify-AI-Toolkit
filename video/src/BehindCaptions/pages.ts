@@ -14,7 +14,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 0,
     "endFrame": 12,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 370,
     "tilt": 1,
     "words": [
       {
@@ -26,8 +26,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 12,
     "endFrame": 25,
-    "fontSize": 222,
-    "centerY": 447,
+    "fontSize": 243,
+    "centerY": 355,
     "tilt": -1,
     "words": [
       {
@@ -44,7 +44,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 25,
     "endFrame": 52,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 326,
     "tilt": 1,
     "words": [
       {
@@ -61,7 +61,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 52,
     "endFrame": 62,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 306,
     "tilt": -1,
     "words": [
       {
@@ -78,7 +78,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 62,
     "endFrame": 82,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 294,
     "tilt": 1,
     "words": [
       {
@@ -90,8 +90,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 82,
     "endFrame": 98,
-    "fontSize": 154,
-    "centerY": 438,
+    "fontSize": 169,
+    "centerY": 288,
     "tilt": -1,
     "words": [
       {
@@ -108,7 +108,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 98,
     "endFrame": 111,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 286,
     "tilt": 1,
     "words": [
       {
@@ -125,7 +125,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 111,
     "endFrame": 117,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 270,
     "tilt": -1,
     "words": [
       {
@@ -141,8 +141,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 117,
     "endFrame": 135,
-    "fontSize": 222,
-    "centerY": 447,
+    "fontSize": 207,
+    "centerY": 245,
     "tilt": 1,
     "words": [
       {
@@ -155,7 +155,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 135,
     "endFrame": 152,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 262,
     "tilt": -1,
     "words": [
       {
@@ -171,8 +171,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 152,
     "endFrame": 171,
-    "fontSize": 154,
-    "centerY": 438,
+    "fontSize": 161,
+    "centerY": 215,
     "tilt": 1,
     "words": [
       {
@@ -193,7 +193,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 171,
     "endFrame": 179,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 258,
     "tilt": -1,
     "words": [
       {
@@ -209,8 +209,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 179,
     "endFrame": 204,
-    "fontSize": 154,
-    "centerY": 438,
+    "fontSize": 161,
+    "centerY": 291,
     "tilt": 1,
     "words": [
       {
@@ -231,7 +231,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 204,
     "endFrame": 213,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 326,
     "tilt": -1,
     "words": [
       {
@@ -244,7 +244,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 213,
     "endFrame": 220,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 340,
     "tilt": 1,
     "words": [
       {
@@ -257,7 +257,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 220,
     "endFrame": 240,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 368,
     "tilt": -1,
     "words": [
       {
@@ -270,7 +270,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 240,
     "endFrame": 250,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 378,
     "tilt": 1,
     "words": [
       {
@@ -286,8 +286,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 250,
     "endFrame": 265,
-    "fontSize": 182,
-    "centerY": 442,
+    "fontSize": 183,
+    "centerY": 352,
     "tilt": -1,
     "words": [
       {
@@ -304,7 +304,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 265,
     "endFrame": 285,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 362,
     "tilt": 1,
     "words": [
       {
@@ -320,8 +320,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 285,
     "endFrame": 293,
-    "fontSize": 250,
-    "centerY": 450,
+    "fontSize": 248,
+    "centerY": 344,
     "tilt": -1,
     "words": [
       {
@@ -334,7 +334,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 293,
     "endFrame": 304,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 322,
     "tilt": 1,
     "words": [
       {
@@ -347,7 +347,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 304,
     "endFrame": 328,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 294,
     "tilt": -1,
     "words": [
       {
@@ -360,7 +360,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 338,
     "endFrame": 348,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 302,
     "tilt": 1,
     "words": [
       {
@@ -376,8 +376,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 348,
     "endFrame": 373,
-    "fontSize": 143,
-    "centerY": 437,
+    "fontSize": 148,
+    "centerY": 286,
     "tilt": -1,
     "words": [
       {
@@ -397,8 +397,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 373,
     "endFrame": 389,
-    "fontSize": 182,
-    "centerY": 442,
+    "fontSize": 177,
+    "centerY": 317,
     "tilt": 1,
     "words": [
       {
@@ -415,7 +415,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 389,
     "endFrame": 399,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 330,
     "tilt": -1,
     "words": [
       {
@@ -428,7 +428,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 399,
     "endFrame": 415,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 322,
     "tilt": 1,
     "words": [
       {
@@ -445,7 +445,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 415,
     "endFrame": 428,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 334,
     "tilt": -1,
     "words": [
       {
@@ -462,7 +462,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 428,
     "endFrame": 444,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 330,
     "tilt": 1,
     "words": [
       {
@@ -479,7 +479,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 444,
     "endFrame": 462,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 318,
     "tilt": -1,
     "words": [
       {
@@ -496,7 +496,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 462,
     "endFrame": 480,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 318,
     "tilt": 1,
     "words": [
       {
@@ -509,7 +509,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 480,
     "endFrame": 489,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 354,
     "tilt": -1,
     "words": [
       {
@@ -522,7 +522,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 489,
     "endFrame": 502,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 332,
     "tilt": 1,
     "words": [
       {
@@ -534,8 +534,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 502,
     "endFrame": 521,
-    "fontSize": 182,
-    "centerY": 442,
+    "fontSize": 184,
+    "centerY": 322,
     "tilt": -1,
     "words": [
       {
@@ -551,8 +551,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 521,
     "endFrame": 540,
-    "fontSize": 167,
-    "centerY": 440,
+    "fontSize": 165,
+    "centerY": 324,
     "tilt": 1,
     "words": [
       {
@@ -568,8 +568,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 540,
     "endFrame": 564,
-    "fontSize": 222,
-    "centerY": 447,
+    "fontSize": 212,
+    "centerY": 309,
     "tilt": -1,
     "words": [
       {
@@ -586,7 +586,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 564,
     "endFrame": 588,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 318,
     "tilt": 1,
     "words": [
       {
@@ -602,8 +602,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 588,
     "endFrame": 597,
-    "fontSize": 182,
-    "centerY": 442,
+    "fontSize": 202,
+    "centerY": 304,
     "tilt": -1,
     "words": [
       {
@@ -620,7 +620,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 597,
     "endFrame": 617,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 326,
     "tilt": 1,
     "words": [
       {
@@ -636,8 +636,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 617,
     "endFrame": 629,
-    "fontSize": 222,
-    "centerY": 447,
+    "fontSize": 231,
+    "centerY": 276,
     "tilt": -1,
     "words": [
       {
@@ -654,7 +654,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 629,
     "endFrame": 653,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 274,
     "tilt": 1,
     "words": [
       {
@@ -666,8 +666,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 653,
     "endFrame": 661,
-    "fontSize": 200,
-    "centerY": 444,
+    "fontSize": 218,
+    "centerY": 282,
     "tilt": -1,
     "words": [
       {
@@ -684,7 +684,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 661,
     "endFrame": 678,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 298,
     "tilt": 1,
     "words": [
       {
@@ -697,7 +697,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 678,
     "endFrame": 699,
     "fontSize": 250,
-    "centerY": 450,
+    "centerY": 306,
     "tilt": -1,
     "words": [
       {
@@ -709,8 +709,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 701,
     "endFrame": 720,
-    "fontSize": 200,
-    "centerY": 444,
+    "fontSize": 233,
+    "centerY": 280,
     "tilt": 1,
     "words": [
       {
