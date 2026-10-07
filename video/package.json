@@ -6,14 +6,15 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "@fontsource/anton": "^5.3.0",
     "@remotion/cli": "4.0.507",
+    "@remotion/tailwind-v4": "4.0.507",
     "@remotion/zod-types": "4.0.507",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "remotion": "4.0.507",
-    "zod": "4.4.3",
-    "@remotion/tailwind-v4": "4.0.507",
-    "tailwindcss": "4.0.0"
+    "tailwindcss": "4.0.0",
+    "zod": "4.4.3"
   },
   "devDependencies": {
     "@remotion/eslint-config-flat": "4.0.507",
