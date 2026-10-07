@@ -8,6 +8,7 @@
   "dependencies": {
     "@fontsource/anton": "^5.3.0",
     "@fontsource/bebas-neue": "^5.3.0",
+    "@fontsource/gluten": "^5.3.0",
     "@remotion/cli": "4.0.507",
     "@remotion/tailwind-v4": "4.0.507",
     "@remotion/zod-types": "4.0.507",

@@ -33,3 +33,14 @@ page in `#f0d820`, spanning the width above the speaker, with the bottom
 30% of the letters tucked behind the head. Words rise from behind the head.
 `make_pages_top.py words.json matte.mp4 ffmpeg
 ../../src/BehindCaptionsTop/pages.ts <bebas-neue.woff>`
+
+## BehindCaptions3D (bubbly poster style)
+
+Big Gluten 900 captions in lime `#c0de4e` with a dark-green 3D extrusion,
+1–2 lines per page, behind the speaker. `make_pages_3d.py` tries 1/2-line
+layouts, sizes and heights and measures with the matte how much of each
+word the speaker covers: every word stays readable (≤ 40 % hidden) and the
+layout aims for ~22 % overlap so the text clearly sits behind them. Pages
+never end on a function word (el, la, de, a, y, que…).
+`make_pages_3d.py words.json matte.mp4 ffmpeg
+../../src/BehindCaptions3D/pages.ts <gluten-latin-900-normal.woff>`
