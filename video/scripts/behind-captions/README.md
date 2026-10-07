@@ -25,3 +25,11 @@ them; words slide out from behind the speaker and slide back on exit.
    constants must match `BehindCaptions.tsx`.
 
 `public/joined.mp4` and `public/person.webm` are gitignored (large media).
+
+## BehindCaptionsTop (title style)
+
+Alternative layout: one big flat Bebas Neue word (or two short ones) per
+page in `#f0d820`, spanning the width above the speaker, with the bottom
+30% of the letters tucked behind the head. Words rise from behind the head.
+`make_pages_top.py words.json matte.mp4 ffmpeg
+../../src/BehindCaptionsTop/pages.ts <bebas-neue.woff>`

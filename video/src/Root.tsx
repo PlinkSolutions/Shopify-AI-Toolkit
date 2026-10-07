@@ -7,12 +7,21 @@ import { Hello } from "./Hello";
 import { SkyHello } from "./SkyHello";
 import { HelloSound } from "./HelloSound";
 import { BehindCaptions } from "./BehindCaptions/BehindCaptions";
+import { BehindCaptionsTop } from "./BehindCaptionsTop/BehindCaptionsTop";
 
 // Each <Composition> is an entry in the sidebar!
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="BehindCaptionsTop"
+        component={BehindCaptionsTop}
+        durationInFrames={720}
+        fps={24}
+        width={1080}
+        height={1920}
+      />
       <Composition
         id="BehindCaptions"
         component={BehindCaptions}
