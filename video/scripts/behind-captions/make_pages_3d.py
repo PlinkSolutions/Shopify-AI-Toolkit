@@ -1,16 +1,19 @@
 """Lay out big bubbly 3D captions (1-2 lines) behind the speaker.
 
 For every page, try 1- and 2-line layouts, font sizes and heights, and
-measure with the person matte how much of each word the speaker covers.
-Keep layouts where every word stays readable (<= MAX_WORD_COVER hidden) and
-pick the biggest one, preferring some overlap so the text clearly sits
-behind the speaker.
+measure with the person matte how much of each letter the speaker covers.
+Keep layouts where every letter stays readable (<= MAX_LETTER_COVER hidden)
+and pick the biggest one, preferring some overlap so the text clearly sits
+behind the speaker. If nothing qualifies, take the layout whose most hidden
+letter is hidden the least.
 
 usage: make_pages_3d.py words.json matte.mp4 ffmpeg out.ts gluten-900.woff
 """
-import json, re, subprocess, sys
+import io, json, re, subprocess, sys
+from functools import lru_cache
 import numpy as np
 from fontTools.ttLib import TTFont
+from PIL import Image, ImageDraw, ImageFont
 
 words_path, matte_path, ffmpeg, out_ts, font_path = sys.argv[1:6]
 FPS, W, H, N = 24, 1080, 1920, 720
@@ -23,15 +26,17 @@ SPACE_EM = 0.22            # gap between words, em
 
 SIDE_MARGIN = 40
 TOP_MARGIN = 120
-MAX_FONT, MIN_FONT = 330, 120
-MAX_WORD_COVER = 0.40      # never hide more than this share of any word
-TARGET_COVER = 0.22        # overlap we aim for, so the text reads as "behind"
+MAX_FONT, MIN_FONT = 330, 80
+MAX_LETTER_COVER = 0.30    # never hide more than this share of any letter's ink
+TARGET_COVER = 0.10        # overlap we aim for, so the text reads as "behind"
+HIDDEN_SHARE = 0.1         # a pixel counts as hidden if the speaker covers it in >= 10% of the page's frames
 MAX_CHARS = 16             # per page
 
 font = TTFont(font_path)
 cmap, hmtx, upm = font.getBestCmap(), font["hmtx"], font["head"].unitsPerEm
 ASC, DESC = font["hhea"].ascent / upm, -font["hhea"].descent / upm
 CAP = font["OS/2"].sCapHeight / upm
+XH = font["OS/2"].sxHeight / upm
 BASELINE_IN_LINE = (LINE_HEIGHT - (ASC + DESC)) / 2 + ASC   # baseline offset inside a line box
 
 def word_em(t):
@@ -86,34 +91,52 @@ pages = merged
 
 proc = subprocess.run([ffmpeg, "-v", "error", "-i", matte_path, "-vf", "scale=270:480",
                        "-f", "rawvideo", "-pix_fmt", "gray", "-"], capture_output=True, check=True)
-matte = (np.frombuffer(proc.stdout, np.uint8).reshape(-1, 480, 270) > 100).astype(np.float32)
+# low threshold: soft curly hair still hides the yellow text visually
+matte = (np.frombuffer(proc.stdout, np.uint8).reshape(-1, 480, 270) > 40).astype(np.float32)
 
-def integral(a):
-    s = np.zeros((a.shape[0] + 1, a.shape[1] + 1), np.float64)
-    s[1:, 1:] = a.cumsum(0).cumsum(1)
-    return s
+_ttf = io.BytesIO()
+font.flavor = None
+font.save(_ttf)
 
-def cover(ii, x0, y0, x1, y1):
-    """Mean matte over a full-res rectangle, using the 1/4-res integral image."""
-    c0, r0 = max(0, int(x0 // 4)), max(0, int(y0 // 4))
-    c1, r1 = min(270, int(np.ceil(x1 / 4))), min(480, int(np.ceil(y1 / 4)))
-    if c1 <= c0 or r1 <= r0:
-        return 0.0
-    tot = ii[r1, c1] - ii[r0, c1] - ii[r1, c0] + ii[r0, c0]
-    return tot / ((c1 - c0) * (r1 - r0))
+@lru_cache(maxsize=None)
+def _pil_font(px):
+    _ttf.seek(0)
+    return ImageFont.truetype(io.BytesIO(_ttf.getvalue()), px)
 
-def boxes(lines, fs, top):
-    """Word rectangles (x0, y0, x1, y1, area) for a centred block."""
-    out = []
+@lru_cache(maxsize=None)
+def glyph_ink(c, fs):
+    """Ink pixels of one glyph at 1/4 resolution, relative to (left, baseline)."""
+    f = _pil_font(max(4, round(fs / 4)))
+    x0, y0, x1, y1 = f.getbbox(c, anchor="ls")
+    if x1 <= x0 or y1 <= y0:
+        return np.zeros(0, int), np.zeros(0, int)
+    im = Image.new("L", (x1 - x0, y1 - y0))
+    ImageDraw.Draw(im).text((-x0, -y0), c, font=f, fill=255, anchor="ls")
+    ys, xs = np.nonzero(np.asarray(im) > 127)
+    return ys + y0, xs + x0
+
+def glyph_em(c):
+    return (hmtx[cmap[ord(c)]][0] if ord(c) in cmap else upm * 0.5) / upm + LETTER_SPACING
+
+def letter_covers(hidden, lines, fs, top):
+    """Share of each letter's ink hidden by the speaker, plus ink areas."""
+    covs, areas = [], []
     for li, line in enumerate(lines):
-        widths = [word_em(show(w["text"])) * fs for w in line]
-        total = sum(widths) + SPACE_EM * fs * (len(line) - 1)
+        texts = [show(w["text"]) for w in line]
+        total = sum(word_em(t) for t in texts) * fs + SPACE_EM * fs * (len(line) - 1)
         x = (W - total) / 2
         base = top + li * LINE_HEIGHT * fs + BASELINE_IN_LINE * fs
-        for wd in widths:
-            out.append((x, base - CAP * fs * 1.05, x + wd, base + 0.04 * fs, wd * CAP * fs))
-            x += wd + SPACE_EM * fs
-    return out
+        for t in texts:
+            for c in t:
+                ys, xs = glyph_ink(c, int(fs))
+                if len(ys):
+                    ys = ys + int(round(base / 4)); xs = xs + int(round(x / 4))
+                    ok = (ys >= 0) & (ys < 480) & (xs >= 0) & (xs < 270)
+                    covs.append(hidden[ys[ok], xs[ok]].mean() if ok.any() else 0.0)
+                    areas.append(len(ys))
+                x += glyph_em(c) * fs
+            x += SPACE_EM * fs
+    return covs, areas
 
 result = []
 for pi, p in enumerate(pages):
@@ -122,29 +145,32 @@ for pi, p in enumerate(pages):
     end = min(nxt_start, p[-1]["end"] + 0.6)
     sf, ef = round(start * FPS), round(end * FPS)
     lo = max(c for c in CUTS if c <= sf); hi = min(c for c in CUTS if c > sf)
-    ii = integral(matte[max(lo, sf):min(hi, ef + 1)].mean(axis=0))
+    hidden = (matte[max(lo, sf):min(hi, ef + 1)].mean(axis=0) >= HIDDEN_SHARE).astype(np.float32)
 
     layouts = [[p]] + [[p[:k], p[k:]] for k in range(1, len(p))]
     best = None
+    fallback = None    # (max letter cover, -fs, top, lines, total)
     for lines in layouts:
         max_em = max(sum(word_em(show(w["text"])) for w in l) + SPACE_EM * (len(l) - 1) for l in lines)
         fs_cap = min(MAX_FONT, (W - 2 * SIDE_MARGIN) / max_em)
         for fs in np.arange(fs_cap, MIN_FONT - 1, -10):
             block_h = LINE_HEIGHT * fs * len(lines)
             for top in range(TOP_MARGIN, int(H * 0.6 - block_h), 10):
-                bx = boxes(lines, fs, top)
-                covs = [cover(ii, *b[:4]) for b in bx]
-                if max(covs) > MAX_WORD_COVER:
+                covs, areas = letter_covers(hidden, lines, fs, top)
+                total = float(np.dot(covs, areas) / sum(areas))
+                cand = (max(covs), -float(fs), top, lines, total)
+                if fallback is None or cand[:2] < fallback[:2]:
+                    fallback = cand
+                if max(covs) > MAX_LETTER_COVER:
                     continue
-                area = sum(b[4] for b in bx)
-                total = sum(c * b[4] for c, b in zip(covs, bx)) / area
                 score = fs - 300 * abs(total - TARGET_COVER) - (25 if len(lines) == 2 and len(p) < 2 else 0)
                 if best is None or score > best[0]:
                     best = (score, float(fs), top, lines, total, max(covs))
             if best is not None and best[1] >= fs + 60:
                 break
-    if best is None:   # nothing readable: smallest size at the top
-        lines = [p]; fs = float(MIN_FONT); best = (0, fs, TOP_MARGIN, lines, 0, 0)
+    if best is None:   # nothing fully readable: least-hidden worst letter
+        mx, nfs, top, lines, total = fallback
+        best = (0, -nfs, top, lines, total, mx)
     _, fs, top, lines, total, mx = best
     result.append({
         "startFrame": sf, "endFrame": ef, "fontSize": round(fs), "top": int(top),

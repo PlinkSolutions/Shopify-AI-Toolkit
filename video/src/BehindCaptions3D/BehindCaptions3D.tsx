@@ -21,9 +21,9 @@ const LINE_HEIGHT = 0.8;
 const LETTER_SPACING = -0.01;
 const SPACE_EM = 0.22;
 
-const FILL = "#c0de4e";
-const EXTRUDE_FROM = "#93b52c";
-const EXTRUDE_TO = "#2e440d";
+const FILL = "#ffe100";
+const EXTRUDE_FROM = "#d9a800";
+const EXTRUDE_TO = "#5c3a00";
 
 const mix = (a: string, b: string, t: number) => {
   const pa = [1, 3, 5].map((i) => parseInt(a.slice(i, i + 2), 16));
@@ -155,7 +155,12 @@ const Page: React.FC<{ page: CaptionPage; index: number }> = ({
 export const BehindCaptions3D: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: "black" }}>
-      <OffthreadVideo src={staticFile("joined.mp4")} />
+      {/* Each layer gets its own AbsoluteFill: bare videos would stack in normal
+          flow (the cutout ended up below the frame) and paint under the
+          absolutely positioned captions. */}
+      <AbsoluteFill>
+        <OffthreadVideo src={staticFile("joined.mp4")} />
+      </AbsoluteFill>
       {PAGES.map((page, i) => (
         <Sequence
           key={i}
@@ -165,7 +170,9 @@ export const BehindCaptions3D: React.FC = () => {
           <Page page={page} index={i} />
         </Sequence>
       ))}
-      <OffthreadVideo src={staticFile("person.webm")} transparent muted />
+      <AbsoluteFill>
+        <OffthreadVideo src={staticFile("person.webm")} transparent muted />
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };

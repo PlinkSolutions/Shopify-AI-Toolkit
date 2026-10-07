@@ -13,16 +13,14 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 0,
     "endFrame": 21,
-    "fontSize": 275,
-    "top": 120,
+    "fontSize": 166,
+    "top": 230,
     "lines": [
       [
         {
           "text": "Vale",
           "startFrame": 0
-        }
-      ],
-      [
+        },
         {
           "text": "dicen",
           "startFrame": 12
@@ -33,20 +31,20 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 21,
     "endFrame": 52,
-    "fontSize": 285,
+    "fontSize": 198,
     "top": 120,
     "lines": [
       [
         {
           "text": "que",
           "startFrame": 21
-        }
-      ],
-      [
+        },
         {
           "text": "soy",
           "startFrame": 25
-        },
+        }
+      ],
+      [
         {
           "text": "IA",
           "startFrame": 31
@@ -57,8 +55,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 52,
     "endFrame": 82,
-    "fontSize": 187,
-    "top": 130,
+    "fontSize": 142,
+    "top": 180,
     "lines": [
       [
         {
@@ -68,9 +66,7 @@ export const PAGES: CaptionPage[] = [
         {
           "text": "os",
           "startFrame": 58
-        }
-      ],
-      [
+        },
         {
           "text": "reto",
           "startFrame": 62
@@ -81,16 +77,14 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 82,
     "endFrame": 98,
-    "fontSize": 155,
-    "top": 150,
+    "fontSize": 131,
+    "top": 190,
     "lines": [
       [
         {
           "text": "si",
           "startFrame": 82
-        }
-      ],
-      [
+        },
         {
           "text": "encontráis",
           "startFrame": 85
@@ -102,7 +96,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 98,
     "endFrame": 111,
     "fontSize": 226,
-    "top": 230,
+    "top": 120,
     "lines": [
       [
         {
@@ -119,8 +113,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 111,
     "endFrame": 135,
-    "fontSize": 163,
-    "top": 130,
+    "fontSize": 101,
+    "top": 150,
     "lines": [
       [
         {
@@ -130,9 +124,7 @@ export const PAGES: CaptionPage[] = [
         {
           "text": "lo",
           "startFrame": 115
-        }
-      ],
-      [
+        },
         {
           "text": "demuestra",
           "startFrame": 117
@@ -143,8 +135,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 135,
     "endFrame": 152,
-    "fontSize": 252,
-    "top": 200,
+    "fontSize": 122,
+    "top": 120,
     "lines": [
       [
         {
@@ -161,8 +153,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 152,
     "endFrame": 171,
-    "fontSize": 184,
-    "top": 120,
+    "fontSize": 124,
+    "top": 130,
     "lines": [
       [
         {
@@ -172,9 +164,7 @@ export const PAGES: CaptionPage[] = [
         {
           "text": "a",
           "startFrame": 156
-        }
-      ],
-      [
+        },
         {
           "text": "vosotros",
           "startFrame": 157
@@ -185,8 +175,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 171,
     "endFrame": 179,
-    "fontSize": 252,
-    "top": 190,
+    "fontSize": 192,
+    "top": 120,
     "lines": [
       [
         {
@@ -203,8 +193,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 179,
     "endFrame": 204,
-    "fontSize": 184,
-    "top": 130,
+    "fontSize": 124,
+    "top": 190,
     "lines": [
       [
         {
@@ -214,9 +204,7 @@ export const PAGES: CaptionPage[] = [
         {
           "text": "a",
           "startFrame": 181
-        }
-      ],
-      [
+        },
         {
           "text": "vosotros",
           "startFrame": 184
@@ -227,8 +215,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 204,
     "endFrame": 220,
-    "fontSize": 207,
-    "top": 160,
+    "fontSize": 127,
+    "top": 120,
     "lines": [
       [
         {
@@ -248,7 +236,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 220,
     "endFrame": 240,
     "fontSize": 330,
-    "top": 260,
+    "top": 190,
     "lines": [
       [
         {
@@ -261,8 +249,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 240,
     "endFrame": 260,
-    "fontSize": 184,
-    "top": 210,
+    "fontSize": 164,
+    "top": 120,
     "lines": [
       [
         {
@@ -285,16 +273,14 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 260,
     "endFrame": 285,
-    "fontSize": 247,
-    "top": 120,
+    "fontSize": 179,
+    "top": 230,
     "lines": [
       [
         {
           "text": "no",
           "startFrame": 260
-        }
-      ],
-      [
+        },
         {
           "text": "lo",
           "startFrame": 265
@@ -310,7 +296,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 285,
     "endFrame": 293,
     "fontSize": 187,
-    "top": 300,
+    "top": 220,
     "lines": [
       [
         {
@@ -323,16 +309,14 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 293,
     "endFrame": 328,
-    "fontSize": 198,
-    "top": 130,
+    "fontSize": 99,
+    "top": 200,
     "lines": [
       [
         {
           "text": "clientes",
           "startFrame": 293
-        }
-      ],
-      [
+        },
         {
           "text": "tampoco",
           "startFrame": 304
@@ -344,7 +328,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 338,
     "endFrame": 351,
     "fontSize": 189,
-    "top": 270,
+    "top": 160,
     "lines": [
       [
         {
@@ -365,16 +349,14 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 351,
     "endFrame": 373,
-    "fontSize": 220,
-    "top": 120,
+    "fontSize": 146,
+    "top": 190,
     "lines": [
       [
         {
           "text": "que",
           "startFrame": 351
-        }
-      ],
-      [
+        },
         {
           "text": "pensar?",
           "startFrame": 354
@@ -386,7 +368,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 373,
     "endFrame": 385,
     "fontSize": 177,
-    "top": 280,
+    "top": 210,
     "lines": [
       [
         {
@@ -399,8 +381,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 385,
     "endFrame": 410,
-    "fontSize": 162,
-    "top": 170,
+    "fontSize": 132,
+    "top": 130,
     "lines": [
       [
         {
@@ -423,16 +405,14 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 410,
     "endFrame": 428,
-    "fontSize": 207,
-    "top": 120,
+    "fontSize": 173,
+    "top": 210,
     "lines": [
       [
         {
           "text": "y",
           "startFrame": 410
-        }
-      ],
-      [
+        },
         {
           "text": "os",
           "startFrame": 415
@@ -447,7 +427,7 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 428,
     "endFrame": 457,
-    "fontSize": 199,
+    "fontSize": 149,
     "top": 120,
     "lines": [
       [
@@ -472,7 +452,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 457,
     "endFrame": 480,
     "fontSize": 273,
-    "top": 240,
+    "top": 150,
     "lines": [
       [
         {
@@ -489,16 +469,14 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 480,
     "endFrame": 502,
-    "fontSize": 264,
-    "top": 190,
+    "fontSize": 138,
+    "top": 230,
     "lines": [
       [
         {
           "text": "Desde",
           "startFrame": 480
-        }
-      ],
-      [
+        },
         {
           "text": "arriba",
           "startFrame": 489
@@ -509,16 +487,14 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 502,
     "endFrame": 521,
-    "fontSize": 304,
-    "top": 180,
+    "fontSize": 150,
+    "top": 220,
     "lines": [
       [
         {
           "text": "desde",
           "startFrame": 502
-        }
-      ],
-      [
+        },
         {
           "text": "abajo",
           "startFrame": 505
@@ -529,8 +505,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 521,
     "endFrame": 540,
-    "fontSize": 226,
-    "top": 140,
+    "fontSize": 136,
+    "top": 120,
     "lines": [
       [
         {
@@ -549,16 +525,14 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 540,
     "endFrame": 564,
-    "fontSize": 270,
-    "top": 120,
+    "fontSize": 174,
+    "top": 210,
     "lines": [
       [
         {
           "text": "los",
           "startFrame": 540
-        }
-      ],
-      [
+        },
         {
           "text": "moños",
           "startFrame": 544
@@ -569,16 +543,14 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 564,
     "endFrame": 588,
-    "fontSize": 286,
-    "top": 120,
+    "fontSize": 202,
+    "top": 190,
     "lines": [
       [
         {
           "text": "la",
           "startFrame": 564
-        }
-      ],
-      [
+        },
         {
           "text": "barba",
           "startFrame": 572
@@ -589,16 +561,14 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 588,
     "endFrame": 597,
-    "fontSize": 233,
-    "top": 120,
+    "fontSize": 157,
+    "top": 200,
     "lines": [
       [
         {
           "text": "los",
           "startFrame": 588
-        }
-      ],
-      [
+        },
         {
           "text": "dientes",
           "startFrame": 590
@@ -609,8 +579,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 597,
     "endFrame": 624,
-    "fontSize": 278,
-    "top": 150,
+    "fontSize": 139,
+    "top": 180,
     "lines": [
       [
         {
@@ -620,9 +590,7 @@ export const PAGES: CaptionPage[] = [
         {
           "text": "oro",
           "startFrame": 603
-        }
-      ],
-      [
+        },
         {
           "text": "hasta",
           "startFrame": 617
@@ -633,16 +601,14 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 624,
     "endFrame": 653,
-    "fontSize": 214,
+    "fontSize": 148,
     "top": 150,
     "lines": [
       [
         {
           "text": "los",
           "startFrame": 624
-        }
-      ],
-      [
+        },
         {
           "text": "zapatos",
           "startFrame": 629
@@ -653,20 +619,20 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 653,
     "endFrame": 678,
-    "fontSize": 164,
-    "top": 140,
+    "fontSize": 109,
+    "top": 120,
     "lines": [
       [
         {
           "text": "¿Veis",
           "startFrame": 653
-        }
-      ],
-      [
+        },
         {
           "text": "algo",
           "startFrame": 657
-        },
+        }
+      ],
+      [
         {
           "text": "raro?",
           "startFrame": 661
@@ -677,8 +643,8 @@ export const PAGES: CaptionPage[] = [
   {
     "startFrame": 678,
     "endFrame": 699,
-    "fontSize": 330,
-    "top": 190,
+    "fontSize": 270,
+    "top": 120,
     "lines": [
       [
         {
@@ -692,7 +658,7 @@ export const PAGES: CaptionPage[] = [
     "startFrame": 701,
     "endFrame": 720,
     "fontSize": 191,
-    "top": 230,
+    "top": 160,
     "lines": [
       [
         {

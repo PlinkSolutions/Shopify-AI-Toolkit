@@ -200,7 +200,12 @@ const Page: React.FC<{ page: CaptionPage }> = ({ page }) => {
 export const BehindCaptions: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: "black" }}>
-      <OffthreadVideo src={staticFile("joined.mp4")} />
+      {/* Each layer gets its own AbsoluteFill: bare videos would stack in normal
+          flow (the cutout ended up below the frame) and paint under the
+          absolutely positioned captions. */}
+      <AbsoluteFill>
+        <OffthreadVideo src={staticFile("joined.mp4")} />
+      </AbsoluteFill>
       {PAGES.map((page, i) => (
         <Sequence
           key={i}
@@ -210,7 +215,9 @@ export const BehindCaptions: React.FC = () => {
           <Page page={page} />
         </Sequence>
       ))}
-      <OffthreadVideo src={staticFile("person.webm")} transparent muted />
+      <AbsoluteFill>
+        <OffthreadVideo src={staticFile("person.webm")} transparent muted />
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };
