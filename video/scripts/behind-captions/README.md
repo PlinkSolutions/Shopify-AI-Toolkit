@@ -1,7 +1,10 @@
 # BehindCaptions pipeline
 
-Builds the `BehindCaptions` composition: captions rendered *behind* the
-speaker, with a 3D look. Layers: full video → captions → person cutout.
+Builds the `BehindCaptions` composition: 3D captions *behind* the speaker.
+Layers: full video → captions → person cutout. Each caption page is split
+into a left and a right "wall" anchored at the frame edges that recede in
+perspective toward the speaker, so the text flanks them without covering
+them; words slide out from behind the speaker and slide back on exit.
 
 1. **Join clips** (1 → 2 → 3) into `public/joined.mp4` with ffmpeg `concat`.
 2. **Transcribe** each 10 s clip with Whisper-small (transformers.js, ONNX
@@ -15,8 +18,10 @@ speaker, with a 3D look. Layers: full video → captions → person cutout.
    `@imgly/background-removal-node` (both npm).
 4. **Lay out captions** with `make_pages.py words.json matte.mp4 ffmpeg
    ../../src/BehindCaptions/pages.ts <anton.woff>` — groups words into 1–2
-   word pages, sizes each page from the real Anton glyph widths (needs
-   `fonttools`), and places it just below the top of the head so the head
-   overlaps the lower part of the letters.
+   word pages, splits each page into left/right parts, and picks for each
+   page the height beside the head (not above it) and the font size at which
+   the projected text stays clear of the person's silhouette, using the
+   matte and real Anton glyph widths (needs `fonttools`). The perspective
+   constants must match `BehindCaptions.tsx`.
 
 `public/joined.mp4` and `public/person.webm` are gitignored (large media).

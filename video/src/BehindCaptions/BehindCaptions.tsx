@@ -9,31 +9,38 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { CaptionPage, CaptionWord, PAGES } from "./pages";
+import { CaptionPage, CaptionWord, PAGES, Side } from "./pages";
 
 // Layer order (bottom -> top): full video, 3D captions, person cutout.
-// The cutout (VP9 + alpha) hides the parts of the text that fall behind
-// the person, which makes the captions look like they sit in the room.
+// Each caption page is split into two "walls" anchored at the left and right
+// frame edges that recede in perspective toward the speaker, so the text
+// sits behind them without ever covering them. The cutout (VP9 + alpha) stays
+// on top, so a hand swinging past simply passes in front of the text.
+
+// Keep in sync with scripts/behind-captions/make_pages.py (used for fitting).
+const PERSPECTIVE = 1500;
+const ANGLE_DEG = 48;
+const MARGIN = 26;
 
 const WHITE_FILL = "#ffffff";
 const GOLD_FILL = "#ffd54a";
 
 // Clip 3 (from frame 480) is shot from above: tilt the text back further so
-// it reads as lying on the floor behind the speaker.
+// it reads as lying on the floor beside the speaker.
 const TOP_DOWN_FROM_FRAME = 480;
 
 // Stacked hard shadows fake an extruded 3D slab under the letters.
 const extrusion = (fontSize: number, from: string, to: string) => {
-  const depth = 14;
-  const step = fontSize / 260;
+  const depth = 10;
+  const step = fontSize / 200;
   const layers: string[] = [];
   for (let k = 1; k <= depth; k++) {
     const t = k / depth;
     layers.push(
-      `${(k * 0.55 * step).toFixed(2)}px ${(k * 1.0 * step).toFixed(2)}px 0 ${mix(from, to, t)}`,
+      `${(k * 0.5 * step).toFixed(2)}px ${(k * 0.9 * step).toFixed(2)}px 0 ${mix(from, to, t)}`,
     );
   }
-  layers.push(`0 ${fontSize * 0.14}px ${fontSize * 0.2}px rgba(0,0,0,0.45)`);
+  layers.push(`0 ${fontSize * 0.12}px ${fontSize * 0.2}px rgba(0,0,0,0.5)`);
   return layers.join(", ");
 };
 
@@ -43,6 +50,9 @@ const mix = (a: string, b: string, t: number) => {
   const c = pa.map((v, i) => Math.round(v + (pb[i] - v) * t));
   return `rgb(${c[0]},${c[1]},${c[2]})`;
 };
+
+// +1 = toward the speaker for the left wall, -1 for the right wall
+const towardSpeaker = (side: Side) => (side === "left" ? 1 : -1);
 
 const Word: React.FC<{
   word: CaptionWord;
@@ -57,7 +67,8 @@ const Word: React.FC<{
   const s = spring({
     frame: local,
     fps,
-    config: { damping: 11, stiffness: 170, mass: 0.7 },
+    // no overshoot: a bounce would push the word past the frame edge
+    config: { damping: 14, stiffness: 170, mass: 0.7, overshootClamping: true },
   });
   const opacity = interpolate(local, [0, 3], [0, 1], {
     extrapolateLeft: "clamp",
@@ -69,7 +80,8 @@ const Word: React.FC<{
       style={{
         display: "inline-block",
         opacity,
-        transform: `translateZ(${(1 - s) * -700}px) rotateX(${(1 - s) * 75}deg) scale(${0.6 + 0.4 * s})`,
+        // slides out along its wall from behind the speaker
+        transform: `translateX(${towardSpeaker(word.side) * (1 - s) * fontSize * 2.5}px) scale(${0.85 + 0.15 * s})`,
         color: active ? GOLD_FILL : WHITE_FILL,
         textShadow: active
           ? extrusion(fontSize, "#e0a800", "#5a3300")
@@ -78,6 +90,69 @@ const Word: React.FC<{
     >
       {word.text}
     </span>
+  );
+};
+
+const Wall: React.FC<{
+  page: CaptionPage;
+  side: Side;
+  activeWord: CaptionWord | undefined;
+  lean: number;
+  exit: number;
+  drift: number;
+}> = ({ page, side, activeWord, lean, exit, drift }) => {
+  const words = page.words.filter((w) => w.side === side);
+  if (words.length === 0) {
+    return null;
+  }
+  const lines = [...new Set(words.map((w) => w.line))].sort();
+  const isLeft = side === "left";
+
+  return (
+    <div
+      style={{
+        position: "absolute",
+        top: page.centerY,
+        [isLeft ? "left" : "right"]: MARGIN,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: isLeft ? "flex-start" : "flex-end",
+        fontFamily: "Anton",
+        fontSize: page.fontSize,
+        lineHeight: 1,
+        letterSpacing: page.fontSize * 0.01,
+        whiteSpace: "nowrap",
+        transformStyle: "preserve-3d",
+        // hinge on the frame edge; the speaker-side end recedes into depth
+        transformOrigin: isLeft ? "0% 50%" : "100% 50%",
+        opacity: 1 - exit,
+        // on exit the wall slides back behind the speaker
+        transform: `translateY(-50%) translateY(${drift}px) rotateY(${isLeft ? ANGLE_DEG : -ANGLE_DEG}deg) rotateX(${lean}deg) translateX(${towardSpeaker(side) * exit * page.fontSize * 3}px)`,
+      }}
+    >
+      {lines.map((line) => (
+        <div
+          key={line}
+          style={{
+            display: "flex",
+            gap: page.fontSize * 0.22,
+            transformStyle: "preserve-3d",
+          }}
+        >
+          {words
+            .filter((w) => w.line === line)
+            .map((w, i) => (
+              <Word
+                key={i}
+                word={w}
+                pageStart={page.startFrame}
+                fontSize={page.fontSize}
+                active={w === activeWord}
+              />
+            ))}
+        </div>
+      ))}
+    </div>
   );
 };
 
@@ -91,48 +166,33 @@ const Page: React.FC<{ page: CaptionPage }> = ({ page }) => {
     extrapolateRight: "clamp",
   });
   // gentle idle drift so the text feels like it floats in the room
-  const drift = Math.sin(frame / 9) * 6;
-  const leanBack = page.startFrame >= TOP_DOWN_FROM_FRAME ? 34 : 12;
+  const drift = Math.sin(frame / 9) * 4;
+  const lean = page.startFrame >= TOP_DOWN_FROM_FRAME ? 22 : 6;
 
   // the most recently spoken word on this page is highlighted
-  const activeIndex = page.words.reduce(
-    (acc, w, i) => (w.startFrame <= absolute ? i : acc),
-    0,
+  const activeWord = page.words.reduce<CaptionWord | undefined>(
+    (acc, w) => (w.startFrame <= absolute ? w : acc),
+    undefined,
   );
 
   return (
     <AbsoluteFill
-      style={{ perspective: 1500, perspectiveOrigin: `50% ${page.centerY}px` }}
+      style={{
+        perspective: PERSPECTIVE,
+        perspectiveOrigin: `50% ${page.centerY}px`,
+      }}
     >
-      <div
-        style={{
-          position: "absolute",
-          top: page.centerY,
-          left: 30,
-          right: 30,
-          display: "flex",
-          justifyContent: "center",
-          gap: page.fontSize * 0.22,
-          fontFamily: "Anton",
-          fontSize: page.fontSize,
-          lineHeight: 1,
-          letterSpacing: page.fontSize * 0.01,
-          whiteSpace: "nowrap",
-          transformStyle: "preserve-3d",
-          opacity: 1 - exit,
-          transform: `translateY(-50%) translateY(${drift}px) rotateX(${leanBack}deg) rotateY(${page.tilt * 6}deg) rotateZ(${page.tilt * -2}deg) translateZ(${exit * -350}px)`,
-        }}
-      >
-        {page.words.map((w, i) => (
-          <Word
-            key={i}
-            word={w}
-            pageStart={page.startFrame}
-            fontSize={page.fontSize}
-            active={i === activeIndex}
-          />
-        ))}
-      </div>
+      {(["left", "right"] as const).map((side) => (
+        <Wall
+          key={side}
+          page={page}
+          side={side}
+          activeWord={activeWord}
+          lean={lean}
+          exit={exit}
+          drift={drift}
+        />
+      ))}
     </AbsoluteFill>
   );
 };
