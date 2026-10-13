@@ -11,12 +11,31 @@ import { BehindCaptionsTop } from "./BehindCaptionsTop/BehindCaptionsTop";
 import { BehindCaptions3D } from "./BehindCaptions3D/BehindCaptions3D";
 import { KallawayDemo } from "./Kallaway/KallawayDemo";
 import { KallawayReel, REEL_FRAMES } from "./Kallaway/reel/KallawayReel";
+import { VikingCover } from "./Covers/VikingCover";
 
 // Each <Composition> is an entry in the sidebar!
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="VikingCover"
+        component={VikingCover}
+        durationInFrames={1}
+        fps={24}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          frame: "cover/frame135.png",
+          cutout: "cover/frame135_cutout.png",
+          shift: 392,
+          textTop: 300,
+          lines: [
+            { text: "¿SOY", size: 220 },
+            { text: "IA?", size: 420 },
+          ],
+        }}
+      />
       <Composition
         id="KallawayReel"
         component={KallawayReel}

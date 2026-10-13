@@ -21,7 +21,7 @@ const LINE_HEIGHT = 0.8;
 const LETTER_SPACING = -0.01;
 const SPACE_EM = 0.3;
 
-const FILL = "#ffe100";
+export const FILL = "#ffe100";
 const EXTRUDE_FROM = "#d9a800";
 const EXTRUDE_TO = "#5c3a00";
 
@@ -33,7 +33,7 @@ const mix = (a: string, b: string, t: number) => {
 };
 
 // Stacked hard shadows fake an extruded 3D slab under the letters.
-const extrusion = (fontSize: number) => {
+export const extrusion = (fontSize: number) => {
   const depth = 12;
   const step = fontSize / 240;
   const layers: string[] = [];
