@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Audio, interpolate, OffthreadVideo, random, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, Audio, Easing, interpolate, OffthreadVideo, random, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Captions } from "./Captions";
 import { DATA } from "./data";
 import { GlitchSlices, LightLeak, RgbSplitDefs, Strike, ThumbWall } from "./effects";
@@ -69,20 +69,33 @@ const useCamera = (): React.CSSProperties => {
   };
 };
 
+/** Positions an icon canvas; `flyIn` slides it in from the left edge (paper plane). */
+const IconBox: React.FC<{ x: number; y: number; size: number; flyIn?: boolean; children: React.ReactNode }> = ({ x, y, size, flyIn, children }) => {
+  const frame = useCurrentFrame();
+  const dx = flyIn ? interpolate(frame, [0, 9], [-(x + size), 0], { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }) : 0;
+  const dy = flyIn ? interpolate(frame, [0, 9], [140, 0], { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }) : 0;
+  return (
+    <div style={{ position: "absolute", left: x - size / 2, top: y - size / 2, width: size, height: size, transform: `translate(${dx}px, ${dy}px)` }}>
+      {children}
+    </div>
+  );
+};
+
 const Icons: React.FC = () => (
   <>
     {DATA.icons.map((ev, i) => {
       const Model = MODELS[ev.icon];
       const dur = ev.end - ev.start;
       const strikeAt = "strikeAt" in ev ? ev.strikeAt - ev.start : undefined;
+      const plane = ev.icon === "PaperPlane";
       return (
         <Sequence key={i} from={ev.start} durationInFrames={dur + 6} layout="none">
-          <div style={{ position: "absolute", left: ev.x - ev.size / 2, top: ev.y - ev.size / 2, width: ev.size, height: ev.size }}>
-            <IconStage size={ev.size} enterAt={0} exitAt={dur} yaw={ev.yaw} spin={"spin" in ev ? ev.spin : 0}>
+          <IconBox x={ev.x} y={ev.y} size={ev.size} flyIn={plane}>
+            <IconStage size={ev.size} enterAt={0} exitAt={dur} yaw={plane ? 0 : ev.yaw} spin={"spin" in ev ? ev.spin : 0}>
               <Model stepAt={"steps" in ev ? [...ev.steps] : undefined} />
             </IconStage>
             {strikeAt !== undefined ? <Strike size={ev.size} at={strikeAt} exitAt={dur} seed={`st${i}`} /> : null}
-          </div>
+          </IconBox>
         </Sequence>
       );
     })}

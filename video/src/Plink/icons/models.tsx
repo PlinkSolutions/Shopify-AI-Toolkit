@@ -583,20 +583,26 @@ export const ChatBubble: React.FC = () => (
   </group>
 );
 
-export const PaperPlane: React.FC<{ rot?: [number, number, number] }> = ({ rot = [1.1, -0.45, 0.2] }) => {
-  const geom = useMemo(() => {
+export const PaperPlane: React.FC<{ rot?: [number, number, number] }> = ({ rot = [0.25, -0.25, 0.45] }) => {
+  const [wings, keel] = useMemo(() => {
     // dart plane flying towards +x: wings in a shallow V, centre valley fold, keel below
     const N = [1.6, 0.05, 0], L = [-1.0, 0.42, 1.05], Rr = [-1.0, 0.42, -1.05], C = [-0.9, 0.0, 0], K = [-0.95, -0.55, 0];
-    const v = [...N, ...C, ...L, ...N, ...Rr, ...C, ...N, ...K, ...C, ...N, ...C, ...K];
-    const g = new THREE.BufferGeometry();
-    g.setAttribute("position", new THREE.Float32BufferAttribute(v, 3));
-    g.computeVertexNormals();
-    return g;
+    const make = (v: number[]) => {
+      const g = new THREE.BufferGeometry();
+      g.setAttribute("position", new THREE.Float32BufferAttribute(v, 3));
+      g.computeVertexNormals();
+      return g;
+    };
+    return [make([...N, ...C, ...L, ...N, ...Rr, ...C]), make([...N, ...K, ...C, ...N, ...C, ...K])];
   }, []);
   return (
     <group rotation={rot} position={[0.15, 0.1, 0]}>
-      <mesh geometry={geom}>
-        <meshPhysicalMaterial color="#ffffff" roughness={0.45} clearcoat={0.5} side={THREE.DoubleSide} flatShading />
+      {/* off-white wings (pure white blows out under the studio lights) and a lilac keel for depth */}
+      <mesh geometry={wings}>
+        <meshPhysicalMaterial color="#e9e6f5" roughness={0.5} clearcoat={0.3} envMapIntensity={0.6} side={THREE.DoubleSide} flatShading />
+      </mesh>
+      <mesh geometry={keel}>
+        <meshPhysicalMaterial color={PURPLE} roughness={0.45} clearcoat={0.6} side={THREE.DoubleSide} flatShading />
       </mesh>
       {[0, 1, 2].map((i) => (
         <mesh key={i} position={[-1.35 - i * 0.42, -0.05 - i * 0.05, 0]} scale={0.11 - i * 0.025}>
