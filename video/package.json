@@ -13,13 +13,18 @@
     "@fontsource/inter": "^5.3.0",
     "@fontsource/jetbrains-mono": "^5.3.0",
     "@fontsource/source-serif-4": "^5.3.0",
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.1",
     "@remotion/cli": "4.0.507",
     "@remotion/tailwind-v4": "4.0.507",
+    "@remotion/three": "^4.0.507",
     "@remotion/zod-types": "4.0.507",
+    "@types/three": "^0.186.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "remotion": "4.0.507",
     "tailwindcss": "4.0.0",
+    "three": "^0.186.1",
     "zod": "4.4.3"
   },
   "devDependencies": {

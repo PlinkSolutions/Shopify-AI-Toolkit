@@ -12,12 +12,16 @@ import { BehindCaptions3D } from "./BehindCaptions3D/BehindCaptions3D";
 import { KallawayDemo } from "./Kallaway/KallawayDemo";
 import { KallawayReel, REEL_FRAMES } from "./Kallaway/reel/KallawayReel";
 import { VikingCover } from "./Covers/VikingCover";
+import { IconGallery, ICONS } from "./Plink/icons/IconGallery";
+import { PlinkReel, PLINK_FRAMES } from "./Plink/PlinkReel";
 
 // Each <Composition> is an entry in the sidebar!
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition id="PlinkReel" component={PlinkReel} durationInFrames={PLINK_FRAMES} fps={24} width={1080} height={1920} />
+      <Composition id="IconGallery" component={IconGallery} durationInFrames={ICONS.length} fps={24} width={600} height={600} />
       <Composition
         id="VikingCover"
         component={VikingCover}

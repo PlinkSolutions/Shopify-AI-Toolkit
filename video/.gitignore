@@ -11,3 +11,10 @@ public/joined.mp4
 public/person.webm
 public/k_joined.mp4
 public/cover/
+
+# Plink reel media (user takes, cutout, thumbnails and generated sound effects)
+public/plink_joined.mp4
+public/plink_person.webm
+public/plink/
+
+__pycache__/
