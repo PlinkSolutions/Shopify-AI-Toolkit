@@ -30,8 +30,9 @@ export const ICONS: [string, React.FC][] = [
   ["PaperPlane", M.PaperPlane],
 ];
 
-export const IconGallery: React.FC = () => (
-  <AbsoluteFill style={{ backgroundColor: "#e9b6cf" }}>
+// `bg` defaults to the reel's wall colour; "transparent" exports PNGs for the website.
+export const IconGallery: React.FC<{ bg?: string }> = ({ bg = "#e9b6cf" }) => (
+  <AbsoluteFill style={{ backgroundColor: bg }}>
     {ICONS.map(([name, Icon], i) => (
       <Sequence key={name} from={i} durationInFrames={1} layout="none">
         <IconStage size={600} settled>

@@ -1,0 +1,843 @@
+<title>Plink Academy</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Aprende a crear videos con presentadores IA que graban por ti. Sin cámara, sin estudio y por menos de $1 por video. Pago único.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600;1,700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: a dark studio where a presenter who doesn't exist steps in front of
+   floating 3D props; each band moves the visitor one step closer to buying. */
+:root {
+  --ink: #0f1111;        /* page */
+  --panel: #161c18;      /* cards, pills */
+  --panel-2: #1c241f;
+  --line: #26322b;
+  --mint: #3ce89a;       /* brand accent */
+  --mint-ink: #0b2e20;   /* text on mint */
+  --sage: #68c38e;       /* headline green */
+  --mist: #9cada5;       /* secondary text */
+  --paper: #f4f6f3;      /* primary text */
+  --lilac: #b8a4ff;      /* her beanie: second accent, used sparingly */
+  --coral: #ff5c6c;      /* the "problem" strike */
+  --display: "Poppins", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "Poppins", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --radius: 22px;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 10; background: var(--ink);
+}
+a { color: inherit; }
+img, video { max-width: 100%; display: block; }
+:focus-visible { outline: 3px solid var(--mint); outline-offset: 3px; border-radius: 8px; }
+
+.wrap {
+  width: 100%; max-width: 1180px; margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 { font-family: var(--display); line-height: 1.08; text-wrap: balance; margin: 0; letter-spacing: -0.02em; }
+h2 { font-size: clamp(2rem, 4.4vw, 3.3rem); font-weight: 700; }
+h3 { font-size: 1.2rem; font-weight: 600; letter-spacing: -0.01em; }
+p { margin: 0; }
+.accent { color: var(--mint); }
+.eyebrow {
+  font-family: var(--mono); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--mint);
+}
+.lead { color: var(--mist); font-size: 1.12rem; max-width: 58ch; }
+.section { padding-block: clamp(72px, 10vw, 128px); position: relative; }
+.section-head { display: grid; gap: 16px; max-width: 760px; margin-bottom: clamp(36px, 5vw, 56px); }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  font-family: var(--display); font-weight: 600; font-size: 1rem; text-decoration: none;
+  padding: 16px 28px; border-radius: 999px; border: 1.5px solid transparent;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.btn-mint { background: var(--mint); color: var(--mint-ink); box-shadow: 0 10px 40px -12px rgba(60, 232, 154, .7); }
+.btn-mint:hover { transform: translateY(-2px); box-shadow: 0 16px 50px -12px rgba(60, 232, 154, .9); }
+.btn-ghost { border-color: var(--line); color: var(--paper); background: rgba(22, 28, 24, .6); }
+.btn-ghost:hover { border-color: var(--mint); }
+.btn svg { width: 18px; height: 18px; }
+
+/* Header */
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: rgba(15, 17, 17, .78); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(38, 50, 43, .6);
+}
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
+.logo { font-family: var(--display); font-size: 1.45rem; font-weight: 700; text-decoration: none; letter-spacing: -0.03em; white-space: nowrap; }
+.logo i { color: var(--mint); font-weight: 600; letter-spacing: -0.01em; }
+.nav { display: flex; align-items: center; gap: 28px; font-size: .95rem; color: var(--mist); }
+.nav a { text-decoration: none; }
+.nav a:hover { color: var(--paper); }
+.nav .btn { padding: 10px 20px; font-size: .92rem; }
+@media (max-width: 760px) { .nav .link { display: none; } }
+
+/* Hero */
+.hero { position: relative; padding-block: clamp(40px, 6vw, 80px) clamp(56px, 8vw, 96px); overflow: hidden; }
+.hero::before { /* studio key light */
+  content: ""; position: absolute; inset: -20% -10% auto auto; width: 70%; height: 120%;
+  background: radial-gradient(closest-side, rgba(60, 232, 154, .16), transparent 70%),
+              radial-gradient(closest-side at 30% 70%, rgba(184, 164, 255, .12), transparent 70%);
+  pointer-events: none;
+}
+.hero .wrap { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(24px, 4vw, 56px); align-items: center; position: relative; }
+.hero-copy { display: grid; gap: 26px; min-width: 0; }
+.pill {
+  justify-self: start; display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--display); font-weight: 700; font-size: .78rem; letter-spacing: .08em;
+  padding: 9px 16px; border-radius: 999px; border: 1.5px solid #3a453f; background: var(--panel);
+}
+.pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 4px rgba(60, 232, 154, .18); animation: pulse 2s infinite; }
+@keyframes pulse { 50% { box-shadow: 0 0 0 7px rgba(60, 232, 154, .05); } }
+.hero h1 { font-size: clamp(2.6rem, 6.4vw, 5rem); font-weight: 700; letter-spacing: -0.035em; }
+.hero h1 .accent { color: var(--sage); display: block; }
+.hero .lead { font-size: clamp(1.05rem, 1.6vw, 1.22rem); }
+.ctas { display: flex; flex-wrap: wrap; gap: 14px; }
+.ticks { display: flex; flex-wrap: wrap; gap: 10px 22px; color: var(--mist); font-size: .92rem; list-style: none; padding: 0; margin: 0; }
+.ticks li { display: inline-flex; align-items: center; gap: 8px; }
+.ticks svg { width: 18px; height: 18px; color: var(--mint); flex: none; }
+
+.stage { position: relative; min-height: 600px; display: grid; place-items: center; min-width: 0; }
+.stage canvas.three { position: absolute; inset: -40px; width: calc(100% + 80px); height: calc(100% + 80px); z-index: 2; pointer-events: none; }
+.phone {
+  position: relative; z-index: 1; width: min(290px, 72vw); aspect-ratio: 9 / 19; border-radius: 46px;
+  padding: 10px; background: linear-gradient(160deg, #2a332e, #121614 60%);
+  box-shadow: 0 0 0 1.5px #39443e inset, 0 40px 80px -30px rgba(0, 0, 0, .9), 0 0 120px -20px rgba(60, 232, 154, .35);
+  transform: rotate(-3deg);
+}
+.phone .screen { position: relative; width: 100%; height: 100%; border-radius: 37px; overflow: hidden; background: #000; }
+.phone video { width: 100%; height: 100%; object-fit: cover; }
+.phone .island { position: absolute; top: 10px; left: 50%; translate: -50% 0; width: 34%; height: 24px; border-radius: 99px; background: #000; z-index: 2; }
+.phone .tag {
+  position: absolute; left: 12px; bottom: 12px; z-index: 2; display: inline-flex; align-items: center; gap: 6px;
+  font-size: .72rem; font-weight: 600; padding: 6px 10px; border-radius: 99px; background: rgba(15, 17, 17, .72); backdrop-filter: blur(6px);
+}
+.phone .tag svg { width: 12px; height: 12px; color: var(--mint); }
+.sticker {
+  position: absolute; z-index: 3; right: 0; top: 40%; width: 148px; aspect-ratio: 1; border-radius: 50%;
+  background: var(--mint); color: var(--mint-ink); display: grid; place-content: center; text-align: center;
+  font-family: var(--display); font-weight: 700; line-height: 1; box-shadow: 0 18px 50px -16px rgba(60, 232, 154, .8);
+  animation: wobble 6s ease-in-out infinite;
+}
+.sticker small { font-size: .8rem; letter-spacing: .06em; }
+.sticker b { font-size: 3.1rem; letter-spacing: -0.03em; margin-block: 4px 2px; }
+@keyframes wobble { 0%, 100% { transform: rotate(-9deg) translateY(0); } 50% { transform: rotate(-4deg) translateY(-8px); } }
+.stage .fallback { display: none; }
+.no-webgl .stage .fallback { display: block; position: absolute; width: 110px; z-index: 2; }
+
+/* Proof strip */
+.proof { border-block: 1px solid var(--line); background: var(--panel); }
+.proof .wrap { display: grid; grid-template-columns: repeat(4, 1fr); padding-block: 26px; }
+.proof div { display: grid; gap: 2px; padding-inline: 20px; border-left: 1px solid var(--line); min-width: 0; }
+.proof div:first-child { border-left: 0; padding-left: 0; }
+.proof b { font-family: var(--display); font-size: clamp(1.5rem, 2.6vw, 2.1rem); font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.proof span { color: var(--mist); font-size: .9rem; }
+@media (max-width: 760px) {
+  .proof .wrap { grid-template-columns: 1fr 1fr; gap: 20px 0; }
+  .proof div:nth-child(3) { border-left: 0; padding-left: 0; }
+}
+
+/* Problem */
+.problems { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.problem {
+  position: relative; display: grid; gap: 12px; align-content: start; padding: 26px; border-radius: var(--radius);
+  background: var(--panel); border: 1px solid var(--line); min-width: 0;
+}
+.problem img { width: 96px; height: 96px; object-fit: contain; filter: drop-shadow(0 14px 18px rgba(0, 0, 0, .5)); }
+.problem .strike { position: absolute; left: 24px; top: 70px; width: 104px; height: 20px; overflow: visible; }
+.problem .strike path { stroke: var(--coral); stroke-width: 7; stroke-linecap: round; fill: none; stroke-dasharray: 120; stroke-dashoffset: 0; }
+.problem p { color: var(--mist); }
+
+/* Method */
+.method { display: grid; grid-template-columns: .95fr 1.05fr; gap: clamp(24px, 4vw, 56px); align-items: center; }
+.stairs-box { position: relative; aspect-ratio: 1 / .92; border-radius: 28px; background: radial-gradient(80% 70% at 50% 60%, rgba(60, 232, 154, .12), transparent 70%), var(--panel); border: 1px solid var(--line); overflow: hidden; min-width: 0; max-width: 100%; }
+.stairs-box canvas { width: 100%; height: 100%; display: block; }
+.stairs-box .fallback { display: none; }
+.no-webgl .stairs-box .fallback { display: block; position: absolute; inset: 0; margin: auto; width: 60%; }
+.receipt {
+  position: absolute; right: 16px; bottom: 16px; width: min(215px, 56%); padding: 14px 14px 12px; z-index: 2;
+  font-family: var(--mono); font-size: .68rem; color: #1b211e; background: #eef1ec; border-radius: 6px;
+  box-shadow: 0 20px 40px -18px rgba(0, 0, 0, .8); transform: rotate(2.5deg);
+  -webkit-mask: radial-gradient(6px at 50% 100%, transparent 98%, #000) 50% 100% / 14px 100% repeat-x;
+          mask: radial-gradient(6px at 50% 100%, transparent 98%, #000) 50% 100% / 14px 100% repeat-x;
+}
+.receipt h4 { margin: 0 0 8px; font-size: .74rem; letter-spacing: .12em; }
+.receipt .row { display: flex; gap: 6px; }
+.receipt .row span:nth-child(2) { flex: 1; border-bottom: 1.5px dotted #9aa39e; translate: 0 -4px; }
+.receipt .total { margin-top: 8px; padding-top: 8px; border-top: 1.5px dashed #9aa39e; font-weight: 700; font-size: .86rem; }
+.receipt .foot { margin-top: 8px; font-size: .64rem; color: #5d6762; letter-spacing: .06em; }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; counter-reset: step; min-width: 0; }
+.step {
+  display: grid; grid-template-columns: 52px 1fr; gap: 16px; align-items: start; padding: 16px 18px; border-radius: 18px;
+  border: 1px solid transparent; cursor: default; transition: background .25s, border-color .25s;
+}
+.step .n {
+  width: 52px; height: 52px; border-radius: 15px; display: grid; place-items: center; font-family: var(--display);
+  font-weight: 700; font-size: 1.3rem; background: var(--panel-2); border: 1px solid var(--line); color: var(--mist);
+  transition: background .25s, color .25s;
+}
+.step p { color: var(--mist); font-size: .97rem; }
+.step h3 { margin-bottom: 4px; }
+.step.on { background: var(--panel); border-color: var(--line); }
+.step.on .n { background: var(--mint); color: var(--mint-ink); border-color: var(--mint); }
+
+/* Included (bento) */
+.bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.card {
+  position: relative; display: grid; gap: 10px; align-content: start; padding: 28px; border-radius: var(--radius);
+  background: var(--panel); border: 1px solid var(--line); overflow: hidden; min-width: 0;
+}
+.card img { width: 88px; height: 88px; object-fit: contain; filter: drop-shadow(0 14px 18px rgba(0, 0, 0, .5)); transition: transform .4s cubic-bezier(.2, .9, .3, 1.4); }
+.card:hover img { transform: translateY(-6px) rotate(-6deg) scale(1.06); }
+.card p { color: var(--mist); }
+.card.big { grid-row: span 2; align-content: end; background: radial-gradient(90% 60% at 70% 20%, rgba(60, 232, 154, .16), transparent 70%), var(--panel); }
+.card.big img { width: 190px; height: 190px; justify-self: end; margin-bottom: auto; }
+.card.big h3 { font-size: 1.7rem; }
+
+/* Compare */
+.compare-scroll { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--line); }
+.compare { width: 100%; min-width: 560px; border-collapse: collapse; background: var(--panel); }
+.compare th, .compare td { padding: 18px 22px; text-align: left; border-bottom: 1px solid var(--line); }
+.compare tr:last-child td { border-bottom: 0; }
+.compare thead th { font-family: var(--display); font-size: .95rem; color: var(--mist); font-weight: 600; }
+.compare thead th:last-child { color: var(--mint); }
+.compare td:first-child { color: var(--mist); }
+.compare td:nth-child(2) { color: #c6cfca; }
+.compare td:last-child { font-weight: 600; background: rgba(60, 232, 154, .06); }
+.compare .x, .compare .ok { display: inline-flex; align-items: center; gap: 8px; }
+.compare svg { width: 16px; height: 16px; flex: none; }
+.compare .x svg { color: var(--coral); }
+.compare .ok svg { color: var(--mint); }
+
+/* Gallery */
+.reel-strip { display: flex; gap: 16px; overflow-x: auto; padding: 8px 4px 22px; scroll-snap-type: x mandatory; }
+.reel-strip figure { margin: 0; flex: 0 0 170px; scroll-snap-align: start; position: relative; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); transition: transform .3s; }
+.reel-strip figure:hover { transform: translateY(-6px) rotate(-1.5deg); }
+.reel-strip img { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; }
+.reel-strip figcaption {
+  position: absolute; left: 10px; bottom: 10px; display: inline-flex; gap: 6px; align-items: center; font-size: .72rem; font-weight: 600;
+  padding: 5px 9px; border-radius: 99px; background: rgba(15, 17, 17, .75);
+}
+.reel-strip figcaption svg { width: 11px; height: 11px; color: var(--mint); }
+.note { color: var(--mist); font-size: .9rem; margin-top: 6px; }
+
+/* Pricing */
+.price-wrap { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(24px, 4vw, 48px); align-items: end; }
+.her { position: relative; align-self: stretch; display: grid; align-items: end; min-height: 420px; min-width: 0; }
+.her img { width: min(400px, 100%); margin-inline: auto; -webkit-mask: radial-gradient(ellipse 58% 64% at 50% 40%, #000 72%, transparent 100%); mask: radial-gradient(ellipse 58% 64% at 50% 40%, #000 72%, transparent 100%); }
+.her .bubble {
+  position: absolute; top: 8%; right: 0; max-width: 220px; padding: 14px 18px; border-radius: 20px 20px 20px 4px;
+  background: var(--paper); color: var(--ink); font-family: var(--display); font-weight: 700; font-size: 1.05rem; line-height: 1.25;
+  box-shadow: 0 20px 40px -18px rgba(0, 0, 0, .9);
+}
+.her .bubble span { color: #16a466; }
+.price {
+  position: relative; display: grid; gap: 22px; padding: clamp(26px, 4vw, 40px); border-radius: 30px; background: var(--panel); min-width: 0;
+  border: 1.5px solid rgba(60, 232, 154, .55); box-shadow: 0 0 0 6px rgba(60, 232, 154, .06), 0 40px 90px -40px rgba(60, 232, 154, .45);
+}
+.price .tagline { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.badge { font-family: var(--display); font-weight: 700; font-size: .78rem; letter-spacing: .08em; padding: 8px 14px; border-radius: 999px; background: var(--mint); color: var(--mint-ink); }
+.amount { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.amount b { font-family: var(--display); font-size: clamp(3.4rem, 8vw, 5rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+.amount span { color: var(--mist); }
+.includes { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.includes li { display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start; }
+.includes svg { width: 22px; height: 22px; color: var(--mint); }
+.price .btn { width: 100%; font-size: 1.08rem; padding-block: 18px; }
+.fine { color: var(--mist); font-size: .86rem; text-align: center; }
+
+/* FAQ */
+.faq { display: grid; gap: 12px; max-width: 860px; }
+.faq details { border: 1px solid var(--line); border-radius: 18px; background: var(--panel); padding: 4px 22px; }
+.faq summary {
+  list-style: none; cursor: pointer; padding: 18px 0; font-family: var(--display); font-weight: 600; font-size: 1.06rem;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-size: 1.6rem; font-weight: 400; color: var(--mint); transition: transform .25s; flex: none; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { color: var(--mist); padding-bottom: 18px; max-width: 65ch; }
+
+/* Final CTA */
+.final { padding-block: clamp(64px, 9vw, 110px); }
+.final .box {
+  position: relative; overflow: hidden; border-radius: 34px; padding: clamp(32px, 6vw, 72px);
+  background: radial-gradient(70% 90% at 85% 10%, rgba(60, 232, 154, .28), transparent 60%),
+              radial-gradient(60% 80% at 0% 100%, rgba(184, 164, 255, .18), transparent 60%), var(--panel-2);
+  border: 1px solid var(--line); display: grid; gap: 24px; justify-items: start;
+}
+.final h2 { font-size: clamp(2.2rem, 5.4vw, 4.2rem); max-width: 14ch; }
+.final .ghost-ico { position: absolute; right: clamp(-20px, 2vw, 40px); bottom: -10px; width: clamp(150px, 22vw, 260px); opacity: .95; filter: drop-shadow(0 24px 30px rgba(0, 0, 0, .55)); animation: floaty 5s ease-in-out infinite; }
+@keyframes floaty { 50% { transform: translateY(-14px) rotate(4deg); } }
+
+footer { border-top: 1px solid var(--line); }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-block: 28px; color: var(--mist); font-size: .9rem; }
+
+/* Responsive */
+@media (max-width: 960px) {
+  .hero .wrap, .method, .price-wrap { grid-template-columns: 1fr; }
+  .stage { min-height: 560px; }
+  .problems { grid-template-columns: 1fr; }
+  .bento { grid-template-columns: 1fr 1fr; }
+  .card.big { grid-row: auto; grid-column: 1 / -1; }
+  .her { min-height: 0; order: 2; }
+  .her img { width: min(320px, 80%); }
+}
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .bento { grid-template-columns: 1fr; }
+  .stage { min-height: 520px; }
+  .sticker { width: 118px; right: 0; }
+  .sticker b { font-size: 2.4rem; }
+  .ctas .btn { flex: 1 1 100%; }
+  .final .ghost-ico { opacity: .35; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#inicio" aria-label="Plink Academy, inicio">plink<i>academy</i></a>
+    <nav class="nav" aria-label="Secciones">
+      <a class="link" href="#metodo">Método</a>
+      <a class="link" href="#incluye">Qué incluye</a>
+      <a class="link" href="#preguntas">Preguntas</a>
+      <a class="btn btn-mint" href="#precio">Quiero entrar</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="pill"><span class="dot" aria-hidden="true"></span>100% CREADA CON IA</span>
+        <h1>Crea videos con alguien <span class="accent">que no existe</span></h1>
+        <p class="lead">Aprende el método de Plink Academy para crear presentadores con IA que graban por ti. Sin cámara, sin estudio y por menos de $1 por video.</p>
+        <div class="ctas">
+          <a class="btn btn-mint" href="#precio">Quiero entrar
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="#metodo">Ver el método</a>
+        </div>
+        <ul class="ticks">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4L19 7"/></svg>Pago único</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4L19 7"/></svg>Acceso de por vida</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4L19 7"/></svg>Comunidad incluida</li>
+        </ul>
+      </div>
+
+      <div class="stage" id="stage">
+        <div class="phone">
+          <div class="screen">
+            <span class="island" aria-hidden="true"></span>
+            <video src="assets/reel-hook.mp4" poster="assets/reel-poster.jpg" autoplay muted loop playsinline aria-label="Fragmento del reel de Plink: la presentadora dice que no existe"></video>
+            <span class="tag"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg>Ella no existe</span>
+          </div>
+        </div>
+        <div class="sticker" aria-label="Menos de 1 dólar por video"><small>MENOS DE</small><b>$1</b><small>POR VIDEO</small></div>
+        <canvas class="three" id="hero3d" aria-hidden="true"></canvas>
+        <img class="fallback" src="assets/icon-ghost.webp" alt="" style="left:2%;top:6%">
+        <img class="fallback" src="assets/icon-playbutton.webp" alt="" style="left:0;bottom:8%">
+      </div>
+    </div>
+  </section>
+
+  <section class="proof" aria-label="Datos">
+    <div class="wrap">
+      <div><b>17K+</b><span>vistas en nuestro primer reel</span></div>
+      <div><b>&lt; $1</b><span>de coste por video</span></div>
+      <div><b>5</b><span>pasos, de cero a publicar</span></div>
+      <div><b>1</b><span>solo pago, para siempre</span></div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="problema-t">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">El problema</span>
+        <h2 id="problema-t">Sin videos no vendes. <span class="accent">Pero hacerlos cuesta.</span></h2>
+        <p class="lead">Si tienes un negocio, ya lo has vivido. Sabes que necesitas contenido, y cada intento se queda a medias.</p>
+      </div>
+      <div class="problems">
+        <article class="problem">
+          <img src="assets/icon-camera.webp" alt="" width="96" height="96">
+          <svg class="strike" viewBox="0 0 104 20" aria-hidden="true"><path d="M4 15 Q 52 2 100 8"/></svg>
+          <h3>Grabarte te da vergüenza</h3>
+          <p>Te pones delante de la cámara, repites diez veces y al final no publicas nada.</p>
+        </article>
+        <article class="problem">
+          <img src="assets/icon-coinstack.webp" alt="" width="96" height="96">
+          <svg class="strike" viewBox="0 0 104 20" aria-hidden="true"><path d="M4 14 Q 50 4 100 10"/></svg>
+          <h3>Un video profesional cuesta cientos</h3>
+          <p>Agencia, actores, estudio y edición. Cada pieza se lleva una parte de tu presupuesto.</p>
+        </article>
+        <article class="problem">
+          <img src="assets/icon-robot.webp" alt="" width="96" height="96">
+          <svg class="strike" viewBox="0 0 104 20" aria-hidden="true"><path d="M4 16 Q 54 3 100 7"/></svg>
+          <h3>Con IA, por tu cuenta, queda falso</h3>
+          <p>La cara cambia entre tomas, la voz suena a robot y gastas créditos probando.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="metodo" aria-labelledby="metodo-t" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">El método</span>
+        <h2 id="metodo-t">De cero a video en <span class="accent">5 pasos</span></h2>
+        <p class="lead">El mismo proceso con el que creamos a la chica del reel, explicado simple y sin tecnicismos.</p>
+      </div>
+      <div class="method">
+        <div class="stairs-box">
+          <canvas id="stairs3d" aria-hidden="true"></canvas>
+          <img class="fallback" src="assets/icon-gradcap.webp" alt="">
+          <div class="receipt" aria-label="Coste aproximado de un video">
+            <h4>TICKET · VIDEO DE 38 s</h4>
+            <div class="row"><span>01 Persona</span><span></span><span>céntimos</span></div>
+            <div class="row"><span>02 Foto</span><span></span><span>céntimos</span></div>
+            <div class="row"><span>03 Animación</span><span></span><span>céntimos</span></div>
+            <div class="row"><span>04 Voz</span><span></span><span>céntimos</span></div>
+            <div class="row"><span>05 Edición</span><span></span><span>céntimos</span></div>
+            <div class="row total"><span>TOTAL</span><span></span><span>&lt; $1 USD</span></div>
+            <div class="foot">SIN CÁMARA · SIN ESTUDIO · SIN ACTRIZ</div>
+          </div>
+        </div>
+        <ol class="steps" id="steps">
+          <li class="step on" data-step="0"><span class="n">1</span><div><h3>Crea a la persona</h3><p>Una descripción súper detallada: rasgos, ropa y estilo. Así nace tu presentador.</p></div></li>
+          <li class="step" data-step="1"><span class="n">2</span><div><h3>Hazle la foto</h3><p>Que parezca tomada con el móvil. Ese detalle es lo que la hace creíble.</p></div></li>
+          <li class="step" data-step="2"><span class="n">3</span><div><h3>Anímala</h3><p>Movimiento natural y la misma cara en todas las tomas.</p></div></li>
+          <li class="step" data-step="3"><span class="n">4</span><div><h3>Ponle voz</h3><p>Una voz que suene humana, con pausas y emoción. Nada de robot.</p></div></li>
+          <li class="step" data-step="4"><span class="n">5</span><div><h3>Edítalo para que retenga</h3><p>Captions, iconos 3D y sonido: lo que hace que la gente se quede hasta el final.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="incluye" aria-labelledby="incluye-t" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Qué incluye</span>
+        <h2 id="incluye-t">Todo lo que necesitas, <span class="accent">en un solo lugar</span></h2>
+      </div>
+      <div class="bento">
+        <article class="card big">
+          <img src="assets/icon-gradcap.webp" alt="" width="190" height="190">
+          <h3>El método completo, paso a paso</h3>
+          <p>Clases cortas y en orden. Ves la clase, copias el proceso y lo aplicas a tu negocio.</p>
+        </article>
+        <article class="card">
+          <img src="assets/icon-promptcard.webp" alt="" width="88" height="88">
+          <h3>Prompts y plantillas listas</h3>
+          <p>Copias, cambias lo tuyo y generas.</p>
+        </article>
+        <article class="card">
+          <img src="assets/icon-chatbubble.webp" alt="" width="88" height="88">
+          <h3>Comunidad que revisa tus videos</h3>
+          <p>Compartes tu video y te dicen qué mejorar.</p>
+        </article>
+        <article class="card">
+          <img src="assets/icon-scissors.webp" alt="" width="88" height="88">
+          <h3>Edición que retiene</h3>
+          <p>El estilo de nuestros reels, explicado: captions, iconos y sonido.</p>
+        </article>
+        <article class="card">
+          <img src="assets/icon-retry.webp" alt="" width="88" height="88">
+          <h3>Actualizaciones incluidas</h3>
+          <p>Las herramientas de IA cambian cada mes. Tu acceso se actualiza con ellas.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="compara-t" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">La diferencia</span>
+        <h2 id="compara-t">Grabar como siempre <span class="accent">o crear con Plink</span></h2>
+      </div>
+      <div class="compare-scroll">
+        <table class="compare">
+          <thead><tr><th scope="col">Qué necesitas</th><th scope="col">Producción tradicional</th><th scope="col">Con Plink Academy</th></tr></thead>
+          <tbody>
+            <tr><td>Cámara y equipo</td><td><span class="x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>Sí, y no es barato</span></td><td><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4L19 7"/></svg>No hace falta</span></td></tr>
+            <tr><td>Estudio o espacio</td><td><span class="x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>Sí</span></td><td><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4L19 7"/></svg>No hace falta</span></td></tr>
+            <tr><td>Salir tú en cámara</td><td><span class="x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>Sí, o pagar a alguien</span></td><td><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4L19 7"/></svg>Tu presentador IA</span></td></tr>
+            <tr><td>Coste por video</td><td>Cientos de dólares</td><td>Menos de $1</td></tr>
+            <tr><td>Tiempo</td><td>Días</td><td>Horas</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="galeria-t" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Hecho con el método</span>
+        <h2 id="galeria-t">Ninguna de estas personas <span class="accent">existe</span></h2>
+      </div>
+      <div class="reel-strip" tabindex="0" aria-label="Fotogramas de reels creados con IA">
+        <figure><img src="assets/thumb00.jpg" alt="Vikingo creado con IA hablando a cámara" loading="lazy"><figcaption><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg>IA</figcaption></figure>
+        <figure><img src="assets/thumb01.jpg" alt="Presentadora con gorro morado creada con IA" loading="lazy"><figcaption><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg>IA</figcaption></figure>
+        <figure><img src="assets/thumb02.jpg" alt="Vikingo creado con IA gesticulando" loading="lazy"><figcaption><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg>IA</figcaption></figure>
+        <figure><img src="assets/thumb05.jpg" alt="Presentadora creada con IA explicando" loading="lazy"><figcaption><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg>IA</figcaption></figure>
+        <figure><img src="assets/thumb04.jpg" alt="Vikingo creado con IA sonriendo" loading="lazy"><figcaption><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg>IA</figcaption></figure>
+        <figure><img src="assets/thumb09.jpg" alt="Presentadora creada con IA sonriendo" loading="lazy"><figcaption><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg>IA</figcaption></figure>
+        <figure><img src="assets/thumb06.jpg" alt="Vikingo creado con IA con subtítulos" loading="lazy"><figcaption><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg>IA</figcaption></figure>
+        <figure><img src="assets/thumb11.jpg" alt="Presentadora creada con IA con micrófono" loading="lazy"><figcaption><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg>IA</figcaption></figure>
+      </div>
+      <p class="note">Fotogramas de reels creados por el equipo de Plink con el mismo proceso que vas a aprender.</p>
+    </div>
+  </section>
+
+  <section class="section" id="precio" aria-labelledby="precio-t" style="padding-top:0">
+    <div class="wrap price-wrap">
+      <div class="her">
+        <img src="assets/girl-cutout.webp" alt="La presentadora de Plink, creada con IA, sonriendo con un micrófono" width="560" height="887" loading="lazy">
+        <p class="bubble">Yo no existo.<br><span>Tu negocio sí.</span></p>
+      </div>
+      <div class="price">
+        <div class="tagline"><span class="badge">PAGO ÚNICO</span><span class="eyebrow">Acceso de por vida</span></div>
+        <h2 id="precio-t" style="font-size:clamp(1.7rem,3.2vw,2.4rem)">Entra a Plink Academy</h2>
+        <div class="amount"><b>$XX</b><span>USD · un solo pago</span></div>
+        <ul class="includes">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4L19 7"/></svg><span>El método completo en 5 pasos</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4L19 7"/></svg><span>Prompts y plantillas listas para copiar</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4L19 7"/></svg><span>Comunidad que revisa tus videos</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4L19 7"/></svg><span>Clases de edición que retiene</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4L19 7"/></svg><span>Actualizaciones sin coste extra</span></li>
+        </ul>
+        <a class="btn btn-mint" href="#precio" id="checkout">Quiero entrar a Plink Academy
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <p class="fine">Sin suscripciones ni cuotas mensuales.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="preguntas" aria-labelledby="faq-t" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Preguntas</span>
+        <h2 id="faq-t">Lo que todos preguntan</h2>
+      </div>
+      <div class="faq">
+        <details open><summary>¿Necesito experiencia previa?</summary><p>No. Empiezas desde cero y sigues los pasos en orden, con ejemplos de cada uno.</p></details>
+        <details><summary>¿Tengo que salir en cámara?</summary><p>No. Ese es el punto: tu presentador con IA graba por ti.</p></details>
+        <details><summary>¿Cuánto cuesta crear cada video?</summary><p>Las herramientas cuestan céntimos por paso. Un video completo sale por menos de $1.</p></details>
+        <details><summary>¿De verdad es un pago único?</summary><p>Sí. Pagas una vez y el acceso es tuyo, sin cuotas mensuales.</p></details>
+        <details><summary>¿Me sirve para mi negocio?</summary><p>Si vendes algo y necesitas videos para redes o anuncios, sí. El método se aplica a cualquier producto o servicio.</p></details>
+        <details><summary>¿Qué herramientas voy a usar?</summary><p>Herramientas de IA para imagen, video y voz. En la academia te decimos cuáles usar hoy y cómo cambiar cuando salen mejores.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <div class="box">
+        <span class="eyebrow">Tu turno</span>
+        <h2>Ella no existe. <span class="accent">Tu próximo video, sí.</span></h2>
+        <p class="lead">Crea tu presentador con IA y publica sin ponerte delante de la cámara.</p>
+        <a class="btn btn-mint" href="#precio">Quiero entrar
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <img class="ghost-ico" src="assets/icon-ghost.webp" alt="" loading="lazy">
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="logo" style="font-size:1.2rem">plink<i>academy</i></span>
+    <span>@plinkacademy · Videos 100% creados con IA</span>
+    <span>© 2026 Plink Academy</span>
+  </div>
+</footer>
+
+<script>
+  // Step list ↔ 3D stairs: hover or focus a step to light it; otherwise cycle.
+  (() => {
+    const steps = [...document.querySelectorAll(".step")];
+    let active = 0, hold = false;
+    const set = (i) => {
+      active = i;
+      steps.forEach((s, k) => s.classList.toggle("on", k === i));
+      window.dispatchEvent(new CustomEvent("plink-step", { detail: i }));
+    };
+    steps.forEach((s, k) => {
+      s.tabIndex = 0;
+      s.addEventListener("mouseenter", () => { hold = true; set(k); });
+      s.addEventListener("focus", () => { hold = true; set(k); });
+      s.addEventListener("mouseleave", () => { hold = false; });
+      s.addEventListener("blur", () => { hold = false; });
+    });
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setInterval(() => { if (!hold) set((active + 1) % steps.length); }, 2400);
+    }
+  })();
+</script>
+
+<script>
+  // If three.js can't load (offline, blocked CDN), show the static 3D icons instead.
+  setTimeout(() => { if (!window.__plink3d) document.documentElement.classList.add("no-webgl"); }, 8000);
+</script>
+<script type="importmap">
+  { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+  } }
+</script>
+<script type="module">
+import * as THREE from "three";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+import { SVGLoader } from "three/addons/loaders/SVGLoader.js";
+
+// Extruded glyph outlines (Inter Black, 1 unit = 1 em, y down), same as the reels' 3D icons.
+const GLYPHS = {"$":{"d":"M-0.0205 0.4546V0.3716Q-0.0967 0.3682 -0.1553 0.3442Q-0.2261 0.3164 -0.2651 0.2578Q-0.3042 0.1992 -0.3047 0.1079H-0.1172Q-0.1152 0.1411 -0.1003 0.1641Q-0.0854 0.187 -0.0581 0.1987Q-0.0415 0.2061 -0.0205 0.209V0.0757L-0.0791 0.063Q-0.1753 0.0425 -0.2307 -0.0071Q-0.2861 -0.0566 -0.2861 -0.1421Q-0.2861 -0.2114 -0.2485 -0.2634Q-0.2109 -0.3154 -0.1445 -0.3447Q-0.0898 -0.3687 -0.0205 -0.3726V-0.4546H0.0381V-0.3726Q0.1074 -0.3682 0.1606 -0.3442Q0.2246 -0.3145 0.2595 -0.261Q0.2944 -0.2075 0.2949 -0.1362H0.1055Q0.103 -0.1719 0.0796 -0.1919Q0.064 -0.2046 0.0381 -0.209V-0.082L0.0771 -0.0737Q0.1372 -0.061 0.1804 -0.04Q0.2236 -0.019 0.2512 0.009Q0.2788 0.0371 0.2917 0.0723Q0.3047 0.1074 0.3047 0.1489Q0.3047 0.2207 0.2693 0.2708Q0.2339 0.3208 0.168 0.3467Q0.1123 0.3687 0.0381 0.3721V0.4546ZM0.0381 0.208Q0.0503 0.2061 0.0601 0.2026Q0.0815 0.1948 0.0925 0.1809Q0.1035 0.167 0.1035 0.1489Q0.1035 0.1323 0.093 0.1199Q0.0825 0.1074 0.0586 0.0972Q0.0493 0.0933 0.0381 0.0898ZM-0.0205 -0.0967V-0.2095Q-0.0327 -0.208 -0.042 -0.2046Q-0.0615 -0.1973 -0.0708 -0.1846Q-0.0801 -0.1719 -0.0801 -0.1558Q-0.0801 -0.1387 -0.0701 -0.1257Q-0.0601 -0.1128 -0.0381 -0.1035Q-0.0303 -0.0996 -0.0205 -0.0967Z"},"1":{"d":"M0.1807 -0.3638V0.3638H-0.0166V-0.1938H-0.0215L-0.1807 -0.0864V-0.2544L-0.0176 -0.3638Z"},"P":{"d":"M-0.292 0.3638V-0.3638H0.0215Q0.1025 -0.3638 0.1633 -0.3318Q0.2241 -0.2998 0.2581 -0.2417Q0.292 -0.1836 0.292 -0.106Q0.292 -0.0278 0.2573 0.0291Q0.2227 0.0859 0.1602 0.1169Q0.0977 0.1479 0.0146 0.1479H-0.0947V0.3638ZM-0.0947 -0.0054H-0.0254Q0.0098 -0.0054 0.0347 -0.0178Q0.0596 -0.0303 0.0728 -0.0527Q0.0859 -0.0752 0.0859 -0.106Q0.0859 -0.1377 0.0728 -0.1599Q0.0596 -0.1821 0.0347 -0.1938Q0.0098 -0.2056 -0.0254 -0.2056H-0.0947Z"},"2":{"d":"M-0.2725 0.3687V0.2271L-0.001 0.0024Q0.0259 -0.02 0.0454 -0.0398Q0.0649 -0.0596 0.0754 -0.0806Q0.0859 -0.1016 0.0859 -0.1274Q0.0859 -0.1553 0.074 -0.175Q0.062 -0.1948 0.0413 -0.2056Q0.0205 -0.2163 -0.0068 -0.2163Q-0.0342 -0.2163 -0.0549 -0.2053Q-0.0757 -0.1943 -0.0872 -0.1733Q-0.0986 -0.1523 -0.0986 -0.1216H-0.2861Q-0.2861 -0.1982 -0.2517 -0.2534Q-0.2173 -0.3086 -0.1543 -0.3386Q-0.0913 -0.3687 -0.0068 -0.3687Q0.0806 -0.3687 0.1445 -0.3408Q0.2085 -0.313 0.2434 -0.2625Q0.2783 -0.2119 0.2783 -0.144Q0.2783 -0.1021 0.261 -0.0608Q0.2437 -0.0195 0.1987 0.0308Q0.1538 0.0811 0.0703 0.1499L0.002 0.2065V0.2114H0.2861V0.3687Z"},"3":{"d":"M-0.0039 0.3735Q-0.0898 0.3735 -0.1565 0.344Q-0.2231 0.3145 -0.261 0.2622Q-0.2988 0.21 -0.2988 0.1421H-0.1006Q-0.1006 0.1631 -0.0879 0.1794Q-0.0752 0.1958 -0.0527 0.2051Q-0.0303 0.2144 -0.002 0.2144Q0.0254 0.2144 0.0461 0.2046Q0.0669 0.1948 0.0784 0.1777Q0.0898 0.1606 0.0898 0.1382Q0.0898 0.1157 0.0764 0.0989Q0.063 0.082 0.0388 0.0725Q0.0146 0.063 -0.0176 0.063H-0.0918V-0.0737H-0.0176Q0.0117 -0.0737 0.0342 -0.0835Q0.0566 -0.0933 0.0693 -0.1101Q0.082 -0.127 0.082 -0.1489Q0.082 -0.1704 0.0713 -0.1865Q0.0605 -0.2026 0.0417 -0.2119Q0.0229 -0.2212 -0.002 -0.2212Q-0.0293 -0.2212 -0.0505 -0.2117Q-0.0718 -0.2021 -0.0837 -0.1853Q-0.0957 -0.1685 -0.0957 -0.146H-0.2852Q-0.2852 -0.2129 -0.2488 -0.2642Q-0.2124 -0.3154 -0.1484 -0.3445Q-0.0845 -0.3735 -0.002 -0.3735Q0.0786 -0.3735 0.1406 -0.3462Q0.2026 -0.3188 0.2375 -0.271Q0.2725 -0.2231 0.2725 -0.1616Q0.2725 -0.1011 0.2302 -0.0618Q0.188 -0.0225 0.123 -0.0151V-0.0103Q0.1816 -0.0039 0.2207 0.0183Q0.2598 0.0405 0.2793 0.0754Q0.2988 0.1104 0.2988 0.1548Q0.2988 0.2188 0.2603 0.2683Q0.2217 0.3179 0.1536 0.3457Q0.0854 0.3735 -0.0039 0.3735Z"},"4":{"d":"M-0.3135 0.2505V0.0972L-0.0205 -0.3638H0.2295V0.0972H0.3135V0.2505H0.2295V0.3638H0.04V0.2505ZM0.0449 0.0972V-0.1587H0.0391L-0.1191 0.0913V0.0972Z"},"5":{"d":"M-0.0015 0.3687Q-0.0854 0.3687 -0.1504 0.3391Q-0.2153 0.3096 -0.2524 0.2573Q-0.2896 0.2051 -0.2905 0.1372H-0.0981Q-0.0981 0.1621 -0.085 0.1807Q-0.0718 0.1992 -0.0498 0.2092Q-0.0278 0.2192 -0.0015 0.2192Q0.0288 0.2192 0.0515 0.2063Q0.0742 0.1934 0.0872 0.1699Q0.1001 0.1465 0.1001 0.1147Q0.1001 0.0825 0.0872 0.0588Q0.0742 0.0352 0.0515 0.0222Q0.0288 0.0093 -0.0015 0.0093Q-0.0332 0.0093 -0.0593 0.0244Q-0.0854 0.0396 -0.0981 0.0659L-0.272 0.0317L-0.2437 -0.3687H0.2456V-0.2104H-0.0815L-0.0952 -0.0503H-0.0913Q-0.0742 -0.0835 -0.0322 -0.105Q0.0098 -0.1265 0.0649 -0.1265Q0.1133 -0.1265 0.1545 -0.1094Q0.1958 -0.0923 0.2263 -0.0608Q0.2568 -0.0293 0.2737 0.0139Q0.2905 0.0571 0.2905 0.1089Q0.2905 0.1851 0.2544 0.2437Q0.2183 0.3022 0.1526 0.3354Q0.0869 0.3687 -0.0015 0.3687Z"}};
+
+const MINT = "#3ce89a", LILAC = "#b8a4ff", GOLD = "#ffcf4a", INK = "#0f1111";
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const plastic = (color, o = {}) => new THREE.MeshPhysicalMaterial({ color, roughness: 0.32, clearcoat: 1, clearcoatRoughness: 0.12, ...o });
+const metal = (color, o = {}) => new THREE.MeshPhysicalMaterial({ color, metalness: 0.9, roughness: 0.2, envMapIntensity: 2.6, clearcoat: 0.3, ...o });
+
+function glyph(ch, size, depth, mat) {
+  const paths = new SVGLoader().parse(`<svg xmlns="http://www.w3.org/2000/svg"><path d="${GLYPHS[ch].d}"/></svg>`).paths;
+  const shapes = paths.flatMap((p) => SVGLoader.createShapes(p));
+  const geo = new THREE.ExtrudeGeometry(shapes, { depth: depth / size, bevelEnabled: true, bevelThickness: 0.03, bevelSize: 0.018, bevelSegments: 4, curveSegments: 10 });
+  geo.center();
+  const m = new THREE.Mesh(geo, mat);
+  m.scale.set(size, -size, size);
+  return m;
+}
+function roundedBox(w, h, d, r, mat) {
+  const s = new THREE.Shape();
+  const x = -w / 2 + r, y = -h / 2 + r, W = w - 2 * r, H = h - 2 * r;
+  s.moveTo(x, y - r); s.lineTo(x + W, y - r); s.quadraticCurveTo(x + W + r, y - r, x + W + r, y);
+  s.lineTo(x + W + r, y + H); s.quadraticCurveTo(x + W + r, y + H + r, x + W, y + H + r);
+  s.lineTo(x, y + H + r); s.quadraticCurveTo(x - r, y + H + r, x - r, y + H);
+  s.lineTo(x - r, y); s.quadraticCurveTo(x - r, y - r, x, y - r);
+  const bev = Math.min(r * 0.6, d * 0.45);
+  const geo = new THREE.ExtrudeGeometry(s, { depth: d - 2 * bev, bevelEnabled: true, bevelThickness: bev, bevelSize: bev * 0.9, bevelSegments: 8, curveSegments: 24 });
+  geo.center();
+  return new THREE.Mesh(geo, mat);
+}
+
+function coin() {
+  const g = new THREE.Group();
+  const body = new THREE.Mesh(new THREE.CylinderGeometry(1.15, 1.15, 0.26, 72), metal(GOLD));
+  body.rotation.x = Math.PI / 2; g.add(body);
+  g.add(new THREE.Mesh(new THREE.TorusGeometry(1.15, 0.08, 16, 72), metal("#e0a224")));
+  const face = metal("#fff0b8", { roughness: 0.15, envMapIntensity: 3.2 });
+  for (const side of [1, -1]) {
+    const f = new THREE.Group();
+    const d = glyph("$", 0.95, 0.12, face); d.position.x = -0.3; f.add(d);
+    const one = glyph("1", 0.95, 0.12, face); one.position.x = 0.32; f.add(one);
+    f.position.z = 0.17 * side; if (side < 0) f.rotation.y = Math.PI;
+    g.add(f);
+  }
+  return g;
+}
+function badge() {
+  const g = new THREE.Group();
+  g.add(roundedBox(2.1, 2.1, 0.5, 0.48, plastic(MINT)));
+  const p = glyph("P", 1.45, 0.24, plastic(INK)); p.position.set(-0.03, -0.03, 0.33); g.add(p);
+  return g;
+}
+function play() {
+  const g = new THREE.Group();
+  g.add(roundedBox(2.1, 1.6, 0.5, 0.38, plastic(LILAC)));
+  const tri = new THREE.Shape([new THREE.Vector2(-0.32, -0.42), new THREE.Vector2(0.46, 0), new THREE.Vector2(-0.32, 0.42)]);
+  const tg = new THREE.ExtrudeGeometry(tri, { depth: 0.12, bevelEnabled: true, bevelThickness: 0.06, bevelSize: 0.06, bevelSegments: 5 });
+  tg.center();
+  const t = new THREE.Mesh(tg, plastic("#ffffff")); t.position.set(0.05, 0, 0.33); g.add(t);
+  return g;
+}
+function ghost() {
+  const g = new THREE.Group();
+  const white = plastic("#f6f3ff", { roughness: 0.25 });
+  const pts = [];
+  for (let i = 0; i <= 24; i++) { const a = (i / 24) * (Math.PI / 2); pts.push(new THREE.Vector2(Math.sin(a), 0.25 + Math.cos(a))); }
+  pts.push(new THREE.Vector2(1.0, -0.85));
+  g.add(new THREE.Mesh(new THREE.LatheGeometry(pts.reverse(), 64), white));
+  for (let i = 0; i < 8; i++) {
+    const m = new THREE.Mesh(new THREE.SphereGeometry(1, 24, 24), white);
+    m.position.set(Math.cos((i / 8) * Math.PI * 2) * 0.78, -0.88, Math.sin((i / 8) * Math.PI * 2) * 0.78);
+    m.scale.set(0.34, 0.3, 0.34); g.add(m);
+  }
+  const eye = plastic("#16161c", { roughness: 0.2 }), shine = new THREE.MeshBasicMaterial({ color: "#ffffff" });
+  for (const k of [-1, 1]) {
+    const e = new THREE.Mesh(new THREE.SphereGeometry(1, 24, 24), eye);
+    e.scale.set(0.14, 0.22, 0.09); e.position.set(k * 0.33, 0.45, 0.93); g.add(e);
+    const s = new THREE.Mesh(new THREE.SphereGeometry(0.045, 12, 12), shine); s.position.set(k * 0.33 + 0.045, 0.53, 1.0); g.add(s);
+    const c = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 16), plastic("#ff7fb6"));
+    c.scale.set(0.16, 0.09, 0.05); c.position.set(k * 0.58, 0.12, 0.8); g.add(c);
+    const arm = new THREE.Mesh(new THREE.SphereGeometry(1, 20, 20), white);
+    arm.scale.set(0.2, 0.42, 0.2); arm.position.set(k * 1.05, -0.1, 0.1); arm.rotation.z = -0.7 * k; g.add(arm);
+  }
+  const mouth = new THREE.Mesh(new THREE.SphereGeometry(1, 16, 16), plastic("#2a1a2a"));
+  mouth.scale.set(0.1, 0.13, 0.05); mouth.position.set(0, 0.08, 0.98); g.add(mouth);
+  g.position.y = 0.1;
+  return g;
+}
+
+function makeRenderer(canvas) {
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.toneMapping = THREE.NeutralToneMapping;
+  const scene = new THREE.Scene();
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+  scene.environmentIntensity = 0.7;
+  pmrem.dispose();
+  scene.add(new THREE.AmbientLight(0xffffff, 0.25));
+  const key = new THREE.DirectionalLight(0xffffff, 2.2); key.position.set(3, 5, 6); scene.add(key);
+  const fill = new THREE.DirectionalLight(0xd9fff0, 0.8); fill.position.set(-5, 1, 2); scene.add(fill);
+  const rim = new THREE.DirectionalLight(0xffffff, 1.4); rim.position.set(0, -3, -5); scene.add(rim);
+  return { renderer, scene };
+}
+function fit(renderer, camera, canvas) {
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  if (!w || !h) return false;
+  if (canvas.width !== Math.round(w * renderer.getPixelRatio()) || canvas.height !== Math.round(h * renderer.getPixelRatio())) {
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h; camera.updateProjectionMatrix();
+  }
+  return true;
+}
+// render only while on screen
+function whenVisible(el) {
+  let on = true;
+  new IntersectionObserver(([e]) => { on = e.isIntersecting; }).observe(el);
+  return () => on;
+}
+
+let pointer = { x: 0, y: 0 };
+addEventListener("pointermove", (e) => { pointer.x = e.clientX / innerWidth - 0.5; pointer.y = e.clientY / innerHeight - 0.5; });
+
+function hero() {
+  const canvas = document.getElementById("hero3d");
+  const { renderer, scene } = makeRenderer(canvas);
+  const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+  camera.position.set(0, 0, 18);
+  const root = new THREE.Group(); scene.add(root);
+  // props arranged around the phone, never over the video
+  // props sit in the corners around the phone (side, height as a fraction of the view), never over the video
+  const props = [
+    { obj: coin(), side: -1, fy: 0.56, z: 0, s: 0.95, spin: 0.012, yaw: 0.5 },
+    { obj: badge(), side: 1, fy: 0.6, z: 0.5, s: 0.85, yaw: -0.45 },
+    { obj: play(), side: -1, fy: -0.52, z: 0.4, s: 0.8, yaw: 0.45 },
+    { obj: ghost(), side: 1, fy: -0.64, z: 1, s: 0.8, yaw: -0.35 },
+  ];
+  props.forEach((p, i) => { p.phase = i * 1.7; root.add(p.obj); });
+  const sparkMat = plastic(MINT, { emissive: MINT, emissiveIntensity: 0.35 });
+  const sparks = [[-1.6, 4.2], [2.0, -4.3], [-4.4, 0.2], [4.6, 1.0], [0.6, 4.6]].map(([x, y], i) => {
+    const m = new THREE.Mesh(new THREE.IcosahedronGeometry(0.12 + (i % 2) * 0.06, 1), sparkMat);
+    m.position.set(x, y, -1); root.add(m); return m;
+  });
+  const visible = whenVisible(canvas);
+  const t0 = performance.now();
+  let rx = 0, ry = 0;
+  function frame(now) {
+    requestAnimationFrame(frame);
+    if (!visible() || !fit(renderer, camera, canvas)) return;
+    const t = reduced ? 0 : (now - t0) / 1000;
+    const halfH = camera.position.z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * 0.92;
+    const halfW = halfH * camera.aspect;
+    const k = Math.min(1, halfW / 4.2);
+    const intro = reduced ? 1 : Math.min(1, 0.6 + t * 0.9);
+    props.forEach((p) => {
+      const sc = p.s * k;
+      p.obj.position.set(p.side * (halfW - 1.3 * sc), p.fy * halfH + Math.sin(t * 1.4 + p.phase) * 0.18, p.z);
+      const pop = 1 + (1 - intro) * -0.4 + (intro < 1 ? Math.sin(intro * Math.PI) * 0.08 : 0);
+      p.obj.scale.setScalar(sc * pop);
+      p.obj.rotation.set(0.12 + Math.sin(t * 0.8 + p.phase) * 0.06, p.yaw + Math.sin(t * 1.1 + p.phase) * 0.28 + (p.spin ? t * p.spin * 60 : 0), 0);
+    });
+    sparks.forEach((m, i) => { m.rotation.set(t * (0.6 + i * 0.1), t * 0.8, 0); m.position.z = -1 + Math.sin(t * 2 + i) * 0.3; });
+    rx += (pointer.y * 0.25 - rx) * 0.06; ry += (pointer.x * 0.35 - ry) * 0.06;
+    root.rotation.set(rx, ry, 0);
+    renderer.render(scene, camera);
+  }
+  requestAnimationFrame(frame);
+}
+
+function stairs() {
+  const canvas = document.getElementById("stairs3d");
+  const { renderer, scene } = makeRenderer(canvas);
+  const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+  camera.position.set(0, 1.4, 11.5); camera.lookAt(0, 0.2, 0);
+  const root = new THREE.Group(); root.rotation.y = -0.45; root.position.set(-1.25, 0.7, 0); scene.add(root);
+  const colors = [LILAC, "#a8b6f6", "#86cbd8", "#5cdcb2", MINT];
+  const steps = colors.map((c, i) => {
+    const h = 0.62 * (i + 1);
+    const g = new THREE.Group();
+    const mat = plastic(c, { emissive: c, emissiveIntensity: 0 });
+    const box = roundedBox(0.86, h, 1.5, 0.12, mat); g.add(box);
+    const num = glyph(String(i + 1), 0.5, 0.08, plastic("#ffffff")); num.position.set(0, h / 2 - 0.36, 0.78); g.add(num);
+    g.position.set(-1.8 + i * 0.9, -1.9 + h / 2, 0);
+    root.add(g);
+    return { g, mat, h, lift: 0 };
+  });
+  const fig = ghost(); fig.scale.setScalar(0.42); root.add(fig);
+  let active = 0;
+  addEventListener("plink-step", (e) => { active = e.detail; });
+  const visible = whenVisible(canvas);
+  const t0 = performance.now();
+  let ry = 0;
+  function frame(now) {
+    requestAnimationFrame(frame);
+    if (!visible() || !fit(renderer, camera, canvas)) return;
+    const t = reduced ? 0 : (now - t0) / 1000;
+    steps.forEach((s, i) => {
+      const target = i === active ? 0.22 : 0;
+      s.lift += (target - s.lift) * 0.12;
+      s.g.position.y = -1.9 + s.h / 2 + s.lift;
+      s.mat.emissiveIntensity = s.lift * 1.4;
+    });
+    // the little ghost hops onto the active step
+    const top = steps[active];
+    const gx = top.g.position.x, gy = top.g.position.y + top.h / 2 + 0.55;
+    fig.position.x += (gx - fig.position.x) * 0.12;
+    fig.position.y += (gy + Math.abs(Math.sin(t * 3)) * 0.12 - fig.position.y) * 0.2;
+    fig.rotation.y = 0.4 + Math.sin(t * 1.2) * 0.25;
+    ry += (pointer.x * 0.3 - ry) * 0.05;
+    root.rotation.y = -0.45 + ry + Math.sin(t * 0.5) * 0.05;
+    renderer.render(scene, camera);
+  }
+  requestAnimationFrame(frame);
+}
+
+try {
+  const test = document.createElement("canvas").getContext("webgl2");
+  if (!test) throw new Error("no webgl2");
+  hero();
+  stairs();
+  window.__plink3d = true;
+  document.documentElement.classList.remove("no-webgl"); // in case the fallback kicked in on a slow connection
+} catch (err) {
+  document.documentElement.classList.add("no-webgl");
+}
+</script>

@@ -22,6 +22,7 @@ export const RemotionRoot: React.FC = () => {
     <>
       <Composition id="PlinkReel" component={PlinkReel} durationInFrames={PLINK_FRAMES} fps={24} width={1080} height={1920} />
       <Composition id="IconGallery" component={IconGallery} durationInFrames={ICONS.length} fps={24} width={600} height={600} />
+      <Composition id="IconSheetTransparent" component={IconGallery} durationInFrames={ICONS.length} fps={24} width={600} height={600} defaultProps={{ bg: "transparent" }} />
       <Composition
         id="VikingCover"
         component={VikingCover}
