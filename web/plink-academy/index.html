@@ -84,11 +84,6 @@ p { margin: 0; }
 .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
 .logo { font-family: var(--display); font-size: 1.45rem; font-weight: 700; text-decoration: none; letter-spacing: -0.03em; white-space: nowrap; }
 .logo i { color: var(--mint); font-weight: 600; letter-spacing: -0.01em; }
-.nav { display: flex; align-items: center; gap: 28px; font-size: .95rem; color: var(--mist); }
-.nav a { text-decoration: none; }
-.nav a:hover { color: var(--paper); }
-.nav .btn { padding: 10px 20px; font-size: .92rem; }
-@media (max-width: 760px) { .nav .link { display: none; } }
 
 /* Hero */
 .hero { position: relative; padding-block: clamp(40px, 6vw, 80px) clamp(56px, 8vw, 96px); overflow: hidden; }
@@ -291,6 +286,131 @@ p { margin: 0; }
 footer { border-top: 1px solid var(--line); }
 footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-block: 28px; color: var(--mist); font-size: .9rem; }
 
+/* Header tabs (Academia · Ideas · Modelos) */
+.top .wrap { display: grid; grid-template-columns: auto 1fr auto; }
+.tabs { justify-self: center; display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--panel); border: 1px solid var(--line); }
+.tabs a {
+  display: inline-flex; align-items: center; gap: 7px; padding: 8px 18px; border-radius: 999px; text-decoration: none;
+  font-family: var(--display); font-weight: 600; font-size: .9rem; color: var(--mist); transition: background .2s, color .2s;
+}
+.tabs a:hover { color: var(--paper); }
+.tabs a[aria-current="page"] { background: var(--panel-2); color: var(--paper); box-shadow: inset 0 0 0 1px var(--line); }
+.tabs a[aria-current="page"]::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--mint); }
+.top .cta { padding: 10px 20px; font-size: .92rem; }
+@media (max-width: 760px) {
+  .top .wrap { grid-template-columns: 1fr auto; row-gap: 10px; }
+  .tabs { grid-column: 1 / -1; grid-row: 2; justify-self: stretch; }
+  .tabs a { flex: 1; justify-content: center; padding-inline: 8px; }
+}
+
+/* Resource views */
+.res-head { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; padding-block: clamp(36px, 6vw, 64px) 8px; }
+.res-head > div { display: grid; gap: 14px; min-width: 0; }
+.res-head h1 { font-size: clamp(2.1rem, 5vw, 3.6rem); font-weight: 700; letter-spacing: -0.03em; }
+.res-head img { width: clamp(110px, 16vw, 180px); filter: drop-shadow(0 18px 24px rgba(0, 0, 0, .55)); animation: floaty 5s ease-in-out infinite; }
+@media (max-width: 560px) { .res-head { grid-template-columns: 1fr; } .res-head img { display: none; } }
+
+/* Prompt generator */
+.gen { max-width: 860px; margin-inline: auto; padding-block: 28px 96px; display: grid; gap: 18px; }
+.gen-bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; }
+.stepper { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.stepper li {
+  display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px; border-radius: 999px; font-size: .84rem;
+  color: var(--mist); border: 1px solid var(--line);
+}
+.stepper li b {
+  width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: .74rem; font-family: var(--display);
+  background: var(--panel-2); color: var(--mist);
+}
+.stepper li.now { color: var(--paper); border-color: var(--mint); }
+.stepper li.now b, .stepper li.done b { background: var(--mint); color: var(--mint-ink); }
+.mode {
+  display: inline-flex; align-items: center; gap: 8px; font-size: .8rem; font-weight: 600; padding: 7px 12px; border-radius: 999px;
+  background: var(--panel); border: 1px solid var(--line); color: var(--mist);
+}
+.mode .lamp { width: 8px; height: 8px; border-radius: 50%; background: var(--mist); }
+.mode.ai { color: var(--paper); }
+.mode.ai .lamp { background: var(--mint); box-shadow: 0 0 0 4px rgba(60, 232, 154, .18); }
+.mode button { font: inherit; color: var(--mint); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+
+.chat { display: grid; gap: 14px; padding: clamp(16px, 3vw, 28px); border-radius: 28px; background: var(--panel); border: 1px solid var(--line); min-width: 0; }
+.msg { display: flex; gap: 12px; align-items: flex-end; max-width: 92%; min-width: 0; }
+.msg .av { flex: none; width: 40px; height: 40px; border-radius: 14px; background: var(--panel-2); border: 1px solid var(--line); display: grid; place-items: center; }
+.msg .av img { width: 30px; height: 30px; object-fit: contain; }
+.msg .bubble-t { padding: 12px 16px; border-radius: 18px 18px 18px 6px; background: var(--panel-2); border: 1px solid var(--line); white-space: pre-wrap; overflow-wrap: anywhere; min-width: 0; }
+.msg.me { margin-left: auto; flex-direction: row-reverse; }
+.msg.me .bubble-t { background: var(--mint); color: var(--mint-ink); border-color: var(--mint); border-radius: 18px 18px 6px 18px; font-weight: 500; }
+.msg .count { display: block; font-family: var(--mono); font-size: .7rem; letter-spacing: .1em; color: var(--mint); margin-bottom: 4px; }
+.typing { display: inline-flex; gap: 5px; align-items: center; }
+.typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--mist); animation: blink 1.2s infinite; }
+.typing i:nth-child(2) { animation-delay: .2s; } .typing i:nth-child(3) { animation-delay: .4s; }
+@keyframes blink { 50% { opacity: .25; } }
+
+.dock { display: grid; gap: 14px; padding-top: 6px; border-top: 1px solid var(--line); min-width: 0; }
+.seg { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 4px; border-radius: 14px; background: var(--ink); border: 1px solid var(--line); justify-self: start; }
+.seg button {
+  font: inherit; font-size: .88rem; font-weight: 600; color: var(--mist); background: none; border: 0; padding: 8px 14px; border-radius: 10px; cursor: pointer;
+}
+.seg button[aria-pressed="true"] { background: var(--panel-2); color: var(--paper); box-shadow: inset 0 0 0 1px var(--line); }
+.field { display: grid; gap: 8px; }
+.field label { font-size: .86rem; color: var(--mist); }
+.gen textarea, .gen input[type="text"] {
+  width: 100%; font: inherit; font-size: 1rem; color: var(--paper); background: var(--ink); border: 1px solid var(--line);
+  border-radius: 16px; padding: 14px 16px; resize: vertical;
+}
+.gen textarea:focus, .gen input[type="text"]:focus { outline: none; border-color: var(--mint); box-shadow: 0 0 0 4px rgba(60, 232, 154, .12); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  font: inherit; font-size: .9rem; color: var(--paper); background: var(--panel-2); border: 1px solid var(--line); border-radius: 999px;
+  padding: 9px 15px; cursor: pointer; text-align: left; transition: border-color .2s, background .2s;
+}
+.chip:hover { border-color: var(--mint); }
+.chip.ghost { color: var(--mist); background: none; border-style: dashed; }
+.row { display: flex; gap: 10px; align-items: stretch; flex-wrap: wrap; }
+.row > input { flex: 1 1 220px; min-width: 0; }
+.row .btn { padding-block: 12px; }
+.link-btn { font: inherit; font-size: .88rem; color: var(--mist); background: none; border: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; justify-self: start; padding: 0; }
+.link-btn:hover { color: var(--paper); }
+
+.models { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.model {
+  position: relative; display: grid; gap: 6px; align-content: start; text-align: left; font: inherit; color: var(--paper); cursor: pointer;
+  padding: 16px; border-radius: 18px; background: var(--ink); border: 1.5px solid var(--line); min-width: 0;
+}
+.model[aria-checked="true"] { border-color: var(--mint); box-shadow: 0 0 0 4px rgba(60, 232, 154, .12); }
+.model b { font-family: var(--display); font-size: 1.05rem; }
+.model .tierb { justify-self: start; font-size: .7rem; font-weight: 700; letter-spacing: .06em; padding: 4px 9px; border-radius: 999px; background: var(--panel-2); color: var(--mist); }
+.model .tierb.plus { background: rgba(184, 164, 255, .16); color: var(--lilac); }
+.model span.sub { font-size: .84rem; color: var(--mist); }
+.model .meter { display: flex; gap: 4px; margin-top: 4px; }
+.model .meter i { width: 18px; height: 5px; border-radius: 3px; background: var(--line); }
+.model .meter i.on { background: var(--mint); }
+@media (max-width: 640px) { .models { grid-template-columns: 1fr; } }
+
+.result { display: grid; gap: 12px; padding: 16px; border-radius: 20px; background: var(--ink); border: 1.5px solid rgba(60, 232, 154, .45); min-width: 0; }
+.result-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; }
+.result-head span { font-family: var(--mono); font-size: .74rem; letter-spacing: .1em; color: var(--mint); }
+.result pre {
+  margin: 0; font-family: var(--mono); font-size: .86rem; line-height: 1.65; white-space: pre-wrap; overflow-wrap: anywhere;
+  max-height: 460px; overflow: auto; color: #dfe7e2;
+}
+.result .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.result .actions .btn { padding: 11px 18px; font-size: .92rem; }
+.note-s { font-size: .84rem; color: var(--mist); }
+
+/* Models view */
+.mgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; padding-block: 28px; }
+.mcard { display: grid; gap: 14px; align-content: start; padding: 26px; border-radius: var(--radius); background: var(--panel); border: 1px solid var(--line); min-width: 0; }
+.mcard h3 { font-size: 1.5rem; }
+.mcard dl { margin: 0; display: grid; gap: 10px; }
+.mcard dt { font-family: var(--mono); font-size: .72rem; letter-spacing: .1em; color: var(--mist); text-transform: uppercase; }
+.mcard dd { margin: 0; }
+.mcard dd.tbd { color: var(--mist); font-style: italic; }
+.mcard .btn { justify-self: start; padding: 11px 18px; font-size: .92rem; }
+.soon { display: flex; gap: 16px; align-items: center; padding: 18px 22px; border-radius: 18px; border: 1px dashed #3a453f; color: var(--mist); }
+.soon img { width: 56px; flex: none; }
+@media (max-width: 900px) { .mgrid { grid-template-columns: 1fr; } }
+
 /* Responsive */
 @media (max-width: 960px) {
   .hero .wrap, .method, .price-wrap { grid-template-columns: 1fr; }
@@ -318,16 +438,17 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; a
 <header class="top">
   <div class="wrap">
     <a class="logo" href="#inicio" aria-label="Plink Academy, inicio">plink<i>academy</i></a>
-    <nav class="nav" aria-label="Secciones">
-      <a class="link" href="#metodo">Método</a>
-      <a class="link" href="#incluye">Qué incluye</a>
-      <a class="link" href="#preguntas">Preguntas</a>
-      <a class="btn btn-mint" href="#precio">Quiero entrar</a>
+    <nav class="tabs" aria-label="Secciones">
+      <a href="#inicio" data-tab="inicio">Academia</a>
+      <a href="#ideas" data-tab="ideas">Ideas</a>
+      <a href="#modelos" data-tab="modelos">Modelos</a>
     </nav>
+    <a class="btn btn-mint cta" href="#precio">Quiero entrar</a>
   </div>
 </header>
 
-<main id="inicio">
+<main>
+ <div data-view="inicio" id="inicio">
   <section class="hero">
     <div class="wrap">
       <div class="hero-copy">
@@ -567,6 +688,51 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; a
       </div>
     </div>
   </section>
+ </div>
+
+  <section data-view="ideas" hidden aria-labelledby="ideas-t">
+    <div class="wrap">
+      <div class="res-head">
+        <div>
+          <span class="eyebrow">Recursos · Ideas</span>
+          <h1 id="ideas-t">Convierte tu idea en un <span class="accent">prompt listo</span></h1>
+          <p class="lead">Cuéntanos qué quieres crear. Te hacemos unas preguntas y te damos el prompt adaptado al modelo que elijas.</p>
+        </div>
+        <img src="assets/icon-promptcard.webp" alt="">
+      </div>
+      <div class="gen">
+        <div class="gen-bar">
+          <ol class="stepper" id="gen-steps" aria-label="Progreso">
+            <li data-s="idea"><b>1</b>Idea</li>
+            <li data-s="questions"><b>2</b>Preguntas</li>
+            <li data-s="model"><b>3</b>Modelo</li>
+            <li data-s="result"><b>4</b>Prompt</li>
+          </ol>
+          <span class="mode" id="gen-mode" role="status"><span class="lamp" aria-hidden="true"></span><span id="gen-mode-t">Modo guiado</span></span>
+        </div>
+        <div class="chat">
+          <div id="gen-log" class="log" aria-live="polite" style="display:grid;gap:14px"></div>
+          <div id="gen-dock" class="dock"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-view="modelos" hidden aria-labelledby="modelos-t">
+    <div class="wrap">
+      <div class="res-head">
+        <div>
+          <span class="eyebrow">Recursos · Modelos</span>
+          <h1 id="modelos-t">Qué modelo usar <span class="accent">para cada video</span></h1>
+          <p class="lead">Los modelos estándar te dejan crear por céntimos. Los modelos superiores cuestan un poco más y se ven más reales. Aquí verás cuándo conviene cada uno.</p>
+        </div>
+        <img src="assets/icon-gradcap.webp" alt="">
+      </div>
+      <div class="mgrid" id="model-cards"></div>
+      <div class="soon"><img src="assets/icon-ghost.webp" alt=""><p>Muy pronto: la explicación completa de cada modelo, con ejemplos, precios y trucos de prompt.</p></div>
+      <div style="height:96px"></div>
+    </div>
+  </section>
 </main>
 
 <footer>
@@ -604,6 +770,544 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; a
   // If three.js can't load (offline, blocked CDN), show the static 3D icons instead.
   setTimeout(() => { if (!window.__plink3d) document.documentElement.classList.add("no-webgl"); }, 8000);
 </script>
+<script>
+// ---------------------------------------------------------------------------
+// Views: #inicio (landing, default), #ideas, #modelos. Landing anchors such as
+// #metodo or #precio open the landing and scroll to that section.
+// ---------------------------------------------------------------------------
+(() => {
+  const VIEWS = ["ideas", "modelos"];
+  const tabs = [...document.querySelectorAll(".tabs a")];
+  function route() {
+    const h = location.hash.slice(1);
+    const view = VIEWS.includes(h) ? h : "inicio";
+    document.querySelectorAll("[data-view]").forEach((v) => { v.hidden = v.dataset.view !== view; });
+    tabs.forEach((t) => t.setAttribute("aria-current", t.dataset.tab === view ? "page" : "false"));
+    if (view !== "inicio" || !h || h === "inicio") window.scrollTo(0, 0);
+    else document.getElementById(h)?.scrollIntoView();
+  }
+  addEventListener("hashchange", route);
+  route();
+})();
+
+// ---------------------------------------------------------------------------
+// Models. PLACEHOLDERS until the real list arrives: replace name, badge, cost,
+// best and quality, and adjust `profile` (how the prompt is written for it).
+// The Modelos tab and the generator both read this list.
+// ---------------------------------------------------------------------------
+const MODELS = [
+  { id: "estandar", name: "Estándar", badge: "Incluido", plus: false, quality: 2, cost: "Céntimos por generación", best: "Probar ideas rápido y publicar a diario", profile: "breve" },
+  { id: "pro", name: "Pro", badge: "Paga un poco más", plus: true, quality: 4, cost: "Algo más por generación", best: "Más realismo en piel, luz y movimiento", profile: "detallado" },
+  { id: "cine", name: "Cine", badge: "Máxima calidad", plus: true, quality: 5, cost: "El más caro", best: "Anuncios y videos para retargeting", profile: "cine" },
+];
+const PROFILE_HINT = {
+  breve: "Prompt corto de un párrafo, lo importante primero",
+  detallado: "Prompt detallado por secciones",
+  cine: "Prompt con dirección de cámara, lente y actuación",
+};
+
+(() => {
+  const box = document.getElementById("model-cards");
+  for (const m of MODELS) {
+    const card = document.createElement("article");
+    card.className = "mcard";
+    card.innerHTML = `
+      <span class="tierb ${m.plus ? "plus" : ""}"></span>
+      <h3></h3>
+      <dl>
+        <div><dt>Ideal para</dt><dd class="best"></dd></div>
+        <div><dt>Coste aproximado</dt><dd class="cost"></dd></div>
+        <div><dt>Cómo escribimos su prompt</dt><dd class="prof"></dd></div>
+        <div><dt>Explicación completa</dt><dd class="tbd">Próximamente</dd></div>
+      </dl>
+      <a class="btn btn-ghost" href="#ideas">Usar en el generador</a>`;
+    card.querySelector(".tierb").textContent = m.badge;
+    card.querySelector(".tierb").style.cssText = "justify-self:start;font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:5px 10px;border-radius:999px;" + (m.plus ? "background:rgba(184,164,255,.16);color:var(--lilac)" : "background:var(--panel-2);color:var(--mist)");
+    card.querySelector("h3").textContent = m.name;
+    card.querySelector(".best").textContent = m.best;
+    card.querySelector(".cost").textContent = m.cost;
+    card.querySelector(".prof").textContent = PROFILE_HINT[m.profile];
+    card.querySelector(".btn").addEventListener("click", () => { window.plinkPickModel?.(m.id); });
+    box.append(card);
+  }
+})();
+
+// ---------------------------------------------------------------------------
+// Prompt generator: idea → questions → model → prompt.
+// With Claude available in this viewer (the `sample` capability) the
+// questions and the prompt are written by AI; anywhere else (or if the viewer
+// declines) the guided mode uses the question bank and templates below.
+// ---------------------------------------------------------------------------
+(() => {
+  const $log = document.getElementById("gen-log");
+  const $dock = document.getElementById("gen-dock");
+  const $steps = document.getElementById("gen-steps");
+  const $mode = document.getElementById("gen-mode");
+  const $modeT = document.getElementById("gen-mode-t");
+
+  const S = { kind: "video", idea: "", questions: [], answers: [], qi: 0, model: "estandar", lang: "en", source: "guided", prompt: "" };
+  let sample = null, useAI = true, ctl = null;
+
+  // Claude is reachable only inside a claude.ai viewer.
+  const sampleReady = window.claude?.use ? window.claude.use("sample").catch(() => null) : Promise.resolve(null);
+  sampleReady.then((fn) => { sample = fn; paintMode(); });
+
+  function paintMode() {
+    const on = !!sample && useAI;
+    $mode.classList.toggle("ai", on);
+    $modeT.textContent = on ? "Asistente con IA" : "Modo guiado";
+    if (sample) {
+      let b = $mode.querySelector("button");
+      if (!b) { b = document.createElement("button"); b.type = "button"; $mode.append(b); b.addEventListener("click", () => { useAI = !useAI; paintMode(); }); }
+      b.textContent = on ? "usar guiado" : "usar IA";
+    }
+  }
+  const aiOn = () => !!sample && useAI;
+
+  function setStep(s) {
+    const order = ["idea", "questions", "model", "result"];
+    $steps.querySelectorAll("li").forEach((li) => {
+      const k = order.indexOf(li.dataset.s), n = order.indexOf(s);
+      li.classList.toggle("now", k === n);
+      li.classList.toggle("done", k < n);
+    });
+  }
+
+  // --- chat log ------------------------------------------------------------
+  function say(text, opts = {}) {
+    const row = document.createElement("div");
+    row.className = "msg" + (opts.me ? " me" : "");
+    if (!opts.me) {
+      const av = document.createElement("span");
+      av.className = "av";
+      av.innerHTML = '<img src="assets/icon-ghost.webp" alt="">';
+      row.append(av);
+    }
+    const b = document.createElement("div");
+    b.className = "bubble-t";
+    if (opts.count) { const c = document.createElement("span"); c.className = "count"; c.textContent = opts.count; b.append(c); }
+    const t = document.createElement("span");
+    if (opts.typing) t.innerHTML = '<span class="typing" aria-label="Escribiendo"><i></i><i></i><i></i></span>';
+    else t.textContent = text;
+    b.append(t);
+    row.append(b);
+    $log.append(row);
+    row.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    return { row, set: (s) => { t.textContent = s; } };
+  }
+  const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+  const btn = (label, cls, on) => { const b = el("button", cls, label); b.type = "button"; b.addEventListener("click", on); return b; };
+
+  // --- guided question bank --------------------------------------------------
+  // Each option carries the phrase used in English and Spanish prompts.
+  const O = (label, en, es) => ({ label, en, es: es ?? label.toLowerCase() });
+  const BANK = {
+    persona: { q: "¿Quién aparece en tu video?", options: [
+      O("Mujer joven (25-30)", "a woman in her late twenties", "una mujer de unos 28 años"),
+      O("Hombre joven (25-30)", "a man in his late twenties", "un hombre de unos 28 años"),
+      O("Mujer adulta (40-50)", "a woman in her mid forties", "una mujer de unos 45 años"),
+      O("Hombre adulto (40-50)", "a man in his mid forties", "un hombre de unos 45 años"),
+    ] },
+    ropa: { q: "¿Cómo va vestida esa persona?", options: [
+      O("Casual (sudadera, gorro)", "wearing a casual hoodie and a knit beanie", "con sudadera casual y gorro de lana"),
+      O("Profesional", "wearing a smart blazer", "con un blazer elegante"),
+      O("Streetwear", "wearing trendy streetwear", "con ropa urbana de moda"),
+      O("Uniforme de su negocio", "wearing the uniform of their business", "con el uniforme de su negocio"),
+    ] },
+    lugar: { q: "¿Dónde está?", options: [
+      O("Su habitación", "in a cozy bedroom with fairy lights", "en una habitación acogedora con luces"),
+      O("Oficina o estudio", "in a modern home office", "en una oficina moderna en casa"),
+      O("Su tienda o local", "inside a small local shop", "dentro de una pequeña tienda"),
+      O("En la calle", "on a busy city street", "en una calle concurrida"),
+      O("Cocina", "in a bright home kitchen", "en una cocina luminosa"),
+    ] },
+    encuadre: { q: "¿Cómo la vemos en cámara?", options: [
+      O("Primer plano", "close-up shot", "primer plano"),
+      O("Plano medio", "medium shot from the waist up", "plano medio de cintura para arriba"),
+      O("Cuerpo entero", "full body shot", "plano de cuerpo entero"),
+    ] },
+    luz: { q: "¿Qué luz quieres?", options: [
+      O("Natural de día", "soft natural daylight", "luz natural suave de día"),
+      O("Hora dorada", "warm golden hour light", "luz cálida de hora dorada"),
+      O("Noche con neón", "night scene lit by neon signs", "de noche con luces de neón"),
+      O("Luz de estudio", "soft studio lighting", "luz suave de estudio"),
+    ] },
+    estilo: { q: "¿Qué estilo de imagen buscas?", options: [
+      O("Foto de móvil (UGC)", "candid iPhone photo, UGC style", "foto espontánea de móvil, estilo UGC"),
+      O("Cinematográfico", "cinematic film still, shallow depth of field", "fotograma de cine con fondo desenfocado"),
+      O("Anuncio limpio", "clean commercial look", "estética de anuncio limpia"),
+    ] },
+    dialogo: { q: "¿Qué dice exactamente? Escribe la frase de la toma.", free: true, placeholder: "Ej.: Yo no existo, y este video costó menos de un dólar." },
+    camara: { q: "¿Cómo se mueve la cámara?", options: [
+      O("Fija (trípode)", "static camera on a tripod", "cámara fija en trípode"),
+      O("En mano", "subtle handheld camera movement", "cámara en mano con movimiento suave"),
+      O("Acercamiento lento", "slow push-in towards the face", "acercamiento lento hacia la cara"),
+    ] },
+    tono: { q: "¿Con qué energía habla?", options: [
+      O("Cercana y alegre", "warm, friendly and upbeat", "cercana, amable y alegre"),
+      O("Seria y experta", "calm, confident and authoritative", "tranquila, segura y experta"),
+      O("Sorprendida", "surprised and excited", "sorprendida y emocionada"),
+    ] },
+    duracion: { q: "¿Cuánto dura la toma?", options: [O("5 segundos", "5", "5"), O("8 segundos", "8", "8"), O("10 segundos", "10", "10")] },
+  };
+  const GUIDED = {
+    image: ["persona", "ropa", "lugar", "encuadre", "luz", "estilo"],
+    video: ["persona", "ropa", "lugar", "dialogo", "tono", "encuadre", "camara", "duracion"],
+  };
+
+  // --- steps ----------------------------------------------------------------
+  const EXAMPLES = {
+    video: ["Una chica que explica cómo ahorrar en el súper", "Un barbero que presenta su nuevo corte", "Una nutricionista que da 3 tips rápidos"],
+    image: ["La dueña de una cafetería detrás de la barra", "Un chico gamer en su habitación de noche", "Una entrenadora en un gimnasio"],
+  };
+
+  function stepIdea() {
+    setStep("idea");
+    $dock.replaceChildren();
+    const seg = el("div", "seg");
+    seg.setAttribute("role", "group");
+    seg.setAttribute("aria-label", "Qué vas a crear");
+    const kinds = [["video", "Video hablando a cámara"], ["image", "Imagen del presentador"]];
+    const ex = el("div", "chips");
+    const ta = el("textarea");
+    ta.id = "gen-idea"; ta.rows = 3; ta.value = S.idea;
+    ta.placeholder = "Ej.: Una chica que explica en 10 segundos cómo usar mi app de recetas";
+    const paintKinds = () => {
+      seg.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.k === S.kind)));
+      ex.replaceChildren(...EXAMPLES[S.kind].map((t) => btn(t, "chip ghost", () => { ta.value = t; ta.focus(); })));
+    };
+    for (const [k, label] of kinds) {
+      const b = btn(label, "", () => { S.kind = k; paintKinds(); });
+      b.dataset.k = k; seg.append(b);
+    }
+    paintKinds();
+    const f = el("div", "field");
+    const lab = el("label", null, "Tu idea");
+    lab.htmlFor = "gen-idea";
+    f.append(lab, ta);
+    const go = btn("Empezar", "btn btn-mint", () => start(ta.value.trim(), ta));
+    $dock.append(seg, f, ex, go);
+  }
+
+  async function start(idea, ta) {
+    if (idea.length < 6) { ta.focus(); ta.placeholder = "Escribe tu idea en una frase para empezar"; return; }
+    S.idea = idea; S.answers = []; S.qi = 0; S.prompt = "";
+    say(idea, { me: true });
+    $dock.replaceChildren();
+    setStep("questions");
+    // give the viewer a moment to report whether Claude is available
+    await Promise.race([sampleReady, new Promise((r) => setTimeout(r, 1500))]);
+    if (aiOn()) {
+      const wait = say("", { typing: true });
+      const stop = btn("Detener", "link-btn", () => ctl?.abort());
+      $dock.append(stop);
+      try {
+        ctl = new AbortController();
+        const data = await sample.json(questionPrompt(), { modelTier: "quick", signal: ctl.signal });
+        const qs = (Array.isArray(data?.questions) ? data.questions : [])
+          .filter((q) => q && typeof q.q === "string")
+          .slice(0, 6)
+          .map((q) => ({ q: q.q, options: (Array.isArray(q.options) ? q.options : []).filter((o) => typeof o === "string").slice(0, 5).map((o) => ({ label: o, en: o, es: o })) }));
+        if (qs.length < 2) throw { code: "invalid_json" };
+        wait.row.remove();
+        S.questions = qs; S.source = "ai";
+      } catch (e) {
+        wait.row.remove();
+        if (e?.code === "cancelled") { stepIdea(); return; }
+        fallbackNote(e);
+        S.questions = GUIDED[S.kind].map((k) => ({ key: k, ...BANK[k] })); S.source = "guided";
+      }
+    } else {
+      S.questions = GUIDED[S.kind].map((k) => ({ key: k, ...BANK[k] })); S.source = "guided";
+    }
+    say(S.kind === "video"
+      ? "¡Buena idea! Te hago unas preguntas rápidas para que la toma salga como la imaginas."
+      : "¡Buena idea! Te hago unas preguntas rápidas para que la imagen salga como la imaginas.");
+    ask();
+  }
+
+  function fallbackNote(e) {
+    const code = e?.code;
+    if (code === "not_granted" || code === "sampling_disabled" || code === "not_declared" || code === "capability_disabled" || code === "capability_removed") { sample = null; paintMode(); }
+    if (code === "rate_limited") say("La IA está ocupada ahora mismo. Seguimos con el modo guiado.");
+    else say("Seguimos con el modo guiado.");
+  }
+
+  function ask() {
+    const q = S.questions[S.qi];
+    if (!q) { stepModel(); return; }
+    say(q.q, { count: `PREGUNTA ${S.qi + 1} DE ${S.questions.length}` });
+    $dock.replaceChildren();
+    const answer = (a) => { S.answers[S.qi] = { key: q.key, q: q.q, ...a }; say(a.label, { me: true }); S.qi++; ask(); };
+    if (q.options?.length) $dock.append(el("div", "chips"));
+    q.options?.forEach((o) => $dock.firstChild.append(btn(o.label, "chip", () => answer(o))));
+    const row = el("div", "row");
+    const inp = el("input");
+    inp.type = "text"; inp.id = "gen-answer";
+    inp.placeholder = q.free ? q.placeholder : "O escribe tu propia respuesta";
+    inp.setAttribute("aria-label", q.q);
+    const send = () => { const v = inp.value.trim(); if (v) answer({ label: v, en: v, es: v, custom: true }); else inp.focus(); };
+    inp.addEventListener("keydown", (ev) => { if (ev.key === "Enter") send(); });
+    row.append(inp, btn("Enviar", "btn btn-ghost", send));
+    $dock.append(row);
+    if (!q.free) $dock.append(btn("Saltar esta pregunta", "link-btn", () => { S.answers[S.qi] = null; say("Sáltala", { me: true }); S.qi++; ask(); }));
+    if (q.free) inp.focus({ preventScroll: true });
+  }
+
+  function stepModel(again) {
+    setStep("model");
+    if (!again) say("¡Listo! ¿Con qué modelo lo vas a generar? Los modelos superiores cuestan un poco más, pero se ven más reales.");
+    $dock.replaceChildren();
+    const grid = el("div", "models");
+    grid.setAttribute("role", "radiogroup");
+    grid.setAttribute("aria-label", "Modelo");
+    const paint = () => grid.querySelectorAll(".model").forEach((c) => c.setAttribute("aria-checked", String(c.dataset.id === S.model)));
+    for (const m of MODELS) {
+      const c = btn("", "model", () => { S.model = m.id; paint(); });
+      c.dataset.id = m.id; c.setAttribute("role", "radio");
+      const tb = el("span", "tierb" + (m.plus ? " plus" : ""), m.badge);
+      const meter = el("span", "meter");
+      for (let i = 1; i <= 5; i++) meter.append(el("i", i <= m.quality ? "on" : ""));
+      meter.setAttribute("aria-label", `Calidad ${m.quality} de 5`);
+      c.append(tb, el("b", null, m.name), el("span", "sub", m.best), el("span", "sub", m.cost), meter);
+      grid.append(c);
+    }
+    paint();
+    const seg = el("div", "seg");
+    seg.setAttribute("role", "group"); seg.setAttribute("aria-label", "Idioma del prompt");
+    const langs = [["en", "Prompt en inglés (recomendado)"], ["es", "En español"]];
+    const paintL = () => seg.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.l === S.lang)));
+    for (const [l, label] of langs) { const b = btn(label, "", () => { S.lang = l; paintL(); }); b.dataset.l = l; seg.append(b); }
+    paintL();
+    $dock.append(grid, seg, btn("Generar mi prompt", "btn btn-mint", generate));
+  }
+
+  async function generate() {
+    setStep("result");
+    const m = MODELS.find((x) => x.id === S.model);
+    say(`${m.name} · ${S.lang === "en" ? "en inglés" : "en español"}`, { me: true });
+    $dock.replaceChildren();
+    const card = el("div", "result");
+    const head = el("div", "result-head");
+    head.append(el("span", null, `PROMPT · ${m.name.toUpperCase()} · ${S.kind === "video" ? "VIDEO" : "IMAGEN"}`));
+    const pre = el("pre");
+    const note = el("p", "note-s");
+    const actions = el("div", "actions");
+    card.append(head, pre, actions, note);
+    $dock.append(card);
+
+    if (aiOn()) {
+      pre.textContent = "Escribiendo tu prompt…";
+      const stop = btn("Detener", "btn btn-ghost", () => ctl?.abort());
+      actions.append(stop);
+      try {
+        ctl = new AbortController();
+        const { text, truncated } = await sample(finalPrompt(m), { signal: ctl.signal, onText: ({ text }) => { pre.textContent = text; } });
+        S.prompt = clean(text);
+        pre.textContent = S.prompt;
+        if (truncated) note.textContent = "El prompt salió cortado. Prueba con el modelo Estándar o pide algo más corto.";
+      } catch (e) {
+        if (e?.code !== "cancelled") fallbackNote(e);
+        S.prompt = buildTemplate(m);
+        pre.textContent = S.prompt;
+        note.textContent = "Este prompt es del modo guiado.";
+      }
+    } else {
+      S.prompt = buildTemplate(m);
+      pre.textContent = S.prompt;
+    }
+    actions.replaceChildren(
+      btn("Copiar prompt", "btn btn-mint", (ev) => copy(S.prompt, ev.currentTarget, pre)),
+      btn("Cambiar modelo", "btn btn-ghost", () => stepModel(true)),
+      btn("Nueva idea", "btn btn-ghost", () => { $log.replaceChildren(); S.idea = ""; greet(); }),
+    );
+    if (aiOn()) {
+      const row = el("div", "row");
+      const inp = el("input");
+      inp.type = "text"; inp.id = "gen-tweak"; inp.placeholder = "¿Quieres cambiar algo? Ej.: que sea de noche y más cinematográfico";
+      inp.setAttribute("aria-label", "Ajuste del prompt");
+      const go = () => tweak(inp.value.trim(), pre, note, inp);
+      inp.addEventListener("keydown", (ev) => { if (ev.key === "Enter") go(); });
+      row.append(inp, btn("Ajustar", "btn btn-ghost", go));
+      card.append(row);
+    }
+    say(S.kind === "video"
+      ? "Pégalo en tu generador de video. Si tu modelo admite imagen de referencia, usa la foto de tu presentador para que la cara no cambie entre tomas."
+      : "Pégalo en tu generador de imágenes. Genera 3 o 4 variaciones y quédate con la más natural.");
+  }
+
+  async function tweak(change, pre, note, inp) {
+    if (!change || !aiOn()) { inp.focus(); return; }
+    const before = S.prompt;
+    pre.textContent = "Ajustando…";
+    note.textContent = "";
+    try {
+      ctl = new AbortController();
+      const m = MODELS.find((x) => x.id === S.model);
+      const { text } = await sample(
+        `Este es un prompt para el modelo de generación "${m.name}" (${PROFILE_HINT[m.profile]}):\n\n${before}\n\nAplica este cambio pedido por el usuario: "${change}".\nMantén el mismo idioma, formato y longitud aproximada. Devuelve solo el prompt nuevo, sin explicaciones.`,
+        { signal: ctl.signal, cache: false, onText: ({ text }) => { pre.textContent = text; } },
+      );
+      S.prompt = clean(text);
+      pre.textContent = S.prompt;
+      inp.value = "";
+    } catch (e) {
+      S.prompt = before;
+      pre.textContent = before;
+      if (e?.code !== "cancelled") note.textContent = e?.code === "rate_limited" ? "La IA está ocupada. Inténtalo en un momento." : "No pude ajustarlo esta vez.";
+    }
+  }
+
+  async function copy(text, button, pre) {
+    try {
+      await navigator.clipboard.writeText(text);
+      button.textContent = "¡Copiado!";
+    } catch {
+      const r = document.createRange(); r.selectNodeContents(pre);
+      const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      button.textContent = "Selecciónalo y cópialo";
+    }
+    setTimeout(() => { button.textContent = "Copiar prompt"; }, 2200);
+  }
+
+  const clean = (t) => t.trim().replace(/^```[a-z]*\n?|```$/g, "").replace(/^"|"$/g, "").trim();
+
+  // --- prompts sent to Claude -------------------------------------------------
+  function questionPrompt() {
+    const what = S.kind === "video"
+      ? "una toma de video corta (5-10 s) de un presentador hablando a cámara, generada con IA"
+      : "una imagen fotorrealista de un presentador, generada con IA";
+    const needs = S.kind === "video"
+      ? "quién aparece, cómo va vestido, dónde está, la frase exacta que dice, el tono, el encuadre y el movimiento de cámara"
+      : "quién aparece, cómo va vestido, dónde está, el encuadre, la luz y el estilo de foto";
+    return `Eres el asistente de ideas de Plink Academy, que enseña a crear videos con presentadores generados con IA para redes sociales.
+El usuario quiere crear ${what}. Su idea es:
+"""${S.idea}"""
+
+Hazle entre 4 y 6 preguntas cortas, en español y tuteando, para completar lo que el modelo necesita (${needs}). No preguntes nada que la idea ya responda. Si es video, incluye una pregunta sobre la frase exacta que dice y propone 3 frases posibles como opciones.
+Cada pregunta lleva 3 o 4 opciones concretas y cortas (máximo 8 palabras).
+
+Responde solo con JSON con esta forma:
+{"questions":[{"q":"¿Dónde está?","options":["En su tienda","En la calle","En casa"]}]}`;
+  }
+
+  function finalPrompt(m) {
+    const qa = S.answers.filter(Boolean).map((a) => `- ${a.q} → ${a.label}`).join("\n") || "- (sin respuestas)";
+    const lang = S.lang === "en" ? "inglés" : "español";
+    const format = {
+      breve: "un solo párrafo de 50 a 80 palabras, con lo más importante primero (sujeto, lugar, acción). Sin secciones",
+      detallado: `de 120 a 180 palabras organizado en secciones en mayúsculas (${S.lang === "en" ? "SUBJECT, SETTING, CAMERA, LIGHTING, STYLE, DETAILS, AVOID" : "SUJETO, ESCENA, CÁMARA, LUZ, ESTILO, DETALLES, EVITAR"}${S.kind === "video" ? (S.lang === "en" ? ", DIALOGUE" : ", DIÁLOGO") : ""})`,
+      cine: `muy detallado, de 180 a 250 palabras, con dirección cinematográfica (lente y apertura, movimiento de cámara, look de color, actuación y microexpresiones), en secciones en mayúsculas e incluyendo ${S.lang === "en" ? "AVOID" : "EVITAR"}`,
+    }[m.profile];
+    return `Escribe un prompt para generar ${S.kind === "video" ? "una toma de video con IA (presentador hablando a cámara)" : "una imagen fotorrealista con IA"} con el modelo "${m.name}".
+
+Idea del usuario:
+"""${S.idea}"""
+
+Detalles que eligió:
+${qa}
+
+Reglas:
+- Escribe el prompt en ${lang}.${S.kind === "video" ? "\n- La frase que dice el presentador va siempre en español, entre comillas, tal cual; indica sincronía labial natural." : ""}
+- Formato: ${format}.
+- Fotorrealista, piel natural con textura, sin aspecto de plástico, formato vertical 9:16.
+- Nada de texto, logos ni marcas de agua en la escena.
+- Devuelve SOLO el prompt, sin títulos, explicaciones ni comillas alrededor.`;
+  }
+
+  // --- guided templates ----------------------------------------------------------
+  function buildTemplate(m) {
+    const en = S.lang === "en";
+    const A = Object.fromEntries(S.answers.filter(Boolean).map((a) => [a.key ?? a.q, en ? a.en : a.es]));
+    if (S.source === "ai") {
+      // answers from AI questions have no fixed slots: list them as details
+      const det = S.answers.filter(Boolean).map((a) => a.label).join(". ");
+      return en
+        ? `Photorealistic ${S.kind === "video" ? "vertical video of a presenter talking to the camera" : "vertical photo of a presenter"}. Concept: ${S.idea}. Details: ${det}. Natural skin texture, realistic lighting, no text or logos, 9:16.`
+        : `${S.kind === "video" ? "Video vertical fotorrealista de un presentador hablando a cámara" : "Foto vertical fotorrealista de un presentador"}. Concepto: ${S.idea}. Detalles: ${det}. Piel natural con textura, luz realista, sin texto ni logos, 9:16.`;
+    }
+    const persona = A.persona ?? (en ? "a friendly presenter" : "un presentador cercano");
+    const ropa = A.ropa ? (en ? `, ${A.ropa}` : `, ${A.ropa}`) : "";
+    const lugar = A.lugar ?? (en ? "in a bright room" : "en una habitación luminosa");
+    const encuadre = A.encuadre ?? (en ? "medium shot" : "plano medio");
+    const luz = A.luz ?? (en ? "soft natural light" : "luz natural suave");
+    const estilo = A.estilo ?? (en ? "candid iPhone photo, UGC style" : "foto espontánea de móvil");
+    const camara = A.camara ?? (en ? "static camera" : "cámara fija");
+    const tono = A.tono ?? (en ? "warm and natural" : "cercana y natural");
+    const dur = A.duracion ?? "8";
+    const line = A.dialogo ?? "…";
+    const who = /\bwoman\b|mujer/i.test(persona) ? (en ? "She" : "Ella") : /\bman\b|hombre/i.test(persona) ? (en ? "He" : "Él") : (en ? "The presenter" : "El presentador");
+
+    if (S.kind === "image") {
+      if (m.profile === "breve") return en
+        ? `Candid vertical photo of ${persona}${ropa}, ${lugar}. ${cap(encuadre)}, ${luz}, ${estilo}. Natural skin texture with pores and freckles, realistic details, no text or logos, 9:16.`
+        : `Foto vertical espontánea de ${persona}${ropa}, ${lugar}. ${cap(encuadre)}, ${luz}, ${estilo}. Piel natural con poros y pecas, detalles realistas, sin texto ni logos, 9:16.`;
+      const lines = en ? [
+        `SUBJECT: ${persona}${ropa}, relaxed natural expression, looking at the camera.`,
+        `SETTING: ${lugar}, lived-in details, background slightly out of focus.`,
+        `CAMERA: ${encuadre}, eye level${m.profile === "cine" ? ", 50mm lens at f/1.8, shallow depth of field" : ""}.`,
+        `LIGHTING: ${luz}.`,
+        `STYLE: ${estilo}${m.profile === "cine" ? ", natural film grade, soft contrast, subtle grain" : ""}.`,
+        `DETAILS: natural skin texture with pores, freckles and small imperfections, realistic hands, believable fabric.`,
+        `CONCEPT: ${S.idea}`,
+        `AVOID: plastic skin, extra fingers, warped faces, text, logos, watermarks.`,
+        `FORMAT: vertical 9:16, photorealistic.`,
+      ] : [
+        `SUJETO: ${persona}${ropa}, expresión natural y relajada, mirando a cámara.`,
+        `ESCENA: ${lugar}, con detalles reales, fondo ligeramente desenfocado.`,
+        `CÁMARA: ${encuadre}, a la altura de los ojos${m.profile === "cine" ? ", lente de 50 mm a f/1.8, poca profundidad de campo" : ""}.`,
+        `LUZ: ${luz}.`,
+        `ESTILO: ${estilo}${m.profile === "cine" ? ", etalonaje de cine natural, contraste suave, grano sutil" : ""}.`,
+        `DETALLES: piel natural con poros, pecas y pequeñas imperfecciones, manos realistas, telas creíbles.`,
+        `CONCEPTO: ${S.idea}`,
+        `EVITAR: piel de plástico, dedos de más, caras deformadas, texto, logos, marcas de agua.`,
+        `FORMATO: vertical 9:16, fotorrealista.`,
+      ];
+      return lines.join("\n");
+    }
+
+    if (m.profile === "breve") return en
+      ? `${cap(persona)}${ropa}, talking to the camera ${lugar}. ${cap(encuadre)}, ${camara}, ${luz}. ${who} says in Spanish, ${tono}: "${line}". Natural lip sync and hand gestures, realistic skin, vertical 9:16, ${dur} seconds.`
+      : `${cap(persona)}${ropa}, hablando a cámara ${lugar}. ${cap(encuadre)}, ${camara}, ${luz}. ${who} dice en español, ${tono}: "${line}". Sincronía labial natural y gestos con las manos, piel realista, vertical 9:16, ${dur} segundos.`;
+    const lines = en ? [
+      `SUBJECT: ${persona}${ropa}. Keep the same face, hair and outfit as the reference image.`,
+      `SETTING: ${lugar}, background softly out of focus.`,
+      `PERFORMANCE: talks directly to the camera, ${tono}, natural blinking, small head movements and hand gestures${m.profile === "cine" ? ", subtle micro-expressions that match each word" : ""}.`,
+      `DIALOGUE (Spanish, natural lip sync): "${line}"`,
+      `CAMERA: ${encuadre}, ${camara}${m.profile === "cine" ? ", 35mm lens at f/2, shallow depth of field" : ""}.`,
+      `LIGHTING: ${luz}.`,
+      `STYLE: realistic, ${estilo}${m.profile === "cine" ? ", natural film grade, soft contrast" : ""}.`,
+      `AUDIO: clear voice, light room ambience, no music.`,
+      `AVOID: face morphing between frames, extra fingers, robotic voice, subtitles, text, logos, watermarks.`,
+      `FORMAT: vertical 9:16, ${dur} seconds.`,
+    ] : [
+      `SUJETO: ${persona}${ropa}. Mantén la misma cara, pelo y ropa que la imagen de referencia.`,
+      `ESCENA: ${lugar}, fondo suavemente desenfocado.`,
+      `ACTUACIÓN: habla directamente a cámara, ${tono}, parpadeo natural, pequeños movimientos de cabeza y gestos con las manos${m.profile === "cine" ? ", microexpresiones sutiles acordes a cada palabra" : ""}.`,
+      `DIÁLOGO (español, sincronía labial natural): "${line}"`,
+      `CÁMARA: ${encuadre}, ${camara}${m.profile === "cine" ? ", lente de 35 mm a f/2, poca profundidad de campo" : ""}.`,
+      `LUZ: ${luz}.`,
+      `ESTILO: realista, ${estilo}${m.profile === "cine" ? ", etalonaje de cine natural, contraste suave" : ""}.`,
+      `AUDIO: voz clara, ambiente suave de la habitación, sin música.`,
+      `EVITAR: cara que cambia entre fotogramas, dedos de más, voz robótica, subtítulos, texto, logos, marcas de agua.`,
+      `FORMATO: vertical 9:16, ${dur} segundos.`,
+    ];
+    return lines.join("\n");
+  }
+  const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
+  function greet() {
+    say("¡Hola! Soy el asistente de ideas de Plink. Cuéntame qué quieres crear y te hago unas preguntas para darte el prompt perfecto.");
+    stepIdea();
+  }
+
+  // the Modelos tab can preselect a model
+  window.plinkPickModel = (id) => { S.model = id; };
+
+  greet();
+})();
+</script>
+
 <script type="importmap">
   { "imports": {
       "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
