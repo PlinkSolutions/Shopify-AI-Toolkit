@@ -15,12 +15,14 @@ import { VikingCover } from "./Covers/VikingCover";
 import { IconGallery, ICONS } from "./Plink/icons/IconGallery";
 import { PlinkReel, PLINK_FRAMES } from "./Plink/PlinkReel";
 import { HoloClip, HOLO_FRAMES, HOLO_FPS } from "./Holo/HoloClip";
+import { TickleReel, TICKLE_FRAMES } from "./Holo/tickle/TickleReel";
 
 // Each <Composition> is an entry in the sidebar!
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition id="TickleReel" component={TickleReel} durationInFrames={TICKLE_FRAMES} fps={30} width={1080} height={1920} />
       <Composition id="HoloClip" component={HoloClip} durationInFrames={HOLO_FRAMES} fps={HOLO_FPS} width={1080} height={1920} />
       <Composition id="PlinkReel" component={PlinkReel} durationInFrames={PLINK_FRAMES} fps={24} width={1080} height={1920} />
       <Composition id="IconGallery" component={IconGallery} durationInFrames={ICONS.length} fps={24} width={600} height={600} />

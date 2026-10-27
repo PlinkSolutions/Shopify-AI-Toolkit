@@ -61,8 +61,8 @@ export const Capsule: React.FC<{
   position?: V3;
   rotation?: V3;
   scale?: number;
-  /** head position relative to the group (default: floating above the body) */
-  head?: V3;
+  /** head position relative to the group (default: floating above the body); null hides it */
+  head?: V3 | null;
   opacity?: number;
 }> = ({ kind, position, rotation, scale = 1, head = [0, 2.62, 0], opacity = 1 }) => {
   const [front, back] = useMemo(() => {
@@ -74,8 +74,8 @@ export const Capsule: React.FC<{
     <group position={position} rotation={rotation} scale={scale}>
       <mesh geometry={CAPSULE} material={back} position={[0, 1, 0]} />
       <mesh geometry={CAPSULE} material={front} position={[0, 1, 0]} />
-      <mesh geometry={HEAD} material={back} position={head} />
-      <mesh geometry={HEAD} material={front} position={head} />
+      {head ? <mesh geometry={HEAD} material={back} position={head} /> : null}
+      {head ? <mesh geometry={HEAD} material={front} position={head} /> : null}
     </group>
   );
 };
