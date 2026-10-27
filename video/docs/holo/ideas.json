@@ -1,0 +1,1171 @@
+{
+ "cats": {
+  "cuerpo": "Tu cuerpo",
+  "cerebro": "Tu cerebro",
+  "sueno": "Sueño",
+  "amor": "Amor y relaciones",
+  "quepasaria": "¿Qué pasaría si…?",
+  "espacio": "Espacio",
+  "misterio": "Misterios sin resolver",
+  "cotidiano": "Cosas de todos los días",
+  "animales": "Animales y naturaleza",
+  "tendencia": "Actualidad"
+ },
+ "ideas": [
+  {
+   "cat": "cuerpo",
+   "hook": "¿Por qué no puedes hacerte cosquillas a ti mismo? ¿Y por qué basta con que otro te roce para no aguantar?",
+   "gist": "Tu cerebro predice tu propio movimiento y cancela la sensación antes de que llegue; el toque ajeno no se puede predecir.",
+   "visual": "Firewall: «REMITENTE: TÚ → BLOQUEADO» / alerta roja «REMITENTE DESCONOCIDO»",
+   "cta": "Mándaselo a quien se muere de cosquillas.",
+   "tags": [
+    "base",
+    "top"
+   ],
+   "n": 1
+  },
+  {
+   "cat": "cuerpo",
+   "hook": "¿Por qué se te duerme el pie? ¿Y por qué el hormigueo llega justo cuando te levantas?",
+   "gist": "La presión sobre nervios y vasos corta las señales; al liberarla, los nervios se reactivan todos a la vez.",
+   "visual": "Cable desenchufado → «REINICIANDO SISTEMA…» con barra de progreso",
+   "cta": "Mándaselo a quien siempre se sienta encima de su pierna.",
+   "tags": [
+    "base"
+   ],
+   "n": 2
+  },
+  {
+   "cat": "cuerpo",
+   "hook": "¿Por qué te da hipo? ¿Y por qué asustarte no siempre funciona?",
+   "gist": "Es un espasmo del diafragma; las cuerdas vocales se cierran de golpe y hacen el «hic». Se cree que es un reflejo heredado de antes de nacer.",
+   "visual": "Diafragma con fallo intermitente: «ERROR: RESPIRACIÓN DUPLICADA»",
+   "cta": "Mándaselo a quien le da hipo cada vez que se ríe.",
+   "tags": [
+    "hipotesis"
+   ],
+   "n": 3
+  },
+  {
+   "cat": "cuerpo",
+   "hook": "¿Por qué se te pone la piel de gallina con una canción? ¿Y por qué no te pasa con todas?",
+   "gist": "Músculos diminutos erizan el vello; con la música, el cerebro libera dopamina justo en el momento que anticipa.",
+   "visual": "Ecualizador + pico «DOPAMINA» + vello erizándose en la cápsula",
+   "cta": "Mándaselo a quien te pasa canciones que te erizan.",
+   "tags": [
+    "base"
+   ],
+   "n": 4
+  },
+  {
+   "cat": "cuerpo",
+   "hook": "¿Por qué se te arrugan los dedos en el agua? ¿Y por qué no es solo culpa del agua?",
+   "gist": "Es el sistema nervioso contrayendo vasos. Los científicos creen que da agarre en superficies mojadas, como el dibujo de un neumático.",
+   "visual": "Dedo → neumático con dibujo, interruptor «MODO LLUVIA: ON»",
+   "cta": "Mándaselo a quien se queda una hora en la ducha.",
+   "tags": [
+    "hipotesis"
+   ],
+   "n": 5
+  },
+  {
+   "cat": "cuerpo",
+   "hook": "¿Qué suena cuando te truenas los dedos? ¿Y de verdad da artritis?",
+   "gist": "Es una burbuja de gas en el líquido de la articulación; los estudios no encuentran relación con la artritis.",
+   "visual": "Burbuja que estalla «CAVITACIÓN DETECTADA» + mito tachado en rojo",
+   "cta": "Mándaselo a quien se truena los dedos todo el día.",
+   "tags": [
+    "base"
+   ],
+   "n": 6
+  },
+  {
+   "cat": "cuerpo",
+   "hook": "¿Por qué hay gente que estornuda al mirar el sol? ¿Y por qué tú no?",
+   "gist": "Es el reflejo fótico del estornudo; se cree que las señales del nervio óptico «cruzan cables» con el reflejo del estornudo.",
+   "visual": "Dos cables cruzados: «CORTOCIRCUITO: LUZ → ESTORNUDO»",
+   "cta": "Mándaselo a quien estornuda al salir al sol.",
+   "tags": [
+    "hipotesis"
+   ],
+   "n": 7
+  },
+  {
+   "cat": "cuerpo",
+   "hook": "¿Por qué te duelen los músculos dos días después de entrenar? ¿Y por qué no es el ácido láctico?",
+   "gist": "Son microrroturas en las fibras y la inflamación que las repara; el lactato desaparece en pocas horas.",
+   "visual": "Obra en construcción dentro del músculo: «REPARANDO FIBRAS… 48 H»",
+   "cta": "Mándaselo a quien empieza el gimnasio el lunes.",
+   "tags": [
+    "base"
+   ],
+   "n": 8
+  },
+  {
+   "cat": "cuerpo",
+   "hook": "¿Por qué te mareas leyendo en el coche? ¿Y por qué el conductor nunca se marea?",
+   "gist": "Los ojos dicen «quieto» y el oído interno dice «movimiento». Una teoría: el cerebro lo interpreta como un envenenamiento.",
+   "visual": "Dos sensores con datos opuestos: «CONFLICTO DE DATOS» → «PROTOCOLO: EXPULSAR»",
+   "cta": "Mándaselo a quien siempre se marea en los viajes.",
+   "tags": [
+    "base",
+    "hipotesis"
+   ],
+   "n": 9
+  },
+  {
+   "cat": "cuerpo",
+   "hook": "¿Por qué tu estómago ruge cuando tienes hambre? ¿Y por qué también ruge cuando estás lleno?",
+   "gist": "El intestino empuja aire y líquidos todo el tiempo; con el estómago vacío no hay nada que amortigüe el sonido.",
+   "visual": "Onda de sonido saliendo de la cápsula + «AMORTIGUACIÓN: 0 %»",
+   "cta": "Mándaselo a quien le ruge la tripa en las reuniones.",
+   "tags": [
+    "base"
+   ],
+   "n": 10
+  },
+  {
+   "cat": "cerebro",
+   "hook": "¿Por qué sientes que ya viviste este momento? ¿Y por qué el déjà vu dura solo unos segundos?",
+   "gist": "Se cree que es un fallo de la sensación de familiaridad: el cerebro marca como «recuerdo» algo que es nuevo.",
+   "visual": "Ventana: «ESTE ARCHIVO YA EXISTE · ¿REEMPLAZAR?»",
+   "cta": "Mándaselo a quien siempre dice «esto ya lo viví».",
+   "tags": [
+    "hipotesis",
+    "misterio"
+   ],
+   "n": 11
+  },
+  {
+   "cat": "cerebro",
+   "hook": "¿Por qué no puedes sacarte una canción de la cabeza? ¿Y por qué siempre es el estribillo?",
+   "gist": "El cerebro repite fragmentos cortos e incompletos; escuchar la canción entera ayuda a «cerrarla».",
+   "visual": "Reproductor en bucle: «REPETIR: ∞»",
+   "cta": "Mándaselo a quien te pegó esa canción.",
+   "tags": [
+    "base"
+   ],
+   "n": 12
+  },
+  {
+   "cat": "cerebro",
+   "hook": "¿Por qué olvidas a qué ibas justo al cruzar una puerta?",
+   "gist": "La puerta funciona como un «límite de evento»: el cerebro archiva la escena anterior y abre una nueva.",
+   "visual": "Carpeta que se cierra al cruzar el marco: «ESCENA GUARDADA · NUEVA ESCENA»",
+   "cta": "Mándaselo a quien entra a la cocina y no sabe a qué.",
+   "tags": [
+    "base"
+   ],
+   "n": 13
+  },
+  {
+   "cat": "cerebro",
+   "hook": "¿Por qué a veces tienes una palabra en la punta de la lengua y no sale?",
+   "gist": "Tienes la «dirección» del recuerdo pero no el archivo completo: recuperación parcial.",
+   "visual": "«CARGANDO… 99 %» atascado",
+   "cta": "Mándaselo a quien nunca se acuerda de los nombres.",
+   "tags": [
+    "base"
+   ],
+   "n": 14
+  },
+  {
+   "cat": "cerebro",
+   "hook": "¿Por qué los años pasan cada vez más rápido? ¿Y por qué de niño un verano era eterno?",
+   "gist": "Se cree que el cerebro mide el tiempo por novedad: menos experiencias nuevas, menos recuerdos, años más «cortos».",
+   "visual": "Barra de vida comprimida: «2026: 3 ARCHIVOS NUEVOS»",
+   "cta": "Mándaselo a tu amigo de la infancia.",
+   "tags": [
+    "hipotesis"
+   ],
+   "n": 15
+  },
+  {
+   "cat": "cerebro",
+   "hook": "¿Por qué decir una grosería cuando te golpeas hace que duela menos?",
+   "gist": "Experimentos de psicología mostraron que maldecir aumenta la tolerancia al dolor.",
+   "visual": "Interruptor «ANALGÉSICO NATURAL: ON»",
+   "cta": "Mándaselo a quien grita groserías al golpearse el dedo.",
+   "tags": [
+    "base",
+    "verificar"
+   ],
+   "n": 16
+  },
+  {
+   "cat": "cerebro",
+   "hook": "¿Por qué ves caras en enchufes, nubes y coches?",
+   "gist": "Pareidolia: tu detector de caras es hiperactivo porque no ver una cara a tiempo era peligroso.",
+   "visual": "Escáner sobre un enchufe: «ROSTRO DETECTADO 98 %»",
+   "cta": "Mándaselo a quien siempre ve caras en todo.",
+   "tags": [
+    "base"
+   ],
+   "n": 17
+  },
+  {
+   "cat": "cerebro",
+   "hook": "¿Por qué bostezar es contagioso? ¿Y por qué se te contagia más de quien quieres?",
+   "gist": "Se contagia más entre personas cercanas y se asocia a la empatía.",
+   "visual": "Señal wifi entre dos cápsulas: «CONEXIÓN EMOCIONAL: ALTA»",
+   "cta": "Mándaselo a quien bosteza cada vez que tú bostezas.",
+   "tags": [
+    "hipotesis"
+   ],
+   "n": 18
+  },
+  {
+   "cat": "cerebro",
+   "hook": "¿Por qué hablas solo? ¿Y por qué podría ser buena señal?",
+   "gist": "Hablar en voz alta ayuda a organizar ideas y concentrarse.",
+   "visual": "Asistente de voz interno: «MODO DEPURACIÓN»",
+   "cta": "Mándaselo a quien habla solo cuando cocina.",
+   "tags": [
+    "base"
+   ],
+   "n": 19
+  },
+  {
+   "cat": "cerebro",
+   "hook": "¿Por qué te acuerdas de algo vergonzoso de hace 10 años justo antes de dormir?",
+   "gist": "Sin estímulos, el cerebro repasa recuerdos con carga emocional; la emoción los guarda con más fuerza.",
+   "visual": "Notificación a las 3:00: «RECUERDO VERGONZOSO · 2016»",
+   "cta": "Mándaselo a quien no duerme pensando en lo que dijo en 2016.",
+   "tags": [
+    "base"
+   ],
+   "n": 20
+  },
+  {
+   "cat": "sueno",
+   "hook": "¿Por qué te despiertas un minuto antes de que suene la alarma?",
+   "gist": "Tu reloj interno aprende la hora y sube el cortisol antes para despertarte.",
+   "visual": "Cuenta atrás interna: «ALARMA PROGRAMADA POR EL CEREBRO» + barra de cortisol",
+   "cta": "Mándaselo a quien pone 5 alarmas y se despierta antes de todas.",
+   "tags": [
+    "base",
+    "top"
+   ],
+   "n": 21
+  },
+  {
+   "cat": "sueno",
+   "hook": "¿Por qué sientes que te caes justo cuando te estás durmiendo?",
+   "gist": "Es la sacudida hípnica; una teoría dice que el cerebro confunde la relajación con una caída.",
+   "visual": "Cápsula cayendo por la cuadrícula: «ALERTA: CAÍDA DETECTADA»",
+   "cta": "Mándaselo a quien te ha pateado dormido.",
+   "tags": [
+    "hipotesis"
+   ],
+   "n": 22
+  },
+  {
+   "cat": "sueno",
+   "hook": "¿Por qué el sonido de la lluvia te da sueño?",
+   "gist": "Es un sonido constante y predecible: el cerebro entiende que no hay amenaza y baja la guardia.",
+   "visual": "Radar de amenazas: «SIN PELIGRO DETECTADO» + modo descanso",
+   "cta": "Mándaselo a quien duerme con sonido de lluvia.",
+   "tags": [
+    "hipotesis"
+   ],
+   "n": 23
+  },
+  {
+   "cat": "sueno",
+   "hook": "¿Por qué tanta gente sueña que se le caen los dientes?",
+   "gist": "Nadie lo sabe con certeza; hay teorías sobre estrés y sobre sensaciones de la mandíbula al dormir.",
+   "visual": "«SUEÑO RECURRENTE · ARCHIVO CORRUPTO»",
+   "cta": "Mándaselo a quien tiene ese sueño.",
+   "tags": [
+    "misterio"
+   ],
+   "n": 24
+  },
+  {
+   "cat": "sueno",
+   "hook": "¿Por qué a veces despiertas y no te puedes mover?",
+   "gist": "Parálisis del sueño: la mente despierta antes de que se apague el bloqueo de los músculos del sueño REM.",
+   "visual": "Panel dividido: «MENTE: ONLINE / CUERPO: BLOQUEADO»",
+   "cta": "Mándaselo a quien le ha pasado (y nadie le creyó).",
+   "tags": [
+    "base",
+    "tendencia",
+    "top"
+   ],
+   "n": 25
+  },
+  {
+   "cat": "sueno",
+   "hook": "¿Por qué duermes 8 horas y te levantas peor que si durmieras 6?",
+   "gist": "Si la alarma te despierta en sueño profundo aparece la inercia del sueño.",
+   "visual": "Ciclos de sueño en barra: «CICLO INTERRUMPIDO 47 %»",
+   "cta": "Mándaselo a quien se despierta de mal humor.",
+   "tags": [
+    "base"
+   ],
+   "n": 26
+  },
+  {
+   "cat": "sueno",
+   "hook": "¿Por qué una siesta de 20 minutos te recarga y una de 2 horas te destruye?",
+   "gist": "La corta no llega al sueño profundo; la larga sí, y despertar ahí cuesta.",
+   "visual": "Batería: 20 min «+40 %» vs 2 h «ERROR DE REINICIO»",
+   "cta": "Mándaselo a quien dice «solo 5 minutitos».",
+   "tags": [
+    "base"
+   ],
+   "n": 27
+  },
+  {
+   "cat": "sueno",
+   "hook": "¿Por qué una hora de cambio de horario te deja fatal durante días?",
+   "gist": "Desajusta tu reloj interno como un mini jet lag.",
+   "visual": "Dos relojes desincronizados: «SINCRONIZANDO… 3 DÍAS»",
+   "cta": "Mándaselo a quien sigue cansado desde el cambio de hora.",
+   "tags": [
+    "base",
+    "tendencia"
+   ],
+   "n": 28
+  },
+  {
+   "cat": "sueno",
+   "hook": "¿Por qué babeas cuando duermes profundo?",
+   "gist": "Los músculos de la boca se relajan y la saliva sale por gravedad si duermes de lado.",
+   "visual": "«MÚSCULOS FACIALES: MODO AHORRO»",
+   "cta": "Mándaselo a quien deja la almohada mojada.",
+   "tags": [
+    "base"
+   ],
+   "n": 29
+  },
+  {
+   "cat": "sueno",
+   "hook": "¿Por qué hay gente que habla dormida? ¿Y por qué dice cosas sin sentido?",
+   "gist": "Ocurre en transiciones entre fases del sueño, cuando zonas del lenguaje se activan sin control consciente.",
+   "visual": "Micrófono abierto: «TRANSMISIÓN SIN FILTRO»",
+   "cta": "Mándaselo a quien habla dormido (con pruebas).",
+   "tags": [
+    "base"
+   ],
+   "n": 30
+  },
+  {
+   "cat": "amor",
+   "hook": "¿Por qué sientes mariposas cuando ves a alguien que te gusta?",
+   "gist": "Es una respuesta de estrés: la adrenalina desvía sangre del estómago y el intestino «lo nota».",
+   "visual": "«ALERTA: OBJETIVO DETECTADO» + mariposas holográficas en el estómago",
+   "cta": "Mándaselo a quien te provoca mariposas.",
+   "tags": [
+    "base"
+   ],
+   "n": 31
+  },
+  {
+   "cat": "amor",
+   "hook": "¿Por qué la sudadera de tu pareja te calma? ¿Y por qué no funciona con la de cualquiera?",
+   "gist": "Un estudio encontró que oler a la pareja reduce el estrés.",
+   "visual": "Olor como señal wifi: «AROMA RECONOCIDO · ESTRÉS ↓»",
+   "cta": "Mándaselo a quien le robas las sudaderas.",
+   "tags": [
+    "base",
+    "verificar"
+   ],
+   "n": 32
+  },
+  {
+   "cat": "amor",
+   "hook": "¿Por qué una ruptura duele físicamente?",
+   "gist": "El rechazo social activa zonas del cerebro que también procesan el dolor físico.",
+   "visual": "«ERROR CRÍTICO: VÍNCULO PERDIDO» + zona del dolor iluminada",
+   "cta": "Mándaselo a quien necesita leerlo hoy.",
+   "tags": [
+    "base"
+   ],
+   "n": 33
+  },
+  {
+   "cat": "amor",
+   "hook": "¿Por qué casi todos inclinamos la cabeza a la derecha al besar?",
+   "gist": "Un estudio observó que la mayoría gira a la derecha; se relaciona con preferencias laterales desde antes de nacer.",
+   "visual": "Brújula de beso: «DIRECCIÓN: DERECHA 2/3»",
+   "cta": "Mándaselo a quien besas.",
+   "tags": [
+    "base",
+    "verificar"
+   ],
+   "n": 34
+  },
+  {
+   "cat": "amor",
+   "hook": "¿Por qué enamorarse se parece a una adicción?",
+   "gist": "El enamoramiento activa el sistema de recompensa del cerebro, el mismo de otros placeres intensos.",
+   "visual": "Barra de dopamina al máximo: «RECOMPENSA: [NOMBRE]»",
+   "cta": "Mándaselo a tu adicción favorita.",
+   "tags": [
+    "base"
+   ],
+   "n": 35
+  },
+  {
+   "cat": "amor",
+   "hook": "¿Por qué las parejas acaban pareciéndose? ¿O ya se parecían desde el principio?",
+   "gist": "Un estudio de 2020 no encontró que las caras converjan con los años: ya se parecían al elegirse.",
+   "visual": "Comparador de caras «SIMILITUD: AÑO 1 = AÑO 25»",
+   "cta": "Mándaselo a tu pareja (o a la pareja que parecen hermanos).",
+   "tags": [
+    "base",
+    "verificar",
+    "top"
+   ],
+   "n": 36
+  },
+  {
+   "cat": "amor",
+   "hook": "¿Por qué piensas en alguien y justo te escribe?",
+   "gist": "Sesgo de confirmación: recordamos las coincidencias y olvidamos las mil veces que no pasó.",
+   "visual": "Contador «COINCIDENCIAS: 1 · IGNORADAS: 999»",
+   "cta": "Mándaselo a quien crees que te lee la mente.",
+   "tags": [
+    "base"
+   ],
+   "n": 37
+  },
+  {
+   "cat": "amor",
+   "hook": "¿Por qué sentimos celos?",
+   "gist": "Se cree que es una alarma antigua para proteger los vínculos importantes.",
+   "visual": "Radar: «AMENAZA AL VÍNCULO DETECTADA»",
+   "cta": "Mándaselo a quien se pone celoso de tu perro.",
+   "tags": [
+    "hipotesis"
+   ],
+   "n": 38
+  },
+  {
+   "cat": "amor",
+   "hook": "¿Por qué un abrazo largo te calma más que uno rápido?",
+   "gist": "El contacto prolongado se asocia a liberación de oxitocina y menos estrés.",
+   "visual": "Temporizador de abrazo: «OXITOCINA: CARGANDO»",
+   "cta": "Mándaselo a quien te debe un abrazo.",
+   "tags": [
+    "base"
+   ],
+   "n": 39
+  },
+  {
+   "cat": "amor",
+   "hook": "¿Por qué la voz de tu madre te calma aunque tengas 30 años?",
+   "gist": "Estudios encontraron que la voz materna reduce hormonas de estrés y libera oxitocina.",
+   "visual": "Llamada entrante «MAMÁ» + «CORTISOL ↓»",
+   "cta": "Mándaselo a tu madre.",
+   "tags": [
+    "base",
+    "verificar"
+   ],
+   "n": 40
+  },
+  {
+   "cat": "quepasaria",
+   "hook": "¿Qué pasaría si dejaras de dormir? ¿Y cuánto aguantaría tu cerebro?",
+   "gist": "A las 24 h tus reflejos se parecen a los de alguien bebido; luego llegan microsueños y alucinaciones. Récord: 11 días.",
+   "visual": "Batería que baja por días + «MICROSUEÑO DETECTADO»",
+   "cta": "Mándaselo a quien se queda despierto hasta las 4 viendo series.",
+   "tags": [
+    "base",
+    "verificar"
+   ],
+   "n": 41
+  },
+  {
+   "cat": "quepasaria",
+   "hook": "¿Qué pasaría si la Luna desapareciera esta noche?",
+   "gist": "Mareas mucho más débiles, noches más oscuras y, con el tiempo, un eje terrestre inestable que alteraría las estaciones.",
+   "visual": "«OBJETO ELIMINADO: LUNA» + gráfica de mareas cayendo",
+   "cta": "Mándaselo a quien siempre te manda fotos de la luna.",
+   "tags": [
+    "base"
+   ],
+   "n": 42
+  },
+  {
+   "cat": "quepasaria",
+   "hook": "¿Qué pasaría si cavaras un túnel que atraviese la Tierra y saltaras dentro?",
+   "gist": "Sin aire ni roce caerías y llegarías al otro lado en unos 42 minutos.",
+   "visual": "Cápsula cayendo por el túnel con cronómetro «42:00»",
+   "cta": "Mándaselo a quien vive en la otra punta del mundo.",
+   "tags": [
+    "base",
+    "top"
+   ],
+   "n": 43
+  },
+  {
+   "cat": "quepasaria",
+   "hook": "¿Qué pasaría si la Tierra dejara de girar de repente?",
+   "gist": "Todo lo que no está anclado seguiría moviéndose a cientos de km/h y los días durarían meses.",
+   "visual": "Interruptor «ROTACIÓN: OFF» + alertas rojas",
+   "cta": "Mándaselo a quien dice que el día debería tener más horas.",
+   "tags": [
+    "base"
+   ],
+   "n": 44
+  },
+  {
+   "cat": "quepasaria",
+   "hook": "¿Qué pasaría si todos los humanos saltáramos a la vez?",
+   "gist": "Casi nada: la Tierra es tan masiva que el efecto sería imperceptible.",
+   "visual": "Medidor «IMPACTO EN LA TIERRA: 0,000000…%»",
+   "cta": "Mándaselo al grupo que siempre quiere hacer algo juntos.",
+   "tags": [
+    "base"
+   ],
+   "n": 45
+  },
+  {
+   "cat": "quepasaria",
+   "hook": "¿Qué pasaría si viajaras cerca de la velocidad de la luz y volvieras?",
+   "gist": "El tiempo pasaría más lento para ti: volverías más joven que tu gemelo.",
+   "visual": "Dos relojes «TÚ: 1 AÑO / TIERRA: 10 AÑOS»",
+   "cta": "Mándaselo a tu hermano o hermana.",
+   "tags": [
+    "base"
+   ],
+   "n": 46
+  },
+  {
+   "cat": "quepasaria",
+   "hook": "¿Qué le pasaría a tu cuerpo en el espacio sin traje?",
+   "gist": "No explotas: tienes unos 15 segundos de consciencia y la saliva empieza a hervir.",
+   "visual": "Cuenta atrás «15 s» + «PRESIÓN: 0»",
+   "cta": "Mándaselo a quien quiere ser astronauta.",
+   "tags": [
+    "base",
+    "verificar"
+   ],
+   "n": 47
+  },
+  {
+   "cat": "quepasaria",
+   "hook": "¿Qué pasaría si no pudieras sentir miedo?",
+   "gist": "Existen casos reales de personas con la amígdala dañada que no sienten miedo, y se exponen a peligros sin darse cuenta.",
+   "visual": "«AMÍGDALA: OFFLINE» + peligros sin alerta",
+   "cta": "Mándaselo a la persona más valiente (o más loca) que conoces.",
+   "tags": [
+    "base",
+    "verificar"
+   ],
+   "n": 48
+  },
+  {
+   "cat": "quepasaria",
+   "hook": "¿Qué pasaría si los humanos pudiéramos hibernar?",
+   "gist": "Se investiga para viajes espaciales largos: bajar el metabolismo como algunos animales.",
+   "visual": "Cápsula en criocámara «METABOLISMO: 5 %»",
+   "cta": "Mándaselo a quien hibernaría todo el invierno.",
+   "tags": [
+    "hipotesis"
+   ],
+   "n": 49
+  },
+  {
+   "cat": "quepasaria",
+   "hook": "¿Qué pasaría si desaparecieran todos los insectos?",
+   "gist": "Sin polinizadores ni descomponedores, muchas plantas, animales y cultivos colapsarían.",
+   "visual": "Cadena de dominó «POLINIZACIÓN: 0» → «COSECHAS: ERROR»",
+   "cta": "Mándaselo a quien grita cuando ve una abeja.",
+   "tags": [
+    "base"
+   ],
+   "n": 50
+  },
+  {
+   "cat": "espacio",
+   "hook": "¿Qué tan lejos está lo más lejano que hemos lanzado? ¿Y por qué un mensaje tarda un día entero en llegar?",
+   "gist": "La Voyager 1 llega a un día-luz de la Tierra a mediados de noviembre de 2026.",
+   "visual": "GPS «DISTANCIA: 1 DÍA LUZ» + mensaje «ENVIANDO… 24 H»",
+   "cta": "Mándaselo a quien tarda un día en contestarte.",
+   "tags": [
+    "tendencia",
+    "verificar",
+    "top"
+   ],
+   "n": 51
+  },
+  {
+   "cat": "espacio",
+   "hook": "¿Qué pasó con el asteroide que la NASA golpeó a propósito?",
+   "gist": "La misión DART cambió su órbita en 2022 y la sonda europea Hera llega a ver cómo quedó.",
+   "visual": "«IMPACTO CONFIRMADO» + órbita antes/después",
+   "cta": "Mándaselo a quien siempre dice que un asteroide nos va a destruir.",
+   "tags": [
+    "tendencia",
+    "verificar"
+   ],
+   "n": 52
+  },
+  {
+   "cat": "espacio",
+   "hook": "¿Por qué la Luna se ve gigante cuando sale por el horizonte?",
+   "gist": "Es una ilusión del cerebro: compara la Luna con edificios y árboles; además, en una superluna está algo más cerca.",
+   "visual": "Regla holográfica: «TAMAÑO REAL = IGUAL» + «ILUSIÓN: CEREBRO»",
+   "cta": "Mándaselo a quien le harás ver la superluna.",
+   "tags": [
+    "base",
+    "tendencia"
+   ],
+   "n": 53
+  },
+  {
+   "cat": "espacio",
+   "hook": "¿Hay lunas fuera de nuestro sistema solar?",
+   "gist": "Astrónomos reportaron una posible primera detección de una luna en otro sistema.",
+   "visual": "Planeta lejano con luna parpadeando: «SEÑAL: POR CONFIRMAR»",
+   "cta": "Mándaselo a quien siempre mira el cielo.",
+   "tags": [
+    "tendencia",
+    "verificar"
+   ],
+   "n": 54
+  },
+  {
+   "cat": "espacio",
+   "hook": "¿Y si la fuerza que expande el universo estuviera cambiando?",
+   "gist": "Un análisis de miles de supernovas sugiere que la energía oscura podría variar con el tiempo.",
+   "visual": "Gráfica de expansión con curva que se dobla: «ANOMALÍA»",
+   "cta": "Mándaselo a quien le encanta pensar en el universo a las 2 a. m.",
+   "tags": [
+    "tendencia",
+    "misterio",
+    "verificar"
+   ],
+   "n": 55
+  },
+  {
+   "cat": "espacio",
+   "hook": "¿Por qué la antimateria es lo más caro del universo?",
+   "gist": "Desaparece al tocar materia; hace poco físicos lograron atrapar una partícula de antimateria durante un mes.",
+   "visual": "Contenedor magnético «ANTIMATERIA: NO TOCAR»",
+   "cta": "Mándaselo a quien dice que todo está caro.",
+   "tags": [
+    "tendencia",
+    "verificar"
+   ],
+   "n": 56
+  },
+  {
+   "cat": "espacio",
+   "hook": "¿Qué es realmente una estrella fugaz?",
+   "gist": "Granos de polvo de cometa, como arena, que se queman al entrar en la atmósfera a gran velocidad.",
+   "visual": "Grano de arena con etiqueta «TAMAÑO: 1 MM» ardiendo",
+   "cta": "Mándaselo a quien pide deseos con las estrellas fugaces.",
+   "tags": [
+    "base",
+    "tendencia"
+   ],
+   "n": 57
+  },
+  {
+   "cat": "espacio",
+   "hook": "¿Por qué en Mercurio un día dura más que un año?",
+   "gist": "Gira tan lento que entre dos amaneceres pasan unos 176 días terrestres, y su año dura 88.",
+   "visual": "Dos contadores «DÍA: 176 · AÑO: 88»",
+   "cta": "Mándaselo a quien dice que su lunes dura una eternidad.",
+   "tags": [
+    "base",
+    "tendencia"
+   ],
+   "n": 58
+  },
+  {
+   "cat": "espacio",
+   "hook": "¿Por qué en el espacio no hay sonido?",
+   "gist": "El sonido necesita algo que vibre, como el aire; en el vacío no hay nada que lo transporte.",
+   "visual": "Ondas de sonido chocando con el vacío: «MEDIO: NINGUNO»",
+   "cta": "Mándaselo a quien ve películas de naves con explosiones ruidosas.",
+   "tags": [
+    "base"
+   ],
+   "n": 59
+  },
+  {
+   "cat": "espacio",
+   "hook": "¿A qué huele el espacio?",
+   "gist": "Los astronautas describen un olor a metal quemado al volver de una caminata espacial.",
+   "visual": "Sensor de olor en el traje: «OLOR: METAL QUEMADO»",
+   "cta": "Mándaselo a quien tiene buen olfato.",
+   "tags": [
+    "base",
+    "verificar"
+   ],
+   "n": 60
+  },
+  {
+   "cat": "misterio",
+   "hook": "¿Por qué soñamos? ¿Y por qué casi nunca lo recordamos?",
+   "gist": "No hay una respuesta definitiva: teorías hablan de ordenar recuerdos y de ensayar amenazas.",
+   "visual": "Sala de servidores nocturna «PROCESANDO… MOTIVO DESCONOCIDO»",
+   "cta": "Mándaselo a quien te cuenta sus sueños cada mañana.",
+   "tags": [
+    "misterio"
+   ],
+   "n": 61
+  },
+  {
+   "cat": "misterio",
+   "hook": "¿Qué fue la señal «Wow!» que llegó del espacio en 1977?",
+   "gist": "Una señal de radio intensa que duró unos segundos y nunca se volvió a detectar.",
+   "visual": "Impresora con el famoso «6EQUJ5» rodeado + «ORIGEN: DESCONOCIDO»",
+   "cta": "Mándaselo a quien cree que no estamos solos.",
+   "tags": [
+    "misterio",
+    "verificar"
+   ],
+   "n": 62
+  },
+  {
+   "cat": "misterio",
+   "hook": "¿Por qué hay personas zurdas? ¿Y por qué siempre son minoría?",
+   "gist": "Se mezclan genes y ambiente, pero nadie sabe por qué la proporción es tan estable en la historia.",
+   "visual": "Mapa de población «ZURDOS: ~10 %»",
+   "cta": "Mándaselo a tu amigo zurdo.",
+   "tags": [
+    "misterio"
+   ],
+   "n": 63
+  },
+  {
+   "cat": "misterio",
+   "hook": "¿Por qué una pastilla de azúcar puede quitarte el dolor? ¿Y por qué funciona aunque sepas que es falsa?",
+   "gist": "El efecto placebo es real y se ha visto incluso cuando el paciente sabe que es placebo; su mecanismo completo sigue en estudio.",
+   "visual": "Pastilla holográfica «CONTENIDO: AZÚCAR · EFECTO: REAL»",
+   "cta": "Mándaselo a quien dice que todo está en la mente.",
+   "tags": [
+    "misterio",
+    "verificar"
+   ],
+   "n": 64
+  },
+  {
+   "cat": "misterio",
+   "hook": "¿Dónde está tu «yo» dentro del cerebro?",
+   "gist": "La consciencia sigue siendo uno de los grandes misterios de la ciencia.",
+   "visual": "Buscador en el cerebro de puntos: «BUSCANDO: YO… 0 RESULTADOS»",
+   "cta": "Mándaselo a quien filosofa a las 3 a. m.",
+   "tags": [
+    "misterio"
+   ],
+   "n": 65
+  },
+  {
+   "cat": "misterio",
+   "hook": "¿Qué son las bolas de rayo que la gente ve flotar en las tormentas?",
+   "gist": "Esferas brillantes que duran segundos; hay testimonios y pocas grabaciones, y ninguna explicación cerrada.",
+   "visual": "Esfera eléctrica flotando «FENÓMENO: SIN EXPLICAR»",
+   "cta": "Mándaselo a quien ama las tormentas.",
+   "tags": [
+    "misterio"
+   ],
+   "n": 66
+  },
+  {
+   "cat": "misterio",
+   "hook": "¿Qué dice el manuscrito Voynich?",
+   "gist": "Un libro de hace siglos escrito en un idioma o código que nadie ha logrado descifrar.",
+   "visual": "Página escaneada «IDIOMA: DESCONOCIDO · TRADUCCIÓN: ERROR»",
+   "cta": "Mándaselo a quien ama los códigos y acertijos.",
+   "tags": [
+    "misterio"
+   ],
+   "n": 67
+  },
+  {
+   "cat": "misterio",
+   "hook": "¿Cómo construyeron los griegos un «ordenador» hace 2.000 años?",
+   "gist": "El mecanismo de Anticitera predecía eclipses con engranajes; nadie sabe quién lo hizo.",
+   "visual": "Engranajes holográficos «PREDICCIÓN: ECLIPSE»",
+   "cta": "Mándaselo a quien dice que antes no había tecnología.",
+   "tags": [
+    "misterio"
+   ],
+   "n": 68
+  },
+  {
+   "cat": "misterio",
+   "hook": "¿Por qué ronronean los gatos? ¿Y por qué también lo hacen cuando están heridos?",
+   "gist": "No se sabe del todo cómo ni por qué; hay hipótesis sobre comunicación y hasta sobre curación.",
+   "visual": "Ondas de vibración «FRECUENCIA: 25–150 HZ»",
+   "cta": "Mándaselo a quien tiene un gato.",
+   "tags": [
+    "misterio",
+    "hipotesis"
+   ],
+   "n": 69
+  },
+  {
+   "cat": "misterio",
+   "hook": "¿Cómo encuentran las mariposas monarca un bosque en el que nunca estuvieron?",
+   "gist": "Viajan miles de kilómetros a un lugar que solo conocieron sus bisabuelas, guiadas por el sol y quizá el campo magnético.",
+   "visual": "GPS sin datos previos: «RUTA HEREDADA»",
+   "cta": "Mándaselo a quien siempre se pierde.",
+   "tags": [
+    "misterio",
+    "hipotesis"
+   ],
+   "n": 70
+  },
+  {
+   "cat": "cotidiano",
+   "hook": "¿Por qué la comida del avión sabe peor?",
+   "gist": "El aire seco y la baja presión apagan parte del gusto por lo salado y lo dulce.",
+   "visual": "Ecualizador de sabores: «MODO AVIÓN: PAPILAS ↓»",
+   "cta": "Mándaselo a con quien vas a viajar.",
+   "tags": [
+    "base",
+    "verificar"
+   ],
+   "n": 71
+  },
+  {
+   "cat": "cotidiano",
+   "hook": "¿Por qué el café te despierta? ¿Y por qué después te da más sueño?",
+   "gist": "La cafeína bloquea la adenosina, la «ficha» del cansancio; cuando se pasa el efecto, toda esa adenosina llega de golpe.",
+   "visual": "Candado en el receptor: «CANSANCIO: BLOQUEADO» → «DESBLOQUEADO»",
+   "cta": "Mándaselo a quien no es persona sin café.",
+   "tags": [
+    "base",
+    "top"
+   ],
+   "n": 72
+  },
+  {
+   "cat": "cotidiano",
+   "hook": "¿Por qué la cebolla te hace llorar?",
+   "gist": "Al cortarla libera un gas que irrita los ojos y activa las lágrimas para lavarlos.",
+   "visual": "Nube de gas «IRRITANTE DETECTADO» → «LIMPIEZA ACTIVADA»",
+   "cta": "Mándaselo a quien llora cortando cebolla.",
+   "tags": [
+    "base"
+   ],
+   "n": 73
+  },
+  {
+   "cat": "cotidiano",
+   "hook": "¿Cómo sabe tu móvil dónde estás sin internet?",
+   "gist": "El GPS solo escucha señales de satélites; calcula tu posición con el tiempo que tardan en llegar.",
+   "visual": "Tres satélites con líneas a la cápsula: «POSICIÓN CALCULADA»",
+   "cta": "Mándaselo a quien siempre se pierde con el GPS.",
+   "tags": [
+    "base"
+   ],
+   "n": 74
+  },
+  {
+   "cat": "cotidiano",
+   "hook": "¿Por qué la pantalla táctil no funciona con guantes?",
+   "gist": "Detecta la pequeña carga eléctrica de tu dedo; la tela no la conduce.",
+   "visual": "Dedo con chispa «CARGA DETECTADA» / guante «SIN SEÑAL»",
+   "cta": "Mándaselo a quien usa la nariz para desbloquear el móvil en invierno.",
+   "tags": [
+    "base"
+   ],
+   "n": 75
+  },
+  {
+   "cat": "cotidiano",
+   "hook": "¿Por qué el espejo invierte izquierda y derecha pero no arriba y abajo?",
+   "gist": "En realidad no invierte izquierda-derecha: invierte adelante y atrás.",
+   "visual": "Eje de coordenadas girando: «EJE INVERTIDO: Z»",
+   "cta": "Mándaselo a quien se pasa el día frente al espejo.",
+   "tags": [
+    "base"
+   ],
+   "n": 76
+  },
+  {
+   "cat": "cotidiano",
+   "hook": "¿Por qué el pan se pone duro y las galletas se ablandan?",
+   "gist": "El pan pierde agua y su almidón se reorganiza; las galletas, al revés, absorben la humedad del aire.",
+   "visual": "Flechas de humedad entrando y saliendo: «H₂O →»",
+   "cta": "Mándaselo a quien deja la bolsa de pan abierta.",
+   "tags": [
+    "base"
+   ],
+   "n": 77
+  },
+  {
+   "cat": "cotidiano",
+   "hook": "¿El azúcar pone hiperactivos a los niños?",
+   "gist": "Los estudios no lo confirman; los padres que creen que sí ven más hiperactividad.",
+   "visual": "Mito tachado «AZÚCAR = HIPERACTIVIDAD» + «EXPECTATIVA: PADRES»",
+   "cta": "Mándaselo a la madre que no deja comer dulces.",
+   "tags": [
+    "base",
+    "verificar"
+   ],
+   "n": 78
+  },
+  {
+   "cat": "cotidiano",
+   "hook": "¿Por qué el agua caliente a veces se congela antes que la fría?",
+   "gist": "Se llama efecto Mpemba y los científicos aún discuten si existe y por qué.",
+   "visual": "Dos vasos en carrera «CALIENTE: 1º?»",
+   "cta": "Mándaselo a quien cree que lo sabe todo.",
+   "tags": [
+    "misterio"
+   ],
+   "n": 79
+  },
+  {
+   "cat": "cotidiano",
+   "hook": "¿Cómo calienta el microondas? ¿Y por qué se queda frío el centro?",
+   "gist": "Hace vibrar el agua de la comida; las ondas penetran pocos centímetros y el centro se calienta por contacto.",
+   "visual": "Moléculas de agua vibrando «PROFUNDIDAD: 2–3 CM»",
+   "cta": "Mándaselo a quien siempre se quema con la primera cucharada.",
+   "tags": [
+    "base"
+   ],
+   "n": 80
+  },
+  {
+   "cat": "animales",
+   "hook": "¿Por qué los gatos casi siempre caen de pie?",
+   "gist": "Tienen un reflejo que gira primero la cabeza y luego el cuerpo en el aire, gracias a una columna muy flexible.",
+   "visual": "Secuencia de giro «REFLEJO DE ENDEREZAMIENTO»",
+   "cta": "Mándaselo a quien tiene un gato acróbata.",
+   "tags": [
+    "base"
+   ],
+   "n": 81
+  },
+  {
+   "cat": "animales",
+   "hook": "¿Por qué los perros inclinan la cabeza cuando les hablas?",
+   "gist": "No se sabe del todo; se ha observado más en perros que reconocen muchas palabras.",
+   "visual": "«PROCESANDO PALABRA CONOCIDA…»",
+   "cta": "Mándaselo a quien habla con su perro como si fuera una persona.",
+   "tags": [
+    "hipotesis",
+    "verificar"
+   ],
+   "n": 82
+  },
+  {
+   "cat": "animales",
+   "hook": "¿Cómo duermen los delfines sin ahogarse?",
+   "gist": "Duermen con medio cerebro: una mitad descansa mientras la otra vigila y respira.",
+   "visual": "Cerebro dividido «HEMISFERIO IZQ: OFF / DER: ON»",
+   "cta": "Mándaselo a quien duerme con un ojo abierto.",
+   "tags": [
+    "base"
+   ],
+   "n": 83
+  },
+  {
+   "cat": "animales",
+   "hook": "¿Por qué el pulpo tiene tres corazones y sangre azul?",
+   "gist": "Dos corazones bombean a las branquias y uno al cuerpo; su sangre usa cobre en vez de hierro.",
+   "visual": "Tres corazones latiendo «Cu: COBRE»",
+   "cta": "Mándaselo a quien dice que tiene el corazón dividido.",
+   "tags": [
+    "base"
+   ],
+   "n": 84
+  },
+  {
+   "cat": "animales",
+   "hook": "¿Por qué los flamencos son rosas?",
+   "gist": "Nacen grises; el color viene de los pigmentos de lo que comen.",
+   "visual": "Barra de color «DIETA → ROSA 100 %»",
+   "cta": "Mándaselo a quien es lo que come.",
+   "tags": [
+    "base"
+   ],
+   "n": 85
+  },
+  {
+   "cat": "animales",
+   "hook": "¿Por qué es tan difícil atrapar una mosca?",
+   "gist": "Procesan la imagen tan rápido que ven tu mano en cámara lenta.",
+   "visual": "Vista en cámara lenta «FPS MOSCA: MUY ALTO»",
+   "cta": "Mándaselo a quien lleva media hora persiguiendo una mosca.",
+   "tags": [
+    "base"
+   ],
+   "n": 86
+  },
+  {
+   "cat": "animales",
+   "hook": "¿Por qué los mosquitos te pican más a ti que a los demás?",
+   "gist": "El olor de tu piel cambia de persona a persona y a algunas las prefieren claramente.",
+   "visual": "Radar de mosquito «OBJETIVO PRIORITARIO: TÚ»",
+   "cta": "Mándaselo a quien siempre se lleva todas las picaduras.",
+   "tags": [
+    "base",
+    "verificar",
+    "top"
+   ],
+   "n": 87
+  },
+  {
+   "cat": "animales",
+   "hook": "¿Las plantas pueden «escuchar»?",
+   "gist": "Estudios vieron que algunas plantas reaccionan a la vibración de una oruga masticando y se defienden.",
+   "visual": "Onda de vibración «AMENAZA DETECTADA → DEFENSAS ON»",
+   "cta": "Mándaselo a quien habla con sus plantas.",
+   "tags": [
+    "hipotesis",
+    "verificar"
+   ],
+   "n": 88
+  },
+  {
+   "cat": "animales",
+   "hook": "¿Los peces duermen? ¿Y cómo, si no tienen párpados?",
+   "gist": "Sí, entran en estados de reposo con menos actividad, aunque mantengan los ojos abiertos.",
+   "visual": "«MODO REPOSO» en un pez holográfico",
+   "cta": "Mándaselo a quien tiene una pecera.",
+   "tags": [
+    "base"
+   ],
+   "n": 89
+  },
+  {
+   "cat": "animales",
+   "hook": "¿Por qué los perros se parecen a sus dueños?",
+   "gist": "Estudios sugieren que tendemos a elegir mascotas que se parecen a nosotros.",
+   "visual": "Comparador de caras perro-dueño «COINCIDENCIA ALTA»",
+   "cta": "Mándaselo a quien se parece a su perro.",
+   "tags": [
+    "hipotesis",
+    "verificar"
+   ],
+   "n": 90
+  },
+  {
+   "cat": "tendencia",
+   "hook": "¿Por qué nos gusta pasar miedo? ¿Y por qué después de una peli de terror te sientes tan bien?",
+   "gist": "El cerebro sabe que estás a salvo: vives la adrenalina y luego el alivio, sin peligro real.",
+   "visual": "«PELIGRO: SIMULADO» + «MODO SUPERVIVENCIA: ON» → «ALIVIO»",
+   "cta": "Mándaselo a con quien ves pelis de miedo.",
+   "tags": [
+    "base",
+    "tendencia",
+    "top"
+   ],
+   "n": 91
+  },
+  {
+   "cat": "tendencia",
+   "hook": "¿Por qué te asustas con un susto aunque sepas que es falso?",
+   "gist": "La amígdala reacciona antes de que la parte racional del cerebro analice lo que pasa.",
+   "visual": "Dos rutas en el cerebro: «VÍA RÁPIDA» gana a «VÍA LENTA»",
+   "cta": "Mándaselo a quien grita en todas las pelis de terror.",
+   "tags": [
+    "base",
+    "tendencia"
+   ],
+   "n": 92
+  },
+  {
+   "cat": "tendencia",
+   "hook": "¿Por qué nos dan miedo los payasos?",
+   "gist": "Una expresión fija y exagerada impide leer sus intenciones, y eso al cerebro le inquieta.",
+   "visual": "Escáner facial «EMOCIÓN: NO DETECTABLE»",
+   "cta": "Mándaselo a quien no soporta a los payasos.",
+   "tags": [
+    "hipotesis",
+    "tendencia"
+   ],
+   "n": 93
+  },
+  {
+   "cat": "tendencia",
+   "hook": "¿Por qué algo casi humano nos da escalofríos?",
+   "gist": "Es el «valle inquietante»: cuando algo es casi humano pero no del todo, el cerebro lo marca como raro.",
+   "visual": "Gráfica del valle inquietante con la cápsula cayendo en él",
+   "cta": "Mándaselo a quien no confía en los robots.",
+   "tags": [
+    "base",
+    "tendencia"
+   ],
+   "n": 94
+  },
+  {
+   "cat": "tendencia",
+   "hook": "¿Por qué tu cerebro ya no distingue una cara hecha con IA?",
+   "gist": "Estudios encontraron que mucha gente juzga más «real» una cara generada con IA que una cara real.",
+   "visual": "Dos caras holográficas «REAL / IA» con el «REAL» equivocado",
+   "cta": "Mándaselo a quien dice que siempre nota la IA.",
+   "tags": [
+    "tendencia",
+    "verificar",
+    "top"
+   ],
+   "n": 95
+  },
+  {
+   "cat": "tendencia",
+   "hook": "¿Cómo puede una IA ver un cáncer antes que los médicos?",
+   "gist": "Detecta patrones mínimos en los escáneres que el ojo humano no ve.",
+   "visual": "Escáner con píxeles marcados «PATRÓN ANÓMALO»",
+   "cta": "Mándaselo a quien trabaja en salud.",
+   "tags": [
+    "tendencia",
+    "verificar"
+   ],
+   "n": 96
+  },
+  {
+   "cat": "tendencia",
+   "hook": "¿Por qué en otoño te sientes más triste?",
+   "gist": "Con menos luz cambian la melatonina y la serotonina; en algunas personas se llama trastorno afectivo estacional.",
+   "visual": "Barra de luz bajando «LUZ SOLAR ↓ · ÁNIMO ↓»",
+   "cta": "Mándaselo a quien se pone triste cuando oscurece temprano.",
+   "tags": [
+    "base",
+    "tendencia"
+   ],
+   "n": 97
+  },
+  {
+   "cat": "tendencia",
+   "hook": "¿Las gallinas son dinosaurios?",
+   "gist": "Las aves descienden de dinosaurios; un fósil reciente muestra un ave temprana con rasgos de dinosaurio.",
+   "visual": "Árbol evolutivo holográfico «T. REX → GALLINA»",
+   "cta": "Mándaselo a quien le tiene miedo a las gallinas.",
+   "tags": [
+    "base",
+    "tendencia",
+    "verificar"
+   ],
+   "n": 98
+  },
+  {
+   "cat": "tendencia",
+   "hook": "¿Cómo un eclipse de hace 2.700 años demuestra que los días son cada vez más largos?",
+   "gist": "La Tierra frena su rotación muy despacio por las mareas; los eclipses antiguos permiten medirlo.",
+   "visual": "Reloj de la Tierra «+ MILISEGUNDOS POR SIGLO»",
+   "cta": "Mándaselo a quien dice que el día no le alcanza.",
+   "tags": [
+    "base",
+    "tendencia",
+    "verificar"
+   ],
+   "n": 99
+  },
+  {
+   "cat": "tendencia",
+   "hook": "¿Qué encontró la NASA en el polvo de un asteroide?",
+   "gist": "Las muestras del asteroide Bennu contienen ingredientes químicos relacionados con la vida.",
+   "visual": "Cápsula de muestras abriéndose «CONTENIDO: INGREDIENTES DE LA VIDA»",
+   "cta": "Mándaselo a quien cree que venimos de las estrellas.",
+   "tags": [
+    "base",
+    "tendencia",
+    "verificar"
+   ],
+   "n": 100
+  }
+ ]
+}

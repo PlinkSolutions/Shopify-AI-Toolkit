@@ -1,0 +1,206 @@
+<title>Ideas de Ciencia Holográfica</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: the idea bank as a holographic control room. A HUD filter bar on top,
+   then cards that read like scene briefs: hook, answer, HUD visual, share line. */
+:root {
+  --void: #0A0F1C;
+  --panel: #10192d;
+  --line: #22335c;
+  --gold: #F5B83D;
+  --cyan: #4FD1E8;
+  --glass: #e8eeff;
+  --mist: #8e9cc2;
+  --alert: #ff7a59;
+  --display: "Poppins", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--void); color: var(--glass); font-family: var(--display); font-size: 15px; line-height: 1.55;
+  background-image:
+    radial-gradient(60% 40% at 50% 0%, rgba(79, 209, 232, 0.10), transparent 70%),
+    linear-gradient(rgba(34, 51, 92, 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 51, 92, 0.35) 1px, transparent 1px);
+  background-size: auto, 48px 48px, 48px 48px;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--void); }
+.wrap { max-width: 1240px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+
+header .wrap { padding-block: 40px 18px; display: grid; gap: 14px; }
+.kicker { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.18em; color: var(--cyan); text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+.kicker::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 12px var(--cyan); }
+h1 { margin: 0; font-size: clamp(30px, 5vw, 52px); line-height: 1.05; font-weight: 700; letter-spacing: -0.02em; text-wrap: balance; }
+h1 .box { border: 2px solid var(--gold); border-radius: 8px; padding: 0 12px; box-shadow: 0 0 26px rgba(245, 184, 61, 0.28); white-space: nowrap; }
+.lead { margin: 0; color: var(--mist); max-width: 68ch; font-size: 16px; }
+.formula { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.formula span { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.06em; color: var(--glass); border: 1px solid var(--line); background: rgba(16, 25, 45, 0.8); border-radius: 6px; padding: 5px 9px; }
+.formula b { color: var(--gold); margin-right: 6px; }
+
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: rgba(10, 15, 28, 0.88); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-block: 1px solid var(--line); }
+.bar .wrap { padding-block: 12px; display: grid; gap: 10px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.chip {
+  font: 600 12.5px var(--display); color: var(--mist); background: transparent; border: 1px solid var(--line); border-radius: 999px;
+  padding: 6px 12px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center;
+}
+.chip .n { font-family: var(--mono); font-size: 11px; color: var(--mist); opacity: 0.8; }
+.chip[aria-pressed="true"] { color: var(--void); background: var(--gold); border-color: var(--gold); }
+.chip[aria-pressed="true"] .n { color: var(--void); }
+.chip.tag[aria-pressed="true"] { background: var(--cyan); border-color: var(--cyan); }
+.search { flex: 1 1 220px; min-width: 0; display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 10px; padding: 0 12px; background: rgba(16, 25, 45, 0.9); }
+.search input { flex: 1; min-width: 0; background: none; border: 0; color: var(--glass); font: 14px var(--display); padding: 9px 0; outline: none; }
+.count { font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; color: var(--mist); white-space: nowrap; }
+.count b { color: var(--gold); }
+
+main .wrap { padding-block: 22px 80px; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+@media (max-width: 1020px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+.card { position: relative; display: grid; gap: 10px; align-content: start; padding: 18px 18px 14px; border-radius: 14px; background: linear-gradient(180deg, rgba(20, 31, 56, 0.95), rgba(13, 20, 37, 0.95)); border: 1px solid var(--line); min-width: 0; }
+.card.top { border-color: rgba(245, 184, 61, 0.55); box-shadow: 0 0 0 1px rgba(245, 184, 61, 0.15), 0 10px 30px -18px rgba(245, 184, 61, 0.6); }
+.meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mist); }
+.meta .id { color: var(--cyan); font-weight: 700; }
+.meta .star { color: var(--gold); font-weight: 700; }
+.hook { margin: 0; font-size: 16.5px; line-height: 1.35; font-weight: 600; color: #fff; text-wrap: pretty; }
+.gist { margin: 0; color: #c3cde8; font-size: 14px; }
+.hud { margin: 0; font-family: var(--mono); font-size: 12px; line-height: 1.5; color: var(--cyan); background: rgba(79, 209, 232, 0.06); border: 1px dashed rgba(79, 209, 232, 0.35); border-radius: 8px; padding: 8px 10px; overflow-wrap: anywhere; }
+.cta { margin: 0; color: var(--gold); font-size: 13.5px; font-weight: 500; }
+.foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; padding-top: 4px; border-top: 1px solid rgba(34, 51, 92, 0.7); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tags span { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 7px; border-radius: 4px; border: 1px solid var(--line); color: var(--mist); }
+.tags .tendencia { color: var(--cyan); border-color: rgba(79, 209, 232, 0.5); }
+.tags .misterio { color: #c9b6ff; border-color: rgba(201, 182, 255, 0.45); }
+.tags .verificar { color: var(--alert); border-color: rgba(255, 122, 89, 0.45); }
+.copy { font: 600 12px var(--display); color: var(--glass); background: transparent; border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; cursor: pointer; }
+.copy:hover { border-color: var(--gold); color: var(--gold); }
+.empty { color: var(--mist); text-align: center; padding: 60px 0; font-family: var(--mono); letter-spacing: 0.1em; }
+footer .wrap { padding-block: 0 40px; color: var(--mist); font-size: 13px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<header>
+  <div class="wrap">
+    <span class="kicker">Banco de ideas · reels de ciencia holográfica</span>
+    <h1>100 ideas que hacen decir <span class="box">«no sabía eso»</span></h1>
+    <p class="lead">Cuerpo, cerebro, sueño, amor, hipotéticos, espacio, misterios y actualidad. Cada idea trae su gancho, la respuesta corta, la metáfora visual y la frase para compartir. Elige una y pide el guion.</p>
+    <div class="formula" aria-label="Estructura del guion">
+      <span><b>1</b>¿Por qué…? ¿Y por qué…?</span>
+      <span><b>2</b>No es solo X…</span>
+      <span><b>3</b>Piénsalo así:</span>
+      <span><b>4</b>Pasan tres cosas:</span>
+      <span><b>5</b>Pero aquí viene lo curioso:</span>
+      <span><b>6</b>Cierre emocional</span>
+      <span><b>7</b>Mándaselo a…</span>
+    </div>
+  </div>
+</header>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="row" id="cats" role="group" aria-label="Categoría"></div>
+    <div class="row">
+      <div class="row" id="tags" role="group" aria-label="Etiquetas"></div>
+      <label class="search" for="q">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="color:var(--mist)"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="Buscar: sueño, luna, cerebro…" autocomplete="off">
+      </label>
+      <span class="count" id="count" aria-live="polite"></span>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+    <div class="grid" id="grid"></div>
+    <p class="empty" id="empty" hidden>NINGUNA IDEA COINCIDE · PRUEBA OTRO FILTRO</p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Etiqueta <b style="color:var(--alert)">verificar</b>: confirma el estudio, la fecha o el dato antes de escribir el guion. <b style="color:#c9b6ff">misterio</b> e <b style="color:var(--glass)">hipótesis</b> se narran con «los científicos creen…».</p>
+  </div>
+</footer>
+
+<script>
+const DATA = /*DATA*/{};
+const TAGS = [["top", "★ Para empezar"], ["tendencia", "Actualidad"], ["misterio", "Misterio"], ["hipotesis", "Hipótesis"], ["verificar", "Verificar"]];
+const TAG_LABEL = { base: "base", hipotesis: "hipótesis", misterio: "misterio", tendencia: "tendencia", verificar: "verificar" };
+const state = { cat: "all", tag: null, q: "" };
+
+const $ = (id) => document.getElementById(id);
+const norm = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+
+function chip(label, n, pressed, cls, on) {
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "chip" + (cls ? " " + cls : "");
+  b.setAttribute("aria-pressed", String(pressed));
+  b.append(label);
+  if (n != null) { const s = document.createElement("span"); s.className = "n"; s.textContent = n; b.append(s); }
+  b.addEventListener("click", on);
+  return b;
+}
+
+function renderBars() {
+  const cats = $("cats"); cats.replaceChildren();
+  cats.append(chip("Todas", DATA.ideas.length, state.cat === "all", "", () => { state.cat = "all"; update(); }));
+  for (const [k, name] of Object.entries(DATA.cats)) {
+    const n = DATA.ideas.filter((i) => i.cat === k).length;
+    cats.append(chip(name, n, state.cat === k, "", () => { state.cat = k; update(); }));
+  }
+  const tags = $("tags"); tags.replaceChildren();
+  for (const [k, name] of TAGS) {
+    tags.append(chip(name, null, state.tag === k, "tag", () => { state.tag = state.tag === k ? null : k; update(); }));
+  }
+}
+
+function card(i) {
+  const el = document.createElement("article");
+  el.className = "card" + (i.tags.includes("top") ? " top" : "");
+  const meta = document.createElement("div"); meta.className = "meta";
+  const left = document.createElement("span");
+  left.innerHTML = `<span class="id"></span> · <span class="catn"></span>`;
+  left.querySelector(".id").textContent = "#" + String(i.n).padStart(3, "0");
+  left.querySelector(".catn").textContent = DATA.cats[i.cat];
+  meta.append(left);
+  if (i.tags.includes("top")) { const s = document.createElement("span"); s.className = "star"; s.textContent = "★ EMPEZAR"; meta.append(s); }
+  const h = document.createElement("h2"); h.className = "hook"; h.textContent = i.hook;
+  const g = document.createElement("p"); g.className = "gist"; g.textContent = i.gist;
+  const v = document.createElement("p"); v.className = "hud"; v.textContent = "▸ " + i.visual;
+  const c = document.createElement("p"); c.className = "cta"; c.textContent = i.cta;
+  const foot = document.createElement("div"); foot.className = "foot";
+  const tg = document.createElement("div"); tg.className = "tags";
+  for (const t of i.tags) { if (t === "top") continue; const s = document.createElement("span"); s.className = t; s.textContent = TAG_LABEL[t] || t; tg.append(s); }
+  const btn = document.createElement("button"); btn.type = "button"; btn.className = "copy"; btn.textContent = "Copiar idea";
+  btn.addEventListener("click", async () => {
+    const text = `Idea #${i.n} (${DATA.cats[i.cat]})\nGancho: ${i.hook}\nRespuesta: ${i.gist}\nVisual: ${i.visual}\nCTA: ${i.cta}`;
+    try { await navigator.clipboard.writeText(text); btn.textContent = "Copiada"; }
+    catch { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selecciónala y cópiala"; }
+    setTimeout(() => { btn.textContent = "Copiar idea"; }, 1800);
+  });
+  foot.append(tg, btn);
+  el.append(meta, h, g, v, c, foot);
+  return el;
+}
+
+function update() {
+  renderBars();
+  const q = norm(state.q.trim());
+  const list = DATA.ideas.filter((i) =>
+    (state.cat === "all" || i.cat === state.cat) &&
+    (!state.tag || i.tags.includes(state.tag)) &&
+    (!q || norm(i.hook + " " + i.gist + " " + i.visual + " " + i.cta).includes(q)));
+  $("grid").replaceChildren(...list.map(card));
+  $("empty").hidden = list.length > 0;
+  $("count").innerHTML = `<b>${list.length}</b> / ${DATA.ideas.length} IDEAS`;
+}
+
+$("q").addEventListener("input", (e) => { state.q = e.target.value; update(); });
+update();
+</script>
