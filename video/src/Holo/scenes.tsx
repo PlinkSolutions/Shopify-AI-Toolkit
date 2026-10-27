@@ -137,7 +137,7 @@ function brainGeometry() {
 }
 
 /** 3 — "para quedarte dormido": the brain calms, its colour cools to warm gold. */
-export const SceneBrain: React.FC<{ dur: number; calmAt: number }> = ({ dur, calmAt }) => {
+export const SceneBrain: React.FC<{ calmAt: number }> = ({ calmAt }) => {
   const frame = useCurrentFrame();
   const { points, lines } = useMemo(brainGeometry, []);
   const calm = ease(frame, calmAt, calmAt + 14);

@@ -140,7 +140,7 @@ const Chip: React.FC<{ x: number; y: number; at: number; children: React.ReactNo
 
 const Toggle: React.FC<{ on: number }> = ({ on }) => (
   <span style={{ display: "inline-flex", alignItems: "center", gap: 12 }}>
-    <span style={{ position: "relative", width: 64, height: 32, borderRadius: 16, background: on > 0.5 ? "rgba(245,184,61,0.85)" : "#26324f", transition: "none" }}>
+    <span style={{ position: "relative", width: 64, height: 32, borderRadius: 16, background: on > 0.5 ? "rgba(245,184,61,0.85)" : "#26324f" }}>
       <span style={{ position: "absolute", top: 4, left: 4 + on * 32, width: 24, height: 24, borderRadius: 12, background: "#fff", boxShadow: on > 0.5 ? `0 0 12px ${GOLD}` : "none" }} />
     </span>
     <span style={{ color: on > 0.5 ? GOLD : "#7d8bb0", minWidth: 44 }}>{on > 0.5 ? "ON" : "OFF"}</span>
@@ -236,7 +236,7 @@ const S3: React.FC = () => {
   return (
     <AbsoluteFill>
       <HoloStage cam={CAMS[2]} bloom={0.6}>
-        <SceneBrain dur={33} calmAt={CALM_AT} />
+        <SceneBrain calmAt={CALM_AT} />
       </HoloStage>
       <Label anchor={[0.75, 2.55, 0.3]} cam={CAMS[2]} dx={130} dy={-230} text="ONDAS CEREBRALES" at={3} tone={CYAN} />
       <Chip x={540} y={1330} at={2}>
