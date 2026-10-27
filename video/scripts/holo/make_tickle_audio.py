@@ -1,8 +1,7 @@
-"""Music bed and sound effects for the tickle reel (all synthesized, no samples).
+"""Sound effects for the tickle reel (all synthesized, no samples).
 
 usage: make_tickle_audio.py out_dir
-music.wav  ~112 s ambient bed: slow chord pads, soft plucked arpeggio, airy noise
-sfx:       zap, laugh, notif, error, zip, glow, scan, servo, chirps, fear, rise, sent, glitch
+sfx: zap, laugh, notif, error, zip, glow, scan, servo, chirps, fear, rise, sent, glitch
 """
 import os, sys, wave
 import numpy as np
@@ -39,48 +38,6 @@ def env(n, a, d):
     t = np.arange(n) / SR
     return np.minimum(1, t / max(a, 1e-4)) * np.exp(-np.maximum(0, t - a) / d)
 
-
-# ------------------------------------------------------------------ music
-DUR = 112.0
-n = int(SR * DUR)
-t = np.arange(n) / SR
-mus = np.zeros(n)
-chords = [  # Am9, Fmaj7, Cadd9, Em7 — calm, curious
-    [110.0, 164.8, 196.0, 246.9, 261.6],
-    [87.3, 130.8, 174.6, 220.0, 329.6],
-    [130.8, 196.0, 261.6, 293.7, 329.6],
-    [82.4, 123.5, 164.8, 196.0, 293.7],
-]
-SEG = 6.4
-for k in range(int(DUR / SEG) + 1):
-    c = chords[k % 4]
-    s0 = k * SEG - 0.8
-    i0, i1 = max(0, int(s0 * SR)), min(n, int((s0 + SEG + 1.6) * SR))
-    if i0 >= n:
-        break
-    tt = t[i0:i1] - s0
-    shape = np.minimum(1, tt / 1.6) * np.minimum(1, np.maximum(0, (SEG + 1.6 - tt)) / 1.6)
-    seg = np.zeros_like(tt)
-    for j, f in enumerate(c):
-        for det in (-0.6, 0.6):
-            seg += (0.9 if j == 0 else 0.45) * np.sin(2 * np.pi * (f + det) * tt + j)
-    mus[i0:i1] += seg * shape * 0.22
-# plucked arpeggio, every 0.4 s, quiet and sparse
-step = 0.4
-for k in range(int(DUR / step)):
-    if k % 8 in (3, 7) or rng.random() < 0.2:
-        continue
-    c = chords[int(k * step / SEG) % 4]
-    f = c[1 + (k * 3) % 4] * 2
-    i0 = int(k * step * SR)
-    m = min(int(0.9 * SR), n - i0)
-    tt = np.arange(m) / SR
-    mus[i0:i0 + m] += 0.12 * (np.sin(2 * np.pi * f * tt) + 0.3 * np.sin(4 * np.pi * f * tt)) * np.exp(-tt / 0.28)
-# airy noise bed with a slow swell
-air = lp(rng.standard_normal(n), 1200) * (0.6 + 0.4 * np.sin(2 * np.pi * t / 25.6))
-mus += air * 0.35
-mus *= np.minimum(1, t / 2.0) * np.minimum(1, (DUR - t) / 3.0)
-save("music", mus, 0.7)
 
 # ------------------------------------------------------------------ sfx
 # shield zap: bright descending chirp + crackle

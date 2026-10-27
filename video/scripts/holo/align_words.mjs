@@ -1,0 +1,110 @@
+// Align a narration's script to its recording: every script word gets the
+// [start, end] of the word Whisper heard, words Whisper got wrong (names, rare
+// terms) are interpolated between their neighbours, and edges are snapped to
+// the pauses in the audio so cuts and caption pages land on silence.
+//
+// usage: node scripts/holo/align_words.mjs <script.ts> <whisper.json> <voice.wav> <out.ts>
+// script.ts exports scriptWords(); whisper.json is [{text, start, end}] in seconds.
+import { build } from "esbuild";
+import { readFileSync, writeFileSync, mkdtempSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join, resolve } from "node:path";
+import { pathToFileURL } from "node:url";
+
+const [scriptPath, whisperPath, wavPath, outPath] = process.argv.slice(2);
+if (!outPath) {
+  console.error("usage: node scripts/holo/align_words.mjs <script.ts> <whisper.json> <voice.wav> <out.ts>");
+  process.exit(1);
+}
+
+const dir = mkdtempSync(join(tmpdir(), "align-"));
+await build({ entryPoints: [resolve(scriptPath)], bundle: true, platform: "node", format: "esm", outfile: join(dir, "s.mjs"), logLevel: "error" });
+const { scriptWords } = await import(pathToFileURL(join(dir, "s.mjs")).href);
+rmSync(dir, { recursive: true, force: true });
+
+const norm = (w) => w.toLowerCase().normalize("NFD").replace(/[^a-z0-9]/g, "");
+const script = scriptWords().map((w) => ({ ...w, n: norm(w.text) }));
+const heard = JSON.parse(readFileSync(whisperPath, "utf8")).map((w) => ({ ...w, n: norm(w.text) })).filter((w) => w.n);
+
+function sim(a, b) {
+  const d = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++)
+    for (let j = 1; j <= b.length; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+  return 1 - d[a.length][b.length] / Math.max(a.length, b.length);
+}
+
+// Global alignment (script words × heard words).
+const S = script.length, H = heard.length, GAP = -0.4;
+const M = Array.from({ length: S + 1 }, (_, i) => Float64Array.from({ length: H + 1 }, (_, j) => (i + j) * GAP));
+const P = Array.from({ length: S + 1 }, () => new Uint8Array(H + 1)); // 1 diag, 2 up, 3 left
+for (let i = 1; i <= S; i++) P[i][0] = 2;
+for (let j = 1; j <= H; j++) P[0][j] = 3;
+for (let i = 1; i <= S; i++)
+  for (let j = 1; j <= H; j++) {
+    const s = sim(script[i - 1].n, heard[j - 1].n);
+    const opts = [M[i - 1][j - 1] + (s >= 0.5 ? 1 + s : -1), M[i - 1][j] + GAP, M[i][j - 1] + GAP];
+    const k = opts.indexOf(Math.max(...opts));
+    M[i][j] = opts[k];
+    P[i][j] = k + 1;
+  }
+const match = new Array(S).fill(-1);
+for (let i = S, j = H; i > 0 || j > 0; ) {
+  const p = P[i][j];
+  if (p === 1) {
+    if (sim(script[i - 1].n, heard[j - 1].n) >= 0.5) match[i - 1] = j - 1;
+    i--; j--;
+  } else if (p === 2) i--;
+  else j--;
+}
+
+// Voice activity (10 ms frames) for snapping word edges to pauses.
+const b = readFileSync(wavPath);
+let p = 12, fmt, data;
+while (p < b.length) {
+  const id = b.toString("ascii", p, p + 4), size = b.readUInt32LE(p + 4);
+  if (id === "fmt ") fmt = { ch: b.readUInt16LE(p + 10), sr: b.readUInt32LE(p + 12) };
+  if (id === "data") data = b.subarray(p + 8, p + 8 + size);
+  p += 8 + size + (size % 2);
+}
+const hop = Math.round(fmt.sr / 100), total = data.length / 2 / fmt.ch;
+const voiced = [];
+for (let f = 0; f * hop < total; f++) {
+  let e = 0;
+  for (let i = f * hop; i < Math.min(total, (f + 1) * hop); i++) e += (data.readInt16LE(i * fmt.ch * 2) / 32768) ** 2;
+  voiced.push(10 * Math.log10(e / hop + 1e-12) > -45);
+}
+const isVoiced = (t) => voiced[Math.max(0, Math.min(voiced.length - 1, Math.floor(t * 100)))];
+
+// Timings: matched words take Whisper's, runs of unmatched words share the gap by length.
+const out = script.map((w, i) => (match[i] >= 0 ? [heard[match[i]].start, heard[match[i]].end] : null));
+for (let i = 0; i < S; ) {
+  if (out[i]) { i++; continue; }
+  let k = i;
+  while (k < S && !out[k]) k++;
+  const from = i > 0 ? out[i - 1][1] : 0, to = k < S ? out[k][0] : total / fmt.sr;
+  const lens = script.slice(i, k).map((w) => w.n.length + 1), sum = lens.reduce((a, c) => a + c, 0);
+  let t = from;
+  for (let q = i; q < k; q++) { const d = ((to - from) * lens[q - i]) / sum; out[q] = [t, t + d]; t += d; }
+  console.log(`interpolated: ${script.slice(i, k).map((w) => w.text).join(" ")} → ${from.toFixed(2)}–${to.toFixed(2)} s`);
+  i = k;
+}
+for (const w of out) {
+  while (!isVoiced(w[0]) && w[0] < w[1] - 0.06) w[0] += 0.01;
+  while (!isVoiced(w[1]) && w[1] > w[0] + 0.06) w[1] -= 0.01;
+  w[1] += 0.03; // keep the decay the threshold cut off
+}
+out.forEach((w, i) => { if (i && w[0] < out[i - 1][1]) out[i - 1][1] = w[0]; });
+
+const rows = out.map((w) => `[${w[0].toFixed(3)}, ${w[1].toFixed(3)}]`);
+writeFileSync(
+  outPath,
+  `// Narration word timings (seconds), one [start, end] per script word in
+// reading order. Generated by scripts/holo/align_words.mjs from the Whisper
+// transcript of the voice-over — regenerate instead of editing.
+export const VOICE_WORDS: [number, number][] = [
+${rows.map((r, i) => `  ${r}, // ${script[i].text}`).join("\n")}
+];
+`,
+);
+console.log(`${outPath}: ${S} words, ${match.filter((m) => m >= 0).length} matched, voice ${(total / fmt.sr).toFixed(2)} s`);

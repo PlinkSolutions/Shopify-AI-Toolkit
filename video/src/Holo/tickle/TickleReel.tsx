@@ -3,13 +3,12 @@ import { AbsoluteFill, Audio, interpolate, random, Sequence, staticFile, useCurr
 import { NAVY } from "../stage";
 import { Captions, EndCard } from "./hud";
 import { SCENE_COMPONENTS } from "./scenes";
-import { CUES, GLITCH_FROM, GLITCH_TO, MUSIC, MUSIC_ENV } from "./cues";
+import { CUES, GLITCH_FROM, GLITCH_TO } from "./cues";
 import { END_DUR, END_FROM, PAGES, SCENES, TOTAL_FRAMES } from "./timeline";
 
 // "¿Por qué no puedes hacerte cosquillas a ti mismo?" — full reel in the
-// holographic science style, built scene by scene from the narration.
-// Narration is not included yet: the captions run on estimated timings and
-// the music sits where the voice will go (lower it ~20 dB under the voice).
+// holographic science style, built scene by scene from the narration
+// (voice.wav, with captions, cuts and sound effects on its word timings).
 
 export const TICKLE_FRAMES = TOTAL_FRAMES;
 
@@ -68,7 +67,6 @@ export const TickleReel: React.FC = () => {
         <EndCard />
       </Sequence>
       <Overlays />
-      <Audio src={staticFile(MUSIC)} volume={(f) => interpolate(f, MUSIC_ENV[0], MUSIC_ENV[1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })} />
       {CUES.map((c, i) => (
         <Sequence key={i} from={Math.max(0, c.at)} layout="none">
           <Audio src={staticFile(c.src)} volume={() => c.vol} />

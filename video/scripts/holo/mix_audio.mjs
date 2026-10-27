@@ -3,9 +3,9 @@
 // frame, which takes longer than the video itself).
 //
 // usage: node scripts/holo/mix_audio.mjs <cues.ts> <out.wav>
-// The module exports FPS, TOTAL_FRAMES, MUSIC (public path), MUSIC_ENV
-// ([frames, volumes]) and CUES ({src, at, vol}[]), the same values the
-// composition plays. Output: 48 kHz stereo 16-bit, like Remotion's mixer.
+// The module exports FPS, TOTAL_FRAMES and CUES ({src (public path), at
+// (frame), vol}[]), the same values the composition plays. Output: 48 kHz
+// stereo 16-bit, like Remotion's mixer.
 import { build } from "esbuild";
 import { readFileSync, writeFileSync, mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -21,7 +21,7 @@ if (!cuesPath || !outPath) {
 const dir = mkdtempSync(join(tmpdir(), "mix-"));
 const bundle = join(dir, "cues.mjs");
 await build({ entryPoints: [resolve(cuesPath)], bundle: true, platform: "node", format: "esm", outfile: bundle, logLevel: "error" });
-const { FPS, TOTAL_FRAMES, MUSIC, MUSIC_ENV, CUES } = await import(pathToFileURL(bundle).href);
+const { FPS, TOTAL_FRAMES, CUES } = await import(pathToFileURL(bundle).href);
 rmSync(dir, { recursive: true, force: true });
 
 const SR = 48000;
@@ -58,15 +58,6 @@ function load(src) {
   return out;
 }
 
-/** Piecewise-linear volume at frame f (interpolate() with clamping). */
-function envAt([xs, ys], f) {
-  if (f <= xs[0]) return ys[0];
-  for (let i = 1; i < xs.length; i++) if (f <= xs[i]) return ys[i - 1] + ((f - xs[i - 1]) / (xs[i] - xs[i - 1])) * (ys[i] - ys[i - 1]);
-  return ys[ys.length - 1];
-}
-
-const music = load(MUSIC);
-for (let i = 0; i < Math.min(N, music.length); i++) mix[i] += music[i] * envAt(MUSIC_ENV, (i / SR) * FPS);
 for (const c of CUES) {
   const x = load(c.src), o = Math.round((Math.max(0, c.at) / FPS) * SR);
   for (let i = 0; i < x.length && o + i < N; i++) mix[o + i] += x[i] * c.vol;
