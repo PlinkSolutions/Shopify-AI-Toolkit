@@ -3,9 +3,11 @@
 # once, then concatenate and mux. Re-run the same command to continue after
 # an interruption.
 #
-# usage: scripts/holo/render_chunks.sh <CompositionId> <totalFrames> <out.mp4> [chunkSize]
+# usage: scripts/holo/render_chunks.sh <CompositionId> <totalFrames> <out.mp4> [chunkSize] [cues.ts]
+# With a cue module the soundtrack is mixed by mix_audio.mjs (seconds) instead
+# of an audio-only render, which evaluates every WebGL frame (slower than video).
 set -euo pipefail
-ID=$1; TOTAL=$2; OUT=$3; CHUNK=${4:-400}
+ID=$1; TOTAL=$2; OUT=$3; CHUNK=${4:-400}; CUES=${5:-}
 FF=${FFMPEG:-/usr/local/lib/python3.13/dist-packages/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v7.0.2}
 PARTS="out/parts-$ID"
 mkdir -p "$PARTS"
@@ -27,8 +29,13 @@ for ((start = 0; start < TOTAL; start += CHUNK)); do
 done
 
 if [[ ! -f "$PARTS/audio.wav.done" ]]; then
-  echo "render audio"
-  npx remotion render "$ID" "$PARTS/audio.wav" --codec=wav --log=error
+  if [[ -n "$CUES" ]]; then
+    echo "mix audio"
+    node scripts/holo/mix_audio.mjs "$CUES" "$PARTS/audio.wav"
+  else
+    echo "render audio"
+    npx remotion render "$ID" "$PARTS/audio.wav" --codec=wav --log=error
+  fi
   touch "$PARTS/audio.wav.done"
 fi
 
