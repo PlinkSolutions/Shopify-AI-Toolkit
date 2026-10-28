@@ -1,0 +1,89 @@
+{
+  "numero": 1,
+  "slug": "01-cosquillas",
+  "titulo": "¿Por qué no puedes hacerte cosquillas a ti mismo?",
+  "idea": 1,
+  "por_que": "Le pasa a todo el mundo, la pregunta se entiende en un segundo, tiene un mecanismo claro (cerebelo → hipotálamo), dos giros con fuentes reales (el robot de UCL y las ratas que ríen) y un cierre emocional que invita a compartir con una persona concreta.",
+  "bloques": [
+    {
+      "nombre": "Gancho doble",
+      "escenas": [
+        { "texto": "¿Por qué no puedes hacerte cosquillas a ti mismo?", "imagen": "Cápsula blanca; su propia pluma rebota contra un escudo hexagonal «BLOQUEADO»." },
+        { "texto": "¿Y por qué basta con que alguien acerque la mano… para que te rías antes de que te toque?", "imagen": "La cápsula dorada se acerca con una pluma; la blanca ya vibra de risa antes del contacto." }
+      ]
+    },
+    {
+      "nombre": "Reencuadre",
+      "escenas": [
+        { "texto": "No es que tu piel falle. Es que tu cerebro sabe lo que vas a hacer… antes de que lo hagas.", "imagen": "Cabeza de cristal con el cerebro dentro; la barra «PREDICCIÓN» llega antes que «ACCIÓN»." }
+      ]
+    },
+    {
+      "nombre": "Piénsalo así",
+      "escenas": [
+        { "texto": "Piénsalo así: cuando mueves la mano, tu cerebelo copia la orden, predice lo que vas a sentir… y apaga la sensación.", "imagen": "Cerebro de puntos con el cerebelo dorado y la lista «COPIA / PREDICE / APAGA»." },
+        { "texto": "Tus propias cosquillas son un mensaje que tu cerebro ya leyó.", "imagen": "Notificación «Mensaje de: TÚ» que pasa a «LEÍDO», campana silenciada." }
+      ]
+    },
+    {
+      "nombre": "Pasan tres cosas",
+      "escenas": [
+        { "texto": "Pero si la mano es de otra persona, no hay predicción.", "imagen": "La pluma dorada se acerca; la gráfica de predicción se rompe en «SIN DATOS»." },
+        { "texto": "Y pasan tres cosas: la señal llega completa… el hipotálamo, una zona que controla tus reacciones automáticas, se enciende… y tu cuerpo estalla en risa.", "imagen": "Señal cian que sube (1), hipotálamo encendido (2), ondas de risa (3)." },
+        { "texto": "Investigadores de la Universidad de Friburgo lo vieron con resonancia magnética:", "imagen": "Escáner de resonancia de malla con la cápsula entrando." },
+        { "texto": "el hipotálamo se activa incluso antes del contacto, solo con anticipar las cosquillas.", "imagen": "La pluma se queda sin tocar y el hipotálamo ya brilla; cuenta 3·2·1." }
+      ]
+    },
+    {
+      "nombre": "Pero aquí viene lo curioso",
+      "escenas": [
+        { "texto": "Pero aquí viene lo curioso.", "imagen": "Signo de interrogación dorado gigante y placa «DATO CURIOSO»." },
+        { "texto": "En el University College London, la neurocientífica Sarah-Jayne Blakemore hizo que voluntarios se hicieran cosquillas con un robot.", "imagen": "Ficha de investigadora que entra girando; brazo robótico con espuma." },
+        { "texto": "Si el robot copiaba su movimiento al instante, las sentían mucho menos… pero con un pequeño retraso, volvían. Cuanto más retraso, más cosquillas.", "imagen": "Deslizador «RETRASO» y medidor «COSQUILLAS» que sube." },
+        { "texto": "Y no somos los únicos. En la Universidad Humboldt de Berlín vieron que las ratas también se ríen con las cosquillas, con un sonido que no podemos oír…", "imagen": "Rata estilo cápsula saltando de alegría, ondas «50 kHz · INAUDIBLE»." },
+        { "texto": "pero si tenían miedo, las cosquillas desaparecían.", "imagen": "Interruptor rojo «MIEDO: ON»; las ondas desaparecen." }
+      ]
+    },
+    {
+      "nombre": "Cierre emocional",
+      "escenas": [
+        { "texto": "Los científicos creen que en nosotros pasa algo parecido. Las cosquillas no son solo un juego… son una señal de confianza. Tu cerebro solo se deja sorprender por alguien con quien se siente a salvo.", "imagen": "Las dos cápsulas bajo una cúpula dorada «ZONA SEGURA», barra «CONFIANZA»." }
+      ]
+    },
+    {
+      "nombre": "Compartir",
+      "escenas": [
+        { "texto": "Mándaselo a esa persona que sabe exactamente dónde tienes cosquillas.", "imagen": "Móvil holográfico que comparte con «Mi persona» → «Enviado ✓»; glitch final." }
+      ]
+    }
+  ],
+  "palabras_clave": ["cosquillas", "cerebro", "cerebelo", "apaga", "mensaje", "predicción", "hipotálamo", "risa", "resonancia", "antes", "curioso", "robot", "retraso", "ratas", "miedo", "confianza", "salvo", "leyó", "completa"],
+  "cierre": {
+    "pregunta": "¿Dónde tienes más cosquillas?",
+    "clave": "cosquillas",
+    "cta": "COMENTA ↓ · SÍGUENOS PARA MÁS CIENCIA DE LO COTIDIANO"
+  },
+  "fuentes": [
+    {
+      "texto": "Cerebelo y cosquillas propias; experimento del robot con retraso (Sarah-Jayne Blakemore, University College London).",
+      "urls": ["https://www.scientificamerican.com/article/why-cant-a-person-tickle/", "https://www.sciencealert.com/the-scientific-reason-you-can-t-tickle-yourself", "https://web.math.princeton.edu/~sswang/autism/blakemore_frith98_NN.pdf"]
+    },
+    {
+      "texto": "Hipotálamo en la risa por cosquillas (Wattendorf et al., Universidad de Friburgo, Cerebral Cortex 2013) y activación con solo anticipar (mismo grupo, 2019).",
+      "urls": ["https://pubmed.ncbi.nlm.nih.gov/22508768/", "https://pmc.ncbi.nlm.nih.gov/articles/PMC6847157"]
+    },
+    {
+      "texto": "Ratas que ríen a 50 kHz y pierden las cosquillas con miedo (Ishiyama & Brecht, Universidad Humboldt de Berlín, Science 2016).",
+      "urls": ["https://www.hu-berlin.de/en/press-portal/nachrichten-en/archive/pm1611/nr_161110_01", "https://www.smithsonianmag.com/science-nature/ticklish-rats-get-giggles-when-theyre-good-mood-180961061/"]
+    },
+    {
+      "texto": "«Señal de confianza» en humanos: hipótesis, narrada como «los científicos creen».",
+      "urls": []
+    }
+  ],
+  "instagram": {
+    "descripcion": "¿Por qué no puedes hacerte cosquillas a ti mismo? 🤔🪶\n\nTu cerebro sabe lo que vas a hacer… antes de que lo hagas.\nCuando mueves la mano, el cerebelo predice lo que vas a sentir y apaga la sensación. Por eso tus propias cosquillas no funcionan.\n\n🧠 Universidad de Friburgo: el hipotálamo se activa incluso ANTES del contacto, solo con anticipar las cosquillas.\n🤖 University College London: Sarah-Jayne Blakemore usó un robot. Con un pequeño retraso, las cosquillas volvían.\n🐀 Universidad Humboldt de Berlín: las ratas también se ríen con las cosquillas… pero si tienen miedo, desaparecen.\n\nLos científicos creen que las cosquillas son una señal de confianza: tu cerebro solo se deja sorprender por alguien con quien se siente a salvo. 💛\n\n👇 ¿Dónde tienes más cosquillas? Te leo en comentarios.\n📩 Mándaselo a esa persona que sabe exactamente dónde.\n🔖 Guárdalo para tu próximo dato curioso.",
+    "hashtags": ["#ciencia", "#curiosidades", "#cerebro", "#neurociencia", "#datoscuriosos"],
+    "comentario_fijado": "Yo: en el cuello 😂 ¿y tú?"
+  }
+}

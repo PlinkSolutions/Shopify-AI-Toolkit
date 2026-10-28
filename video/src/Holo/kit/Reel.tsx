@@ -1,22 +1,21 @@
 import React from "react";
 import { AbsoluteFill, Audio, interpolate, random, Sequence, staticFile, useCurrentFrame } from "remotion";
 import { NAVY } from "../stage";
+import { Cue } from "./cues";
+import { Guion } from "./guion";
 import { Captions, EndCard } from "./hud";
-import { SCENE_COMPONENTS } from "./scenes";
-import { CUES, GLITCH_FROM, GLITCH_TO } from "./cues";
-import { END_DUR, END_FROM, PAGES, SCENES, TOTAL_FRAMES } from "./timeline";
+import { Scene, Timeline } from "./timeline";
 
-// "¿Por qué no puedes hacerte cosquillas a ti mismo?" — full reel in the
-// holographic science style, built scene by scene from the narration
-// (voice.wav, with captions, cuts and sound effects on its word timings).
+// Shell shared by every holographic reel: one premounted 3D scene per
+// narration segment, karaoke captions, a light flash on every cut (as in the
+// reference), an RGB glitch into the end card, and the soundtrack cues.
 
-export const TICKLE_FRAMES = TOTAL_FRAMES;
+export type SceneComponent = React.FC<{ sc: Scene }>;
 
-/** Light flash on every cut (as in the reference) and an RGB glitch at the end. */
-const Overlays: React.FC = () => {
+const Overlays: React.FC<{ tl: Timeline }> = ({ tl }) => {
   const frame = useCurrentFrame();
   let flash = 0;
-  for (const s of SCENES.slice(1)) {
+  for (const s of tl.SCENES.slice(1)) {
     const d = frame - s.from;
     if (d >= 0 && d < 3) flash = Math.max(flash, [0.36, 0.13, 0.04][d]);
   }
@@ -29,11 +28,10 @@ const Overlays: React.FC = () => {
   );
 };
 
-const glitchOn = (f: number) => f >= GLITCH_FROM && f < GLITCH_TO && (f - GLITCH_FROM) % 3 !== 2;
-
-export const TickleReel: React.FC = () => {
+export const HoloReel: React.FC<{ guion: Guion; tl: Timeline; scenes: SceneComponent[]; cues: Cue[] }> = ({ guion, tl, scenes, cues }) => {
   const frame = useCurrentFrame();
-  const g = glitchOn(frame);
+  const [g0, g1] = tl.GLITCH;
+  const g = frame >= g0 && frame < g1 && (frame - g0) % 3 !== 2;
   const shift = g ? 10 + random(`g${frame}`) * 18 : 0;
   return (
     <AbsoluteFill style={{ backgroundColor: NAVY }}>
@@ -51,8 +49,8 @@ export const TickleReel: React.FC = () => {
         </defs>
       </svg>
       <AbsoluteFill style={{ filter: g ? "url(#tk-rgb)" : undefined, transform: g ? `translateX(${(random(`gx${frame}`) - 0.5) * 30}px)` : undefined }}>
-        {SCENES.map((s, i) => {
-          const S = SCENE_COMPONENTS[i];
+        {tl.SCENES.map((s, i) => {
+          const S = scenes[i];
           return (
             // premounted so each WebGL scene and its bloom pass are ready on the first visible frame
             <Sequence key={i} from={s.from} durationInFrames={s.dur} premountFor={12}>
@@ -61,13 +59,13 @@ export const TickleReel: React.FC = () => {
           );
         })}
         <AbsoluteFill style={{ background: "radial-gradient(120% 80% at 50% 55%, transparent 55%, rgba(3,6,14,0.75) 100%)" }} />
-        <Captions pages={PAGES} />
+        <Captions pages={tl.PAGES} />
       </AbsoluteFill>
-      <Sequence from={END_FROM} durationInFrames={END_DUR}>
-        <EndCard />
+      <Sequence from={tl.END_FROM} durationInFrames={tl.END_DUR}>
+        <EndCard question={guion.cierre.pregunta} keyword={guion.cierre.clave} cta={guion.cierre.cta} />
       </Sequence>
-      <Overlays />
-      {CUES.map((c, i) => (
+      <Overlays tl={tl} />
+      {cues.map((c, i) => (
         <Sequence key={i} from={Math.max(0, c.at)} layout="none">
           <Audio src={staticFile(c.src)} volume={() => c.vol} />
         </Sequence>
@@ -75,3 +73,12 @@ export const TickleReel: React.FC = () => {
     </AbsoluteFill>
   );
 };
+
+export type ReelDef = { id: string; slug: string; frames: number; component: React.FC };
+
+/** Composition entry for src/Holo/reels/index.ts. */
+export function defineReel(guion: Guion, tl: Timeline, scenes: SceneComponent[], cues: Cue[]): ReelDef {
+  if (scenes.length !== tl.SCENES.length) throw new Error(`${guion.slug}: ${scenes.length} scene components for ${tl.SCENES.length} segments`);
+  const component: React.FC = () => <HoloReel guion={guion} tl={tl} scenes={scenes} cues={cues} />;
+  return { id: `reel-${guion.slug}`, slug: guion.slug, frames: tl.TOTAL_FRAMES, component };
+}

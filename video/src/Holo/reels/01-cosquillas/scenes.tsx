@@ -1,9 +1,9 @@
 import React from "react";
 import { AbsoluteFill, Easing, interpolate, useCurrentFrame } from "remotion";
-import { Capsule, Cam, CYAN, GOLD, HoloStage, V3 } from "../stage";
-import { ALERT, Badge, Bar, Checklist, Chip, Countdown, IdCard, Label, Meter, MONO, Notif, Phone, PredGraph, Slider, Toggle } from "./hud";
-import { Brain, BRAIN, bustPoint, BUST, Dome, Feather, GlassBust, HexShield, Mri, QuestionMark, Rat, Rings, RobotArm, Signal } from "./props3d";
-import { beat, Scene } from "./timeline";
+import { Capsule, Cam, CYAN, GOLD, HoloStage, V3 } from "../../stage";
+import { ALERT, Badge, Bar, Checklist, Chip, Countdown, IdCard, Label, Meter, MONO, Notif, Phone, PredGraph, Slider, Toggle } from "../../kit/hud";
+import { Brain, BRAIN, bustPoint, BUST, Dome, Feather, GlassBust, HexShield, Mri, QuestionMark, Rat, Rings, RobotArm, Signal } from "../../kit/props3d";
+import { beat, Scene } from "../../kit/timeline";
 
 // The 16 scenes, one per narration segment. Every beat (a label typing in, a
 // toggle flipping, a signal travelling) is keyed to the word that triggers it.
@@ -120,7 +120,7 @@ export const S05: React.FC<P> = ({ sc }) => {
       <HoloStage cam={c} bloom={0.55}>
         <Capsule kind="glass" scale={0.9} />
       </HoloStage>
-      <Notif x={540} y={560} at={beat(sc, "mensaje") - 6} readAt={beat(sc, "leyó")} />
+      <Notif x={540} y={560} at={beat(sc, "mensaje") - 6} readAt={beat(sc, "leyó")} title="Cosquillas" />
     </AbsoluteFill>
   );
 };
@@ -334,7 +334,7 @@ export const S16: React.FC<P> = ({ sc }) => {
         <Capsule kind="glass" position={[-2.1, 0, -1.5]} scale={0.6} opacity={0.6} />
         <Capsule kind="gold" position={[2.1, 0, -1.5]} scale={0.6} opacity={0.6} />
       </HoloStage>
-      <Phone at={0} pickAt={beat(sc, "persona")} sendAt={beat(sc, "cosquillas.") - 2} />
+      <Phone at={0} pickAt={beat(sc, "persona")} sendAt={beat(sc, "cosquillas.") - 2} question="¿Por qué no puedes hacerte cosquillas?" keyword="cosquillas" />
     </AbsoluteFill>
   );
 };

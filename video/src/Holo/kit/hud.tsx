@@ -19,6 +19,19 @@ const ink = "#e2ebff";
 
 const appear = (frame: number, at: number, len = 6) => interpolate(frame, [at, at + len], [0, 1], { ...clamp, easing: Easing.out(Easing.cubic) });
 
+/** Text with one word in a gold outline box (first occurrence). */
+const Boxed: React.FC<{ text: string; keyword: string; box: React.CSSProperties }> = ({ text, keyword, box }) => {
+  const i = text.indexOf(keyword);
+  if (i < 0) return <>{text}</>;
+  return (
+    <>
+      {text.slice(0, i)}
+      <span style={box}>{keyword}</span>
+      {text.slice(i + keyword.length)}
+    </>
+  );
+};
+
 // ---------------------------------------------------------------- captions
 export const Captions: React.FC<{ pages: Page[] }> = ({ pages }) => {
   const frame = useCurrentFrame();
@@ -137,8 +150,8 @@ export const Checklist: React.FC<{ x: number; y: number; items: { text: string; 
   );
 };
 
-/** Notification from "TÚ", marked as read. */
-export const Notif: React.FC<{ x: number; y: number; at: number; readAt: number }> = ({ x, y, at, readAt }) => {
+/** Notification card (default sender "TÚ"), marked as read. */
+export const Notif: React.FC<{ x: number; y: number; at: number; readAt: number; title: string; from?: string }> = ({ x, y, at, readAt, title, from = "TÚ" }) => {
   const frame = useCurrentFrame();
   const o = appear(frame, at, 8);
   const read = frame >= readAt;
@@ -146,8 +159,8 @@ export const Notif: React.FC<{ x: number; y: number; at: number; readAt: number 
     <div style={{ position: "absolute", left: x, top: y, width: 760, transform: `translate(-50%, ${(1 - o) * -60}px) perspective(1200px) rotateX(10deg)`, opacity: o, padding: "26px 30px", borderRadius: 26, background: "rgba(14,22,42,0.88)", border: "1px solid #34497e", boxShadow: "0 0 60px rgba(79,130,255,0.25)", display: "grid", gridTemplateColumns: "84px 1fr auto", gap: 22, alignItems: "center", fontFamily: SANS, color: "#fff" }}>
       <div style={{ width: 84, height: 84, borderRadius: 42, border: "3px solid #e8f0ff", boxShadow: "0 0 20px rgba(232,240,255,0.7) inset, 0 0 16px rgba(232,240,255,0.5)" }} />
       <div>
-        <div style={{ fontFamily: MONO, fontWeight: 700, fontSize: 22, letterSpacing: "0.14em", color: "#8fa3d6" }}>MENSAJE DE: TÚ</div>
-        <div style={{ fontWeight: 600, fontSize: 38 }}>Cosquillas</div>
+        <div style={{ fontFamily: MONO, fontWeight: 700, fontSize: 22, letterSpacing: "0.14em", color: "#8fa3d6" }}>MENSAJE DE: {from}</div>
+        <div style={{ fontWeight: 600, fontSize: 38 }}>{title}</div>
         <div style={{ fontFamily: MONO, fontSize: 22, letterSpacing: "0.12em", color: read ? CYAN : "#5d6c95" }}>{read ? "✓✓ LEÍDO · SILENCIADO" : "✓ ENVIADO"}</div>
       </div>
       <svg width={64} height={64} viewBox="0 0 24 24" fill="none" stroke={read ? "#7f93c4" : "#fff"} strokeWidth={1.6}>
@@ -207,14 +220,14 @@ export const Countdown: React.FC<{ x: number; y: number; at: number; step: numbe
 };
 
 /** Researcher card with a faceless silhouette; flips in with a 3D turn. */
-export const IdCard: React.FC<{ x: number; y: number; at: number; name: string; role: string; org: string; stamp?: string; stampAt?: number }> = ({ x, y, at, name, role, org, stamp, stampAt = 1e9 }) => {
+export const IdCard: React.FC<{ x: number; y: number; at: number; name: string; role: string; org: string; header?: string; stamp?: string; stampAt?: number }> = ({ x, y, at, name, role, org, header = "INVESTIGADORA · ID", stamp, stampAt = 1e9 }) => {
   const frame = useCurrentFrame();
   const t = interpolate(frame, [at, at + 14], [0, 1], { ...clamp, easing: Easing.out(Easing.cubic) });
   if (t <= 0) return null;
   const st = interpolate(frame, [stampAt, stampAt + 6], [2, 1], { ...clamp, easing: Easing.out(Easing.back(2)) });
   return (
     <div style={{ position: "absolute", left: x, top: y, width: 820, transform: `translate(-50%, 0) perspective(1400px) rotateY(${(1 - t) * 95}deg) rotateX(6deg)`, opacity: Math.min(1, t * 2), padding: 30, borderRadius: 26, background: "linear-gradient(160deg, rgba(22,34,64,0.95), rgba(10,16,32,0.95))", border: "1px solid #3a5190", boxShadow: "0 0 70px rgba(79,130,255,0.25)", fontFamily: SANS, color: "#fff" }}>
-      <div style={{ fontFamily: MONO, fontWeight: 700, fontSize: 20, letterSpacing: "0.16em", color: "#7f93c4", marginBottom: 18 }}>INVESTIGADORA · ID</div>
+      <div style={{ fontFamily: MONO, fontWeight: 700, fontSize: 20, letterSpacing: "0.16em", color: "#7f93c4", marginBottom: 18 }}>{header}</div>
       <div style={{ display: "flex", gap: 28, alignItems: "center" }}>
         <svg width={150} height={150} viewBox="0 0 100 100">
           <rect width={100} height={100} rx={18} fill="#1c2a4f" />
@@ -288,8 +301,8 @@ export const Bar: React.FC<{ x: number; y: number; at: number; label: string; va
   );
 };
 
-/** Floating phone hologram: share sheet → contact selected → sent. */
-export const Phone: React.FC<{ at: number; pickAt: number; sendAt: number }> = ({ at, pickAt, sendAt }) => {
+/** Floating phone hologram showing the reel (its question, one word boxed): share sheet → contact selected → sent. */
+export const Phone: React.FC<{ at: number; pickAt: number; sendAt: number; question: string; keyword: string }> = ({ at, pickAt, sendAt, question, keyword }) => {
   const frame = useCurrentFrame();
   const o = appear(frame, at, 10);
   const sheet = interpolate(frame, [at + 6, at + 18], [1, 0], { ...clamp, easing: Easing.out(Easing.cubic) });
@@ -301,7 +314,9 @@ export const Phone: React.FC<{ at: number; pickAt: number; sendAt: number }> = (
         <div style={{ position: "absolute", top: 18, left: "50%", transform: "translateX(-50%)", width: 150, height: 36, borderRadius: 18, background: "#000" }} />
         {/* the reel being shared */}
         <div style={{ position: "absolute", top: 100, left: 40, right: 40, height: 470, borderRadius: 28, background: "radial-gradient(80% 60% at 50% 70%, rgba(79,209,232,0.25), transparent 70%), #0d1730", border: "1px solid #2b3c66", display: "grid", placeItems: "center", padding: 30, textAlign: "center" }}>
-          <div style={{ fontWeight: 600, fontSize: 36, lineHeight: 1.25 }}>¿Por qué no puedes hacerte <span style={{ border: `2px solid ${GOLD}`, borderRadius: 6, padding: "0 8px" }}>cosquillas</span>?</div>
+          <div style={{ fontWeight: 600, fontSize: 36, lineHeight: 1.25 }}>
+            <Boxed text={question} keyword={keyword} box={{ border: `2px solid ${GOLD}`, borderRadius: 6, padding: "0 8px" }} />
+          </div>
         </div>
         {/* share sheet */}
         <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: 420, transform: `translateY(${sheet * 100}%)`, borderRadius: "34px 34px 0 0", background: "rgba(22,30,54,0.98)", borderTop: "1px solid #34497e", padding: "26px 30px" }}>
@@ -327,17 +342,17 @@ export const Phone: React.FC<{ at: number; pickAt: number; sendAt: number }> = (
   );
 };
 
-/** Closing card (no logo yet): engagement question + follow line. */
-export const EndCard: React.FC = () => {
+/** Closing card (no logo yet): engagement question with one boxed word + call to action. */
+export const EndCard: React.FC<{ question: string; keyword: string; cta: string }> = ({ question, keyword, cta }) => {
   const frame = useCurrentFrame();
   const o = appear(frame, 2, 10);
   return (
     <AbsoluteFill style={{ background: "radial-gradient(70% 45% at 50% 45%, rgba(79,209,232,0.12), transparent 70%), #0A0F1C", display: "grid", placeItems: "center", opacity: o }}>
       <div style={{ textAlign: "center", display: "grid", gap: 34, justifyItems: "center", padding: "0 90px" }}>
         <div style={{ fontFamily: SANS, fontWeight: 700, fontSize: 76, lineHeight: 1.15, color: "#fff" }}>
-          ¿Dónde tienes más <span style={{ border: `3px solid ${GOLD}`, borderRadius: 10, padding: "0 16px", boxShadow: "0 0 30px rgba(245,184,61,0.4)" }}>cosquillas</span>?
+          <Boxed text={question} keyword={keyword} box={{ border: `3px solid ${GOLD}`, borderRadius: 10, padding: "0 16px", boxShadow: "0 0 30px rgba(245,184,61,0.4)" }} />
         </div>
-        <div style={{ fontFamily: MONO, fontWeight: 700, fontSize: 28, letterSpacing: "0.18em", color: CYAN }}>COMENTA ↓ · SÍGUENOS PARA MÁS CIENCIA DE LO COTIDIANO</div>
+        <div style={{ fontFamily: MONO, fontWeight: 700, fontSize: 28, letterSpacing: "0.18em", color: CYAN }}>{cta}</div>
       </div>
     </AbsoluteFill>
   );

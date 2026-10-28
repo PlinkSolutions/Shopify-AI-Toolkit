@@ -3,8 +3,9 @@ import { random, useCurrentFrame } from "remotion";
 import * as THREE from "three";
 import { Capsule, CYAN, GLASS, GOLD, rimMaterial, V3 } from "../stage";
 
-// 3D props for the tickle reel, all in the holographic look: emissive edges,
-// additive glow, no faces, no hands. Sizes are in scene units (capsule = 2 tall).
+// Library of 3D props in the holographic look (first built for the tickle
+// reel): emissive edges, additive glow, no faces, no hands. Sizes are in scene
+// units (capsule = 2 tall). Add new props here when a story needs them.
 
 const additive = (color: string, opacity: number) =>
   new THREE.MeshBasicMaterial({ color, transparent: true, opacity, depthWrite: false, blending: THREE.AdditiveBlending, side: THREE.DoubleSide });
