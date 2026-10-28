@@ -65,6 +65,10 @@ for (const c of CUES) {
 
 let peak = 0;
 for (const v of mix) peak = Math.max(peak, Math.abs(v));
+// headroom for the AAC encode: never above -1 dBFS
+const CEIL = 0.89;
+const gain = peak > CEIL ? CEIL / peak : 1;
+for (let i = 0; i < N; i++) mix[i] *= gain;
 const pcm = Buffer.alloc(44 + N * 4);
 pcm.write("RIFF", 0); pcm.writeUInt32LE(36 + N * 4, 4); pcm.write("WAVEfmt ", 8);
 pcm.writeUInt32LE(16, 16); pcm.writeUInt16LE(1, 20); pcm.writeUInt16LE(2, 22);
@@ -75,4 +79,4 @@ for (let i = 0; i < N; i++) {
   pcm.writeInt16LE(s, 44 + i * 4); pcm.writeInt16LE(s, 46 + i * 4);
 }
 writeFileSync(outPath, pcm);
-console.log(`${outPath}: ${(N / SR).toFixed(2)} s, ${CUES.length} cues, peak ${peak.toFixed(2)}${peak > 1 ? " (clipped)" : ""}`);
+console.log(`${outPath}: ${(N / SR).toFixed(2)} s, ${CUES.length} cues, peak ${peak.toFixed(2)}${gain < 1 ? ` → ${CEIL} (${(20 * Math.log10(gain)).toFixed(1)} dB)` : ""}`);
