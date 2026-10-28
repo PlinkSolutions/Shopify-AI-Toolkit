@@ -1,10 +1,11 @@
-# Banco de 100 ideas · Ciencia holográfica
+# Banco de ideas · Ciencia holográfica
 
-Etiquetas: **base** (ciencia establecida) · **hipótesis** (decir «los científicos creen…») · **misterio** · **tendencia** (oct–nov 2026) · **verificar** (confirmar dato o estudio antes del guion) · ⭐ recomendada para empezar.
+Etiquetas: **base** (ciencia establecida) · **hipótesis** (decir «los científicos creen…») · **misterio** · **tendencia** · **verificar** (confirmar dato o estudio antes del guion) · ⭐ recomendada.
+Estados: 🔒 en producción · ✅ hecha (con su reel). Se actualiza con `scripts/holo/ideas.py`.
 
 ## Tu cuerpo
 
-**1. ¿Por qué no puedes hacerte cosquillas a ti mismo? ¿Y por qué basta con que otro te roce para no aguantar?** ⭐
+**1. ¿Por qué no puedes hacerte cosquillas a ti mismo? ¿Y por qué basta con que otro te roce para no aguantar?** ⭐ ✅ hecha (01-cosquillas)
 - Respuesta: Tu cerebro predice tu propio movimiento y cancela la sensación antes de que llegue; el toque ajeno no se puede predecir.
 - Visual: Firewall: «REMITENTE: TÚ → BLOQUEADO» / alerta roja «REMITENTE DESCONOCIDO»
 - CTA: Mándaselo a quien se muere de cosquillas.

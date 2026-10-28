@@ -454,6 +454,8 @@ assert len(IDEAS) == 100, len(IDEAS)
 
 if __name__ == "__main__":
     here = os.path.dirname(os.path.abspath(__file__))
+    if any("estado" in i for i in json.load(open(os.path.join(here, "ideas.json")))["ideas"]):
+        raise SystemExit("ideas.json ya es el banco vivo (estados, ideas de tendencia): usa scripts/holo/ideas.py, no lo regeneres")
     for n, idea in enumerate(IDEAS, 1):
         idea["n"] = n
     json.dump({"cats": CATS, "ideas": IDEAS}, open(os.path.join(here, "ideas.json"), "w"), ensure_ascii=False, indent=1)

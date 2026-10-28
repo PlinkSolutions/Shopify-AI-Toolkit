@@ -1,6 +1,8 @@
-"""Sound effects for the tickle reel (all synthesized, no samples).
+"""Shared sound-effect library for the holographic reels (all synthesized, no
+samples). Reels pick them with sfx("<name>", frame, vol) in their cues.ts; add
+a new sound here when a story needs one.
 
-usage: make_tickle_audio.py out_dir
+usage: make_sfx_library.py out_dir   (public/holo/sfx, next to make_holo_sfx.py's pad, whoosh, blip, thump)
 sfx: zap, laugh, notif, error, zip, glow, scan, servo, chirps, fear, rise, sent, glitch
 """
 import os, sys, wave

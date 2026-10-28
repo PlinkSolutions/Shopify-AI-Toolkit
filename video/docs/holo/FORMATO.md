@@ -3,7 +3,7 @@
 Contexto de trabajo para crear reels de curiosidades científicas en estilo
 "holograma 3D con personajes cápsula". Léelo antes de escribir un guion, una
 tabla de escenas o de editar uno de estos videos. Complementa la skill
-`reel-ciencia-holografica` y la plantilla de Remotion `src/Holo/` (`HoloClip`).
+`reel-ciencia-holografica` y el manual técnico `PRODUCCION.md` (kit de Remotion).
 
 ---
 
@@ -95,14 +95,15 @@ blanco cristal · rojo-naranja solo para alertas o dolor.
 - **Subtítulos** arriba, blancos, Poppins ~50 px a 1080 de ancho, 1–4 palabras por página,
   estilo karaoke (las palabras siguientes en gris hasta que se dicen) y **palabra clave en
   recuadro dorado**.
-- Audio: voz siempre delante; música ambiental constante unos 20 dB por debajo;
-  sonidos de interfaz suaves (blips al aparecer etiquetas, whoosh en los cortes).
+- Audio: voz siempre delante y **sin música de fondo** (decisión del canal); efectos animados
+  en cada movimiento unos 8 dB bajo la voz (blips al aparecer etiquetas, whoosh en los cortes).
 - Cierre: logo propio 2 s ("Síguenos para más…"). Nunca el logo de otra cuenta.
 
 ## 6. Voz
 
-ElevenLabs: masculina, cálida, medio-grave, ritmo pausado, tono documental íntimo
-(Stability ~50, Similarity ~75, Style ~20). Unas 150–165 palabras por minuto.
+ElevenLabs, voz **David – Clear, Warm and Patient**, Eleven Multilingual v2, Stability 30,
+Similarity 80, Style 0, speaker boost, velocidad 1.0 (`scripts/holo/voz.json`). Unas
+155–165 palabras por minuto. Se genera por API con tiempos exactos por palabra.
 
 ## 7. Producción
 
@@ -111,14 +112,14 @@ Dos caminos, combinables:
 1. **IA generativa** (más cinematográfico, cuesta créditos): imágenes con Nano Banana Pro
    (STYLE), animación con Seedance 2.0 o Veo 3.1 (MOTION BASE + movimiento extra).
    Nunca generar sin que el usuario apruebe los prompts y el coste.
-2. **Remotion `HoloClip`** (gratis, repetible): `video/src/Holo/` tiene el escenario 3D
-   (suelo, foco, plataforma, polvo, bloom), las cápsulas, escenas de ejemplo, subtítulos
-   karaoke, etiquetas ancladas a puntos 3D, destellos en los cortes y sonidos sintetizados.
-   Render: `npx remotion render HoloClip out/clip.mp4 --gl=angle`.
+2. **Kit de Remotion** (gratis, repetible, el camino de producción diaria): `video/src/Holo/kit/`
+   y un reel por carpeta en `video/src/Holo/reels/`. Escenario 3D, cápsulas, librería de props,
+   HUD, subtítulos karaoke, destellos, glitch y efectos sintetizados. Manual: `PRODUCCION.md`.
 
-Flujo recomendado: guion verificado → voz → transcripción con tiempos por palabra →
-tabla de escenas (una por frase) → clips (IA o Remotion) → montaje en la plantilla
-(subtítulos sincronizados con la voz real, destellos, etiquetas, música, logo).
+Flujo: idea (banco + tendencias) → guion verificado (`guion.json`) → voz ElevenLabs con
+tiempos por palabra → escenas nuevas para esa historia → render → revisión viral → entrega
+(video + PDF + descripción de IG). Lo hacen los agentes `reel-creador` y `reel-revisor`
+(`.claude/agents/`), tres veces al día.
 
 ## 8. Checklist antes de publicar
 
@@ -126,13 +127,14 @@ tabla de escenas (una por frase) → clips (IA o Remotion) → montaje en la pla
 - [ ] Gancho doble en los primeros 3 s; tercio superior libre en todas las escenas.
 - [ ] Una metáfora tecnológica por escena; personajes idénticos en todo el video.
 - [ ] Subtítulos sincronizados con la voz real; palabras clave en recuadro dorado.
-- [ ] Destello en cada corte; música ~20 dB bajo la voz.
+- [ ] Destello en cada corte; sin música; efectos bajo la voz.
 - [ ] CTA a una persona concreta; logo propio al final.
 - [ ] Etiqueta "Hecho con IA" activada si hay imágenes generadas.
 
 ## 9. Banco de ideas
 
-100 ideas en `ideas.md` / `ideas.json` (generadas por `ideas.py`), en 10 categorías:
+Banco vivo en `ideas.json` / `ideas.md` (se lee y actualiza con `scripts/holo/ideas.py`:
+estados libre · reservada · hecha, e ideas nuevas de tendencia). Empezó con 100 ideas en 10 categorías:
 tu cuerpo, tu cerebro, sueño, amor, ¿qué pasaría si…?, espacio, misterios, cosas de todos
 los días, animales y actualidad. Etiquetas: base, hipótesis, misterio, tendencia,
 verificar y ⭐ recomendadas para empezar.

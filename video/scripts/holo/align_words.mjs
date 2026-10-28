@@ -1,29 +1,35 @@
-// Align a narration's script to its recording: every script word gets the
-// [start, end] of the word Whisper heard, words Whisper got wrong (names, rare
-// terms) are interpolated between their neighbours, and edges are snapped to
-// the pauses in the audio so cuts and caption pages land on silence.
+// Align a reel's script to a voice-over recorded by hand (ElevenLabs web,
+// your own mic…): every script word gets the [start, end] of the word Whisper
+// heard, words Whisper got wrong (names, rare terms) are interpolated between
+// their neighbours, and edges are snapped to the pauses in the audio so cuts
+// and caption pages land on silence. Voices made with voice_elevenlabs.mjs
+// already come with timings and don't need this.
 //
-// usage: node scripts/holo/align_words.mjs <script.ts> <whisper.json> <voice.wav> <out.ts>
-// script.ts exports scriptWords(); whisper.json is [{text, start, end}] in seconds.
+// usage: node scripts/holo/align_words.mjs <reel-dir> <whisper.json>
+// whisper.json is [{text, start, end}] in seconds for public/holo/reels/<slug>/voice.wav;
+// writes <reel-dir>/voice.ts.
 import { build } from "esbuild";
 import { readFileSync, writeFileSync, mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
-const [scriptPath, whisperPath, wavPath, outPath] = process.argv.slice(2);
-if (!outPath) {
-  console.error("usage: node scripts/holo/align_words.mjs <script.ts> <whisper.json> <voice.wav> <out.ts>");
+const [reelDir, whisperPath] = process.argv.slice(2);
+if (!whisperPath) {
+  console.error("usage: node scripts/holo/align_words.mjs <reel-dir> <whisper.json>");
   process.exit(1);
 }
 
 const dir = mkdtempSync(join(tmpdir(), "align-"));
-await build({ entryPoints: [resolve(scriptPath)], bundle: true, platform: "node", format: "esm", outfile: join(dir, "s.mjs"), logLevel: "error" });
-const { scriptWords } = await import(pathToFileURL(join(dir, "s.mjs")).href);
+await build({ entryPoints: [resolve("src/Holo/kit/timeline.ts")], bundle: true, platform: "node", format: "esm", outfile: join(dir, "t.mjs"), logLevel: "error" });
+const { segmentsOf, scriptWords } = await import(pathToFileURL(join(dir, "t.mjs")).href);
 rmSync(dir, { recursive: true, force: true });
 
+const guion = JSON.parse(readFileSync(join(reelDir, "guion.json"), "utf8"));
+const wavPath = join("public/holo/reels", guion.slug, "voice.wav");
+const outPath = join(reelDir, "voice.ts");
 const norm = (w) => w.toLowerCase().normalize("NFD").replace(/[^a-z0-9]/g, "");
-const script = scriptWords().map((w) => ({ ...w, n: norm(w.text) }));
+const script = scriptWords(segmentsOf(guion)).map((w) => ({ ...w, n: norm(w.text) }));
 const heard = JSON.parse(readFileSync(whisperPath, "utf8")).map((w) => ({ ...w, n: norm(w.text) })).filter((w) => w.n);
 
 function sim(a, b) {

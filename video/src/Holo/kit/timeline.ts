@@ -58,8 +58,11 @@ export function makeTimeline(guion: Guion, voice: [number, number][]): Timeline 
   const segments = segmentsOf(guion);
   const keywords = new Set(guion.palabras_clave.map(bare));
   const script = scriptWords(segments);
-  // ~160 words per minute, as in the reference
-  const times = voice.length === script.length ? voice : estimate(script, (script.length / 160) * 60);
+  if (voice.length && voice.length !== script.length) {
+    throw new Error(`${guion.slug}: voice.ts has ${voice.length} words but guion.json has ${script.length}; the script changed after the voice was made, regenerate it`);
+  }
+  // no voice yet: ~160 words per minute, as in the reference
+  const times = voice.length ? voice : estimate(script, (script.length / 160) * 60);
   const WORDS: Word[] = script.map(({ text, seg }, i) => ({ text, seg, start: times[i][0], end: times[i][1], key: keywords.has(bare(text)) }));
   const lastEnd = WORDS[WORDS.length - 1].end;
 
