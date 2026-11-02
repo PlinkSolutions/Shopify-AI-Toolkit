@@ -1,268 +1,126 @@
 import React from "react";
 import { AbsoluteFill, Easing, interpolate, useCurrentFrame } from "remotion";
 import { Capsule, Cam, HoloStage, V3 } from "../../stage";
+import { Arrow3D, BallKid, CandyPile, ContactShadow, GlossyStage, Stamp, SugarCube, Tag } from "../../kit/glossy";
 import { Chip } from "../../kit/hud";
 import { beat, Scene } from "../../kit/timeline";
+import { kidHop } from "./motion";
 
-// One scene per narration segment. Every beat (a label typing in, a toggle
-// flipping, a signal travelling) is keyed to the word that triggers it.
+// One scene per narration segment, in the glossy 3D icon art direction:
+// candy-bright objects, caramel pink (what we believe) vs mint blue (what
+// really happens). Every change is keyed to the word that triggers it.
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 export const ease = (f: number, a: number, b: number, e = Easing.inOut(Easing.cubic)) => interpolate(f, [a, b], [0, 1], { ...clamp, easing: e });
 const cam = (sc: Scene, from: V3, to: V3, target: V3, orbit = 0.14): Cam => ({ from, to, target, orbit, dur: sc.dur });
 
 type P = { sc: Scene };
+const PINK = "#ff4fa3";
+const RED = "#ff3b5c";
 
 // 1 — "¿Por qué los niños se vuelven locos después de comer dulces?"
-// TODO: Fondo degradado rosa caramelo. Un niño-bolita brillante con disfraz de calabaza junto a una montaña de caramelos envueltos y piruletas. En «locos» rebota de un lado a otro dejando una estela; etiqueta HIPERACTIVO.
 export const S01: React.FC<P> = ({ sc }) => {
   const frame = useCurrentFrame();
-  const c = cam(sc, [0.2, 2.4, 11.6], [0.1, 2.3, 10.4], [0, 1.6, 0]);
-  const first = beat(sc, "¿Por");
+  const c = cam(sc, [0.1, 1.7, 10.4], [0.05, 1.55, 9.2], [0.15, 1.0, -0.4], 0.12);
+  const crazy = beat(sc, "locos");
+  const k = kidHop(frame, crazy);
+  const look: [number, number] = frame < crazy ? [0.9, -0.3] : [0, 0];
   return (
     <AbsoluteFill>
-      <HoloStage cam={c}>
-        <Capsule kind="glass" rotation={[0, Math.sin(frame / 30) * 0.2, 0]} />
-      </HoloStage>
-      <Chip x={540} y={1450} at={first}>
-        ESCENA 1
-      </Chip>
+      <GlossyStage cam={c} palette="caramelo" glow={[0.5, 0.45]}>
+        <CandyPile position={[1.0, 0, -0.9]} radius={1.45} rise={frame / 30} />
+        <ContactShadow position={[k.x, 0.003, 0.4]} size={1.4 - k.y * 0.35} opacity={0.5 - k.y * 0.2} />
+        <BallKid position={[k.x, k.y, 0.4]} rotation={[0, 0.3 * (frame < crazy ? 1 : 0), k.tilt]} scale={0.62} squash={k.squash} look={look} dizzy={frame >= crazy ? 1 : 0} />
+      </GlossyStage>
+      <Tag anchor={[k.x, k.y + 1.45, 0.4]} cam={c} at={crazy} text="HIPERACTIVO" tone={PINK} />
     </AbsoluteFill>
   );
 };
 
 // 2 — "Casi todo el mundo te dirá que es el azúcar."
-// TODO: Un cubo de azúcar gigante y brillante en el centro; flechas desde todos los lados lo señalan. En «azúcar» se le cuelga la etiqueta CULPABLE.
+// mostly vertical: a 9:16 frame is only ~1.3 units wide at this distance
+const ARROWS = [50, 90, 130, 240, 300];
+const CUBE: V3 = [0, 1.05, 0];
+
+const Accused: React.FC<{ frame: number; arrowsIn: number; shrink?: number; drop?: number }> = ({ frame, arrowsIn, shrink = 0, drop = 0 }) => (
+  <>
+    <ContactShadow position={[0, 0.003, 0]} size={2.6 * (1 - shrink * 0.4)} opacity={0.45} />
+    <SugarCube position={[CUBE[0], CUBE[1] + Math.sin(frame / 14) * 0.06 - shrink * 0.45, CUBE[2]]} rotation={[0.18, -0.6 + frame * 0.006, 0.05]} scale={0.8 * (1 - shrink * 0.42)} />
+    {ARROWS.map((deg, i) => {
+      const a = (deg * Math.PI) / 180;
+      const t = ease(arrowsIn - i * 4, 0, 10, Easing.out(Easing.back(1.4)));
+      if (t <= 0) return null;
+      const dist = 0.85 + (1 - t) * 3.5 + Math.sin(frame * 0.6 + i) * 0.04;
+      const fall = drop * (1.5 + i * 0.3);
+      return <Arrow3D key={deg} position={[Math.cos(a) * (dist + 0.85), CUBE[1] + Math.sin(a) * (dist + 0.85) - fall, 0.3]} rotation={[0, 0, a + Math.PI + drop * (i % 2 ? 1 : -1)]} length={0.85} color={RED} />;
+    })}
+  </>
+);
+
 export const S02: React.FC<P> = ({ sc }) => {
   const frame = useCurrentFrame();
-  const c = cam(sc, [0.2, 2.4, 11.6], [0.1, 2.3, 10.4], [0, 1.6, 0]);
-  const first = beat(sc, "Casi");
+  const c = cam(sc, [0.1, 1.6, 9.0], [0, 1.5, 7.8], [0, 1.25, 0], 0.1);
+  const sugar = beat(sc, "azúcar.");
   return (
     <AbsoluteFill>
-      <HoloStage cam={c}>
-        <Capsule kind="glass" rotation={[0, Math.sin(frame / 30) * 0.2, 0]} />
-      </HoloStage>
-      <Chip x={540} y={1450} at={first}>
-        ESCENA 2
-      </Chip>
+      <GlossyStage cam={c} palette="caramelo" glow={[0.5, 0.5]}>
+        <Accused frame={frame} arrowsIn={frame - 2} />
+      </GlossyStage>
+      <Tag anchor={[0, 2.0, 0]} cam={c} at={sugar} text="CULPABLE" tone={RED} swing />
     </AbsoluteFill>
   );
 };
 
 // 3 — "Pues no."
-// TODO: Cae un sello rojo FALSO sobre la etiqueta CULPABLE; el cubo se encoge y el fondo pasa de rosa a azul menta.
 export const S03: React.FC<P> = ({ sc }) => {
   const frame = useCurrentFrame();
-  const c = cam(sc, [0.2, 2.4, 11.6], [0.1, 2.3, 10.4], [0, 1.6, 0]);
-  const first = beat(sc, "Pues");
+  const c = cam(sc, [0, 1.5, 7.8], [0, 1.5, 7.5], [0, 1.25, 0], 0.02);
+  const no = beat(sc, "no.");
+  const hit = ease(frame, no, no + 8, Easing.out(Easing.cubic));
+  const shake = frame >= no && frame < no + 6 ? Math.sin(frame * 3) * 10 : 0;
   return (
-    <AbsoluteFill>
-      <HoloStage cam={c}>
-        <Capsule kind="glass" rotation={[0, Math.sin(frame / 30) * 0.2, 0]} />
-      </HoloStage>
-      <Chip x={540} y={1450} at={first}>
-        ESCENA 3
-      </Chip>
+    <AbsoluteFill style={{ transform: `translateX(${shake}px)` }}>
+      <GlossyStage cam={c} palette="caramelo" toPalette="menta" mixPalette={hit} glow={[0.5, 0.5]}>
+        <Accused frame={frame + 40} arrowsIn={999} shrink={hit} drop={hit} />
+      </GlossyStage>
+      <Tag anchor={[0, 2.0 - hit * 0.5, 0]} cam={c} at={-20} text="CULPABLE" tone={RED} />
+      <Stamp x={540} y={1060} at={no} text="FALSO" />
     </AbsoluteFill>
   );
 };
 
-// 4 — "En un estudio, unas familias siguieron tres dietas, de tres semanas cada una:"
-// TODO: Tres platos con campana brillante en fila, cada uno con su calendario (SEMANA 1, 2, 3). En «tres dietas» se levantan las tres campanas a la vez.
-export const S04: React.FC<P> = ({ sc }) => {
-  const frame = useCurrentFrame();
-  const c = cam(sc, [0.2, 2.4, 11.6], [0.1, 2.3, 10.4], [0, 1.6, 0]);
-  const first = beat(sc, "En");
-  return (
-    <AbsoluteFill>
-      <HoloStage cam={c}>
-        <Capsule kind="glass" rotation={[0, Math.sin(frame / 30) * 0.2, 0]} />
-      </HoloStage>
-      <Chip x={540} y={1450} at={first}>
-        ESCENA 4
-      </Chip>
-    </AbsoluteFill>
-  );
+// Scenes 4–14: still placeholders until the voice is in.
+const placeholder = (n: number, word: string): React.FC<P> => {
+  const Scene: React.FC<P> = ({ sc }) => {
+    const frame = useCurrentFrame();
+    const c = cam(sc, [0.2, 2.4, 11.6], [0.1, 2.3, 10.4], [0, 1.6, 0]);
+    return (
+      <AbsoluteFill>
+        <HoloStage cam={c}>
+          <Capsule kind="glass" rotation={[0, Math.sin(frame / 30) * 0.2, 0]} />
+        </HoloStage>
+        <Chip x={540} y={1450} at={beat(sc, word)}>
+          ESCENA {n}
+        </Chip>
+      </AbsoluteFill>
+    );
+  };
+  return Scene;
 };
 
-// 5 — "una llena de azúcar y dos con endulzantes. Nadie sabía cuál le tocaba."
-// TODO: Dentro: un plato con cubos de azúcar rosas y dos con sobres de endulzante azul menta. En «nadie sabía» las campanas bajan y se barajan como en el juego del vasito, con un signo de interrogación encima.
-export const S05: React.FC<P> = ({ sc }) => {
-  const frame = useCurrentFrame();
-  const c = cam(sc, [0.2, 2.4, 11.6], [0.1, 2.3, 10.4], [0, 1.6, 0]);
-  const first = beat(sc, "una");
-  return (
-    <AbsoluteFill>
-      <HoloStage cam={c}>
-        <Capsule kind="glass" rotation={[0, Math.sin(frame / 30) * 0.2, 0]} />
-      </HoloStage>
-      <Chip x={540} y={1450} at={first}>
-        ESCENA 5
-      </Chip>
-    </AbsoluteFill>
-  );
-};
-
-// 6 — "Ni los niños que, según sus papás, eran sensibles al azúcar… se portaron distinto."
-// TODO: Tres niños-bolita, cada uno bajo un medidor de CONDUCTA (una dieta por niño). En «sensibles» les aparece la etiqueta SENSIBLE AL AZÚCAR; en «distinto» las tres agujas se alinean en el mismo punto y aparece 39 MEDICIONES · SIN CAMBIOS.
-export const S06: React.FC<P> = ({ sc }) => {
-  const frame = useCurrentFrame();
-  const c = cam(sc, [0.2, 2.4, 11.6], [0.1, 2.3, 10.4], [0, 1.6, 0]);
-  const first = beat(sc, "Ni");
-  return (
-    <AbsoluteFill>
-      <HoloStage cam={c}>
-        <Capsule kind="glass" rotation={[0, Math.sin(frame / 30) * 0.2, 0]} />
-      </HoloStage>
-      <Chip x={540} y={1450} at={first}>
-        ESCENA 6
-      </Chip>
-    </AbsoluteFill>
-  );
-};
-
-// 7 — "Entonces, ¿qué está pasando?"
-// TODO: Una lupa gigante barre la escena y se detiene sobre una mamá-bolita (más grande, con lentes) que mira a su hijo.
-export const S07: React.FC<P> = ({ sc }) => {
-  const frame = useCurrentFrame();
-  const c = cam(sc, [0.2, 2.4, 11.6], [0.1, 2.3, 10.4], [0, 1.6, 0]);
-  const first = beat(sc, "Entonces,");
-  return (
-    <AbsoluteFill>
-      <HoloStage cam={c}>
-        <Capsule kind="glass" rotation={[0, Math.sin(frame / 30) * 0.2, 0]} />
-      </HoloStage>
-      <Chip x={540} y={1450} at={first}>
-        ESCENA 7
-      </Chip>
-    </AbsoluteFill>
-  );
-};
-
-// 8 — "Otros científicos les dijeron a unas mamás que sus hijos habían tomado mucha azúcar."
-// TODO: Le entregan a la mamá un vaso brillante con la etiqueta AZÚCAR. En «mucha azúcar» se le llena de cubos rosas la burbuja de pensamiento.
-export const S08: React.FC<P> = ({ sc }) => {
-  const frame = useCurrentFrame();
-  const c = cam(sc, [0.2, 2.4, 11.6], [0.1, 2.3, 10.4], [0, 1.6, 0]);
-  const first = beat(sc, "Otros");
-  return (
-    <AbsoluteFill>
-      <HoloStage cam={c}>
-        <Capsule kind="glass" rotation={[0, Math.sin(frame / 30) * 0.2, 0]} />
-      </HoloStage>
-      <Chip x={540} y={1450} at={first}>
-        ESCENA 8
-      </Chip>
-    </AbsoluteFill>
-  );
-};
-
-// 9 — "Era mentira: todos tomaron un endulzante sin azúcar."
-// TODO: En «mentira» la etiqueta AZÚCAR del vaso se despega y debajo aparece SIN AZÚCAR en azul menta.
-export const S09: React.FC<P> = ({ sc }) => {
-  const frame = useCurrentFrame();
-  const c = cam(sc, [0.2, 2.4, 11.6], [0.1, 2.3, 10.4], [0, 1.6, 0]);
-  const first = beat(sc, "Era");
-  return (
-    <AbsoluteFill>
-      <HoloStage cam={c}>
-        <Capsule kind="glass" rotation={[0, Math.sin(frame / 30) * 0.2, 0]} />
-      </HoloStage>
-      <Chip x={540} y={1450} at={first}>
-        ESCENA 9
-      </Chip>
-    </AbsoluteFill>
-  );
-};
-
-// 10 — "Aun así, esas mamás vieron a sus hijos más inquietos… y los vigilaban más de cerca."
-// TODO: Pantalla partida. Arriba, a través de unas gafas rosas (lo que la mamá espera), el niño rebota sin parar y su medidor INQUIETO se dispara en «inquietos»; abajo, sin gafas, el mismo niño juega tranquilo. En «más de cerca» la mamá se pega al niño con un foco encima: CONTROL +.
-export const S10: React.FC<P> = ({ sc }) => {
-  const frame = useCurrentFrame();
-  const c = cam(sc, [0.2, 2.4, 11.6], [0.1, 2.3, 10.4], [0, 1.6, 0]);
-  const first = beat(sc, "Aun");
-  return (
-    <AbsoluteFill>
-      <HoloStage cam={c}>
-        <Capsule kind="glass" rotation={[0, Math.sin(frame / 30) * 0.2, 0]} />
-      </HoloStage>
-      <Chip x={540} y={1450} at={first}>
-        ESCENA 10
-      </Chip>
-    </AbsoluteFill>
-  );
-};
-
-// 11 — "Y cuando juntaron todos los experimentos que había, el azúcar no cambió la conducta de los niños."
-// TODO: Una pila de fichas de experimentos cae sobre una balanza con un cubo de azúcar en un plato y un sobre de endulzante en el otro. En «no cambió» la balanza queda perfectamente nivelada y una línea plana cruza la gráfica de CONDUCTA.
-export const S11: React.FC<P> = ({ sc }) => {
-  const frame = useCurrentFrame();
-  const c = cam(sc, [0.2, 2.4, 11.6], [0.1, 2.3, 10.4], [0, 1.6, 0]);
-  const first = beat(sc, "Y");
-  return (
-    <AbsoluteFill>
-      <HoloStage cam={c}>
-        <Capsule kind="glass" rotation={[0, Math.sin(frame / 30) * 0.2, 0]} />
-      </HoloStage>
-      <Chip x={540} y={1450} at={first}>
-        ESCENA 11
-      </Chip>
-    </AbsoluteFill>
-  );
-};
-
-// 12 — "Así que los científicos creen que lo que los acelera no son los dulces: es la fiesta, los disfraces, los otros niños…"
-// TODO: Vuelve el niño-calabaza del inicio sobre el degradado rosa. En «fiesta» aparecen globos y confeti; en «disfraces» capas y antifaces; en «otros niños» entran rebotando más niños-bolita.
-export const S12: React.FC<P> = ({ sc }) => {
-  const frame = useCurrentFrame();
-  const c = cam(sc, [0.2, 2.4, 11.6], [0.1, 2.3, 10.4], [0, 1.6, 0]);
-  const first = beat(sc, "Así");
-  return (
-    <AbsoluteFill>
-      <HoloStage cam={c}>
-        <Capsule kind="glass" rotation={[0, Math.sin(frame / 30) * 0.2, 0]} />
-      </HoloStage>
-      <Chip x={540} y={1450} at={first}>
-        ESCENA 12
-      </Chip>
-    </AbsoluteFill>
-  );
-};
-
-// 13 — "y lo que nosotros esperamos ver."
-// TODO: Las gafas rosas de la mamá bajan sobre toda la pantalla y la escena entera se tiñe de rosa caramelo.
-export const S13: React.FC<P> = ({ sc }) => {
-  const frame = useCurrentFrame();
-  const c = cam(sc, [0.2, 2.4, 11.6], [0.1, 2.3, 10.4], [0, 1.6, 0]);
-  const first = beat(sc, "y");
-  return (
-    <AbsoluteFill>
-      <HoloStage cam={c}>
-        <Capsule kind="glass" rotation={[0, Math.sin(frame / 30) * 0.2, 0]} />
-      </HoloStage>
-      <Chip x={540} y={1450} at={first}>
-        ESCENA 13
-      </Chip>
-    </AbsoluteFill>
-  );
-};
-
-// 14 — "Envíaselo a quien no deja que los niños coman dulces porque se ponen locos."
-// TODO: Un móvil brillante comparte el video con TÍA. En «locos» el sello FALSO cae dentro del chat.
-export const S14: React.FC<P> = ({ sc }) => {
-  const frame = useCurrentFrame();
-  const c = cam(sc, [0.2, 2.4, 11.6], [0.1, 2.3, 10.4], [0, 1.6, 0]);
-  const first = beat(sc, "Envíaselo");
-  return (
-    <AbsoluteFill>
-      <HoloStage cam={c}>
-        <Capsule kind="glass" rotation={[0, Math.sin(frame / 30) * 0.2, 0]} />
-      </HoloStage>
-      <Chip x={540} y={1450} at={first}>
-        ESCENA 14
-      </Chip>
-    </AbsoluteFill>
-  );
-};
-
-export const SCENE_COMPONENTS = [S01, S02, S03, S04, S05, S06, S07, S08, S09, S10, S11, S12, S13, S14];
+export const SCENE_COMPONENTS = [
+  S01,
+  S02,
+  S03,
+  placeholder(4, "En"),
+  placeholder(5, "una"),
+  placeholder(6, "Ni"),
+  placeholder(7, "Entonces,"),
+  placeholder(8, "Otros"),
+  placeholder(9, "Era"),
+  placeholder(10, "Aun"),
+  placeholder(11, "Y"),
+  placeholder(12, "Así"),
+  placeholder(13, "y"),
+  placeholder(14, "Envíaselo"),
+];

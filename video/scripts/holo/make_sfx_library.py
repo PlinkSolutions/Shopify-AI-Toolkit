@@ -3,7 +3,7 @@ samples). Reels pick them with sfx("<name>", frame, vol) in their cues.ts; add
 a new sound here when a story needs one.
 
 usage: make_sfx_library.py out_dir   (public/holo/sfx, next to make_holo_sfx.py's pad, whoosh, blip, thump)
-sfx: zap, laugh, notif, error, zip, glow, scan, servo, chirps, fear, rise, sent, glitch
+sfx: zap, laugh, notif, error, zip, glow, scan, servo, chirps, fear, rise, sent, glitch, boing, pop, stamp
 """
 import os, sys, wave
 import numpy as np
@@ -125,4 +125,19 @@ while pos < m:
     x[pos:pos + seg] = (np.sign(np.sin(2 * np.pi * f * tt)) if rng.random() < 0.6 else np.round(rng.standard_normal(seg) * 3) / 3)[: m - pos]
     pos += seg
 save("glitch", np.round(x * 5) / 5 * env(m, 0.002, 0.35), 0.6)
+# boing: springy rising-then-falling pitch with wobble (bouncy characters)
+m = int(0.45 * SR); tt = np.arange(m) / SR
+f = 180 + 260 * np.sin(np.pi * np.minimum(1, tt / 0.3)) + 25 * np.sin(2 * np.pi * 14 * tt)
+save("boing", np.sin(2 * np.pi * np.cumsum(f) / SR) * env(m, 0.004, 0.16), 0.6)
+
+# pop: short bubbly pop (things appearing)
+m = int(0.16 * SR); tt = np.arange(m) / SR
+f = 900 * np.exp(-tt / 0.025) + 380
+save("pop", np.sin(2 * np.pi * np.cumsum(f) / SR) * env(m, 0.001, 0.035) + 0.15 * rng.standard_normal(m) * env(m, 0.0005, 0.006), 0.6)
+
+# stamp: heavy rubber-stamp hit (low thud + paper slap)
+m = int(0.5 * SR); tt = np.arange(m) / SR
+thud = np.sin(2 * np.pi * (70 + 90 * np.exp(-tt / 0.03)) * tt) * env(m, 0.001, 0.12)
+slap = lp(rng.standard_normal(m), 3000) * env(m, 0.0005, 0.03)
+save("stamp", np.tanh(1.8 * thud) + 0.6 * slap, 0.85)
 print("ok", sorted(os.listdir(out)))

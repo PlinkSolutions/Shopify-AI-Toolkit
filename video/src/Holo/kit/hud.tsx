@@ -33,7 +33,28 @@ const Boxed: React.FC<{ text: string; keyword: string; box: React.CSSProperties 
 };
 
 // ---------------------------------------------------------------- captions
-export const Captions: React.FC<{ pages: Page[] }> = ({ pages }) => {
+export type CaptionStyle = {
+  /** "oro": gold glowing box (holographic reels) · "seleccion": blue selection box with corner handles */
+  box?: "oro" | "seleccion";
+  /** true: only the word being spoken is white (others grey) · false: karaoke, spoken words stay white */
+  active?: boolean;
+};
+
+const SELECT = "#3d7bff";
+const Handles: React.FC = () => (
+  <>
+    {[
+      [0, 0],
+      [1, 0],
+      [0, 1],
+      [1, 1],
+    ].map(([x, y], i) => (
+      <span key={i} style={{ position: "absolute", left: `calc(${x * 100}% - 5px)`, top: `calc(${y * 100}% - 5px)`, width: 10, height: 10, background: "#fff", border: `2px solid ${SELECT}`, borderRadius: 2 }} />
+    ))}
+  </>
+);
+
+export const Captions: React.FC<{ pages: Page[] } & CaptionStyle> = ({ pages, box = "oro", active = false }) => {
   const frame = useCurrentFrame();
   const page = pages.find((p) => frame >= p.from && frame < p.to);
   if (!page) return null;
@@ -41,24 +62,30 @@ export const Captions: React.FC<{ pages: Page[] }> = ({ pages }) => {
     <div style={{ position: "absolute", top: 190, left: 70, right: 70, display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "6px 16px", fontFamily: SANS, fontWeight: 500, fontSize: 52, lineHeight: 1.3 }}>
       {page.words.map((w, i) => {
         const at = Math.round(w.start * 30);
-        const on = frame >= at;
+        const next = page.words[i + 1];
+        const on = active ? frame >= at && (!next || frame < Math.round(next.start * 30)) : frame >= at;
+        const said = frame >= at;
         const pop = interpolate(frame, [at, at + 4], [0.9, 1], { ...clamp, easing: Easing.out(Easing.back(2)) });
+        const boxed = w.key && said;
         return (
           <span
             key={i}
             style={{
+              position: "relative",
               display: "inline-block",
-              color: on ? "#ffffff" : "rgba(214,224,255,0.28)",
+              color: on || boxed ? "#ffffff" : active && said ? "rgba(236,232,255,0.62)" : "rgba(214,224,255,0.28)",
+              fontWeight: active && on ? 700 : 500,
               transform: `scale(${on ? pop : 1})`,
               padding: w.key ? "0 12px" : 0,
-              borderRadius: 7,
-              border: w.key && on ? `2px solid ${GOLD}` : "2px solid transparent",
-              background: w.key && on ? "rgba(245,184,61,0.12)" : "transparent",
-              boxShadow: w.key && on ? "0 0 24px rgba(245,184,61,0.35)" : "none",
+              borderRadius: box === "oro" ? 7 : 0,
+              border: boxed ? `2px solid ${box === "oro" ? GOLD : SELECT}` : "2px solid transparent",
+              background: boxed ? (box === "oro" ? "rgba(245,184,61,0.12)" : "rgba(61,123,255,0.22)") : "transparent",
+              boxShadow: boxed && box === "oro" ? "0 0 24px rgba(245,184,61,0.35)" : "none",
               textShadow: "0 2px 14px rgba(0,0,0,0.65)",
             }}
           >
             {w.text}
+            {boxed && box === "seleccion" ? <Handles /> : null}
           </span>
         );
       })}

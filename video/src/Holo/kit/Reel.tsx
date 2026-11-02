@@ -3,7 +3,7 @@ import { AbsoluteFill, Audio, interpolate, random, Sequence, staticFile, useCurr
 import { NAVY } from "../stage";
 import { Cue } from "./cues";
 import { Guion } from "./guion";
-import { Captions, EndCard } from "./hud";
+import { Captions, CaptionStyle, EndCard } from "./hud";
 import { Scene, Timeline } from "./timeline";
 
 // Shell shared by every holographic reel: one premounted 3D scene per
@@ -28,7 +28,9 @@ const Overlays: React.FC<{ tl: Timeline }> = ({ tl }) => {
   );
 };
 
-export const HoloReel: React.FC<{ guion: Guion; tl: Timeline; scenes: SceneComponent[]; cues: Cue[] }> = ({ guion, tl, scenes, cues }) => {
+export type ReelOptions = { captions?: CaptionStyle };
+
+export const HoloReel: React.FC<{ guion: Guion; tl: Timeline; scenes: SceneComponent[]; cues: Cue[]; options?: ReelOptions }> = ({ guion, tl, scenes, cues, options = {} }) => {
   const frame = useCurrentFrame();
   const [g0, g1] = tl.GLITCH;
   const g = frame >= g0 && frame < g1 && (frame - g0) % 3 !== 2;
@@ -59,7 +61,7 @@ export const HoloReel: React.FC<{ guion: Guion; tl: Timeline; scenes: SceneCompo
           );
         })}
         <AbsoluteFill style={{ background: "radial-gradient(120% 80% at 50% 55%, transparent 55%, rgba(3,6,14,0.75) 100%)" }} />
-        <Captions pages={tl.PAGES} />
+        <Captions pages={tl.PAGES} {...options.captions} />
       </AbsoluteFill>
       <Sequence from={tl.END_FROM} durationInFrames={tl.END_DUR}>
         <EndCard question={guion.cierre.pregunta} keyword={guion.cierre.clave} cta={guion.cierre.cta} />
@@ -77,8 +79,8 @@ export const HoloReel: React.FC<{ guion: Guion; tl: Timeline; scenes: SceneCompo
 export type ReelDef = { id: string; slug: string; frames: number; component: React.FC };
 
 /** Composition entry for src/Holo/reels/index.ts. */
-export function defineReel(guion: Guion, tl: Timeline, scenes: SceneComponent[], cues: Cue[]): ReelDef {
+export function defineReel(guion: Guion, tl: Timeline, scenes: SceneComponent[], cues: Cue[], options: ReelOptions = {}): ReelDef {
   if (scenes.length !== tl.SCENES.length) throw new Error(`${guion.slug}: ${scenes.length} scene components for ${tl.SCENES.length} segments`);
-  const component: React.FC = () => <HoloReel guion={guion} tl={tl} scenes={scenes} cues={cues} />;
+  const component: React.FC = () => <HoloReel guion={guion} tl={tl} scenes={scenes} cues={cues} options={options} />;
   return { id: `reel-${guion.slug}`, slug: guion.slug, frames: tl.TOTAL_FRAMES, component };
 }

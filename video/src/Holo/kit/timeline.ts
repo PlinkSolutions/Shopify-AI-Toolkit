@@ -68,7 +68,7 @@ export function makeTimeline(guion: Guion, voice: [number, number][]): Timeline 
 
   const SCENES: Scene[] = segments.map((_, seg) => {
     const ws = WORDS.filter((w) => w.seg === seg);
-    return { seg, from: Math.max(0, f(ws[0].start) - 4), dur: 0, words: ws };
+    return { seg, from: seg === 0 ? 0 : Math.max(0, f(ws[0].start) - 4), dur: 0, words: ws };
   });
   SCENES.forEach((s, i) => {
     const next = SCENES[i + 1];

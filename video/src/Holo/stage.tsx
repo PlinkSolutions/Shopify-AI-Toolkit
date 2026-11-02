@@ -200,15 +200,16 @@ const Dust: React.FC = () => {
   );
 };
 
-const Bloom: React.FC<{ strength: number }> = ({ strength }) => {
+/** UnrealBloom post pass that replaces r3f's render (also used by other stages). */
+export const Bloom: React.FC<{ strength: number; threshold?: number; radius?: number }> = ({ strength, threshold = 0.5, radius = 0.4 }) => {
   const { gl, scene, camera, size } = useThree();
   const composer = useMemo(() => {
     const c = new EffectComposer(gl);
     c.addPass(new RenderPass(scene, camera));
-    c.addPass(new UnrealBloomPass(new THREE.Vector2(size.width, size.height), strength, 0.4, 0.5));
+    c.addPass(new UnrealBloomPass(new THREE.Vector2(size.width, size.height), strength, radius, threshold));
     c.addPass(new OutputPass());
     return c;
-  }, [gl, scene, camera, size.width, size.height, strength]);
+  }, [gl, scene, camera, size.width, size.height, strength, threshold, radius]);
   useLayoutEffect(() => {
     composer.setPixelRatio(gl.getPixelRatio());
     composer.setSize(size.width, size.height);
@@ -243,7 +244,8 @@ export function toScreen(v: V3, cam: Cam, frame: number): [number, number] {
   return [((p.x + 1) / 2) * 1080, ((1 - p.y) / 2) * 1920];
 }
 
-const CameraRig: React.FC<Cam> = (cam) => {
+/** Drives the r3f camera from a Cam (same math as toScreen). */
+export const CameraRig: React.FC<Cam> = (cam) => {
   const frame = useCurrentFrame();
   const { camera } = useThree();
   useLayoutEffect(() => {
