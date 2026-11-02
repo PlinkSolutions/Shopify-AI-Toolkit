@@ -114,6 +114,8 @@ def build(reel_dir, out):
     s.append(Paragraph(f"GUION PARA NARRACIÓN · {dur} · {words} PALABRAS · {len(escenas)} ESCENAS", st["kicker"]))
     s.append(Paragraph(clean(g["titulo"]), st["title"]))
     s.append(Paragraph(clean(g["por_que"]) + " Palabras en negrita: van en el recuadro dorado de los subtítulos.", st["lead"]))
+    if g.get("direccion_arte"):
+        s.append(Paragraph("<b>Dirección de arte:</b> " + clean(g["direccion_arte"]), st["note"]))
 
     s.append(Paragraph("Diálogo por bloques", st["h2"]))
     for i, b in enumerate(g["bloques"], 1):
@@ -143,7 +145,7 @@ def build(reel_dir, out):
     s.append(PageBreak())
     s.append(Paragraph(f"Escenas ({len(escenas)})", st["h2"]))
     s.append(Paragraph("Una escena por frase. " + ("Tiempos de la voz final." if real else "Tiempos estimados; se ajustan a la voz real."), st["note"]))
-    data = [[Paragraph(f"<b>{h}</b>", st["small"]) for h in ("#", "Tiempo", "Narración", "Imagen")]]
+    data = [[Paragraph(f"<b>{h}</b>", st["small"]) for h in ("#", "Tiempo", "Narración", "Dibujo (storyboard)")]]
     for i, (e, t0) in enumerate(zip(escenas, starts), 1):
         data.append([Paragraph(str(i), st["smallmono"]), Paragraph(mmss(t0), st["smallmono"]), Paragraph(clean(e["texto"]), st["small"]), Paragraph(clean(e["imagen"]), st["small"])])
     tab = Table(data, colWidths=[8 * mm, 18 * mm, 68 * mm, 80 * mm], repeatRows=1)

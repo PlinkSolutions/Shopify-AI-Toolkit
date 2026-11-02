@@ -57,15 +57,21 @@ python3.13 scripts/holo/ideas.py hecha N --slug NN-palabra
 
 Tipo en `kit/guion.ts`. Es la única fuente del video, el PDF y la publicación.
 
-- `bloques`: los 7 bloques de `FORMATO.md`, cada uno con sus `escenas`.
-  `escena.texto` = frase exacta que dice la voz (una escena por frase o idea, 12–18 escenas, 2–8 s cada una);
-  `escena.imagen` = qué se ve, en español, concreto.
+- `direccion_arte`: una de las cuatro de `FORMATO.md` §10 (holográfica 3D, simbólica oscura,
+  íconos 3D brillantes, ilustración plana) y en una frase por qué encaja con el tema.
+- `bloques`: los bloques de `FORMATO.md`, cada uno con sus `escenas`.
+  `escena.texto` = frase exacta que dice la voz (una escena por frase o idea, 10–16 escenas, 2–6 s cada una);
+  `escena.imagen` = **el storyboard de esa frase** (método de `FORMATO.md` §10): el dibujo que la
+  cuenta literalmente, qué cambia y en qué palabra, y las etiquetas que aparecen. Ejemplo:
+  «Muro de ladrillo rosa con puerta y un portero de discoteca. En "no las deja pasar" levanta la
+  mano y las bolitas de ENDORFINAS rebotan.»
 - `palabras_clave`: 12–20 palabras (forma exacta como aparecen, en minúsculas) que van en el recuadro dorado.
 - `cierre`: pregunta para comentar con una palabra en recuadro (`clave` debe aparecer en `pregunta`) y `cta`.
 - `fuentes`: cada dato con su fuente real (URL abierta y leída). Hipótesis → «los científicos creen».
 - `instagram`: descripción lista para pegar (gancho en la primera línea, 3 datos con emoji,
   pregunta para comentar, CTA de enviar y de guardar), 4–6 hashtags, comentario fijado.
-- 220–280 palabras en total (≈ 85–105 s a 160 palabras por minuto). Puntos suspensivos donde respira.
+- 125–165 palabras en total (≈ 45–60 s a ~165 palabras por minuto); formato largo solo si el
+  tema lo pide (220–280 palabras). Puntos suspensivos donde respira.
 
 ## 4. Escenas (scenes.tsx)
 
@@ -85,9 +91,15 @@ export const S03: React.FC<P> = ({ sc }) => {
 };
 ```
 
-- **Cada historia necesita imágenes propias.** Las cápsulas y el escenario son la identidad del
-  canal; las metáforas y objetos se crean para cada guion (nuevos props en `kit/props3d.tsx`
-  o en el propio `scenes.tsx`). No repitas las escenas de otro reel.
+- **Cada historia necesita imágenes propias**, dibujadas a partir de su storyboard
+  (`escena.imagen`). La identidad del canal está en la voz, los subtítulos y la estructura; los
+  personajes, objetos y metáforas se crean para cada guion (props 3D reutilizables en
+  `kit/props3d.tsx`, el resto en el propio `scenes.tsx`). No repitas las escenas de otro reel.
+- **Dirección de arte** (`FORMATO.md` §10): la holográfica usa `HoloStage` tal cual; la simbólica
+  oscura y los íconos 3D brillantes también se hacen en three.js (otros materiales, luces y fondos:
+  pásale `spot={false} platform={false}` a `HoloStage` o crea tu propio `ThreeCanvas`); la
+  ilustración plana se dibuja en SVG con React (formas sin contorno, sombra desplazada, paleta de
+  día) sin three.js. Una sola dirección por video.
 - Todo movimiento se ancla a palabras con `beat()`; nada de frames fijos que dependan de la voz.
 - **Encuadre 9:16**: a distancia ~12 de cámara solo hay ±1.9 unidades horizontales visibles.
   Sujeto en los dos tercios inferiores; **la franja superior (y < 380 px) es de los subtítulos**.

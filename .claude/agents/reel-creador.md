@@ -42,7 +42,8 @@ Ejecuta `scripts/holo/setup_assets.sh` desde `video/`.
   exacto de una fuente real; los datos clave con 2 fuentes. Lo que no está probado se dice
   «los científicos creen…». Nunca inventes estudios, cifras ni citas.
 - Escribe `src/Holo/reels/<slug>/guion.json` (tipo en `src/Holo/kit/guion.ts`, reglas en
-  PRODUCCION.md §3): 7 bloques, 12–18 escenas, 220–280 palabras, primera frase ≤ 10 palabras,
+  PRODUCCION.md §3 y FORMATO.md §10): 10–16 escenas, 125–165 palabras (45–60 s; formato largo
+  solo si el tema lo pide), gancho con contraste, mito roto o reencuadre, primera frase ≤ 10 palabras,
   frases cortas, puntos suspensivos donde respira, palabras clave, cierre, fuentes y la
   publicación de Instagram completa.
 - `node scripts/holo/new_reel.mjs <slug>` crea la carpeta, escenas provisionales y el registro.
@@ -51,24 +52,30 @@ Ejecuta `scripts/holo/setup_assets.sh` desde `video/`.
 
 `node scripts/holo/voice_elevenlabs.mjs src/Holo/reels/<slug>` genera la voz con los ajustes de
 `scripts/holo/voz.json` y los tiempos exactos de cada palabra (`voice.ts`). Revisa con
-`node scripts/holo/reel_info.mjs <slug>`: 75–105 s, 150–170 palabras por minuto, escenas de 2–8 s.
-Si una escena dura más de 8 s, divídela en el guion y **regenera la voz** (nunca cambies el texto
+`node scripts/holo/reel_info.mjs <slug>`: 45–60 s (o el largo elegido), escenas de 2–6 s.
+Si una escena dura más de 6 s, divídela en el guion y **regenera la voz** (nunca cambies el texto
 sin regenerarla). Si la voz falla (sin clave, red bloqueada, sin créditos) **no la simules**:
 sigue con `--sin-voz` y repórtalo como bloqueo.
 
-## 4. Escenas: imágenes nuevas para esta historia
+## 4. Storyboard y escenas: narrar con dibujo
 
-1. Primero un plan por escena: frase → metáfora tecnológica propia de esta historia → objetos 3D
-   → HUD → en qué palabra pasa cada cosa. Las cápsulas, el escenario y el estilo son la identidad
-   del canal; **todo lo demás se inventa para este guion** (props nuevos en
-   `src/Holo/kit/props3d.tsx` si sirven para otros reels, o en el `scenes.tsx` del reel).
-2. Escribe `scenes.tsx` y `cues.ts` siguiendo PRODUCCION.md §4–5: movimiento anclado a palabras
-   con `beat()`, acercamiento lento en cada escena, algo que se mueve desde el primer frame,
-   2–3 cambios dentro de las escenas largas, sujeto completo en los dos tercios inferiores,
-   franja superior libre para subtítulos, nada quemado, efectos bajo la voz.
-3. Revisa con stills (`node scripts/holo/stills.mjs reel-<slug> <dir> <frames…>`) cada escena a
-   mitad y en sus beats; mira las imágenes y corrige hasta que todas estén limpias. `npx tsc --noEmit`
-   sin errores.
+1. **Storyboard primero** (método de FORMATO.md §10 y las referencias de `docs/holo/referencias/`):
+   para cada frase del guion escribe en `escena.imagen` el dibujo que la cuenta literalmente
+   (si trae analogía, la analogía tal cual; si no, una metáfora de la vida diaria), qué cambia en
+   qué palabra y qué etiquetas aparecen. Un protagonista o escenario recurrente que vuelve en el
+   resumen final. Si una escena no se entendería sin sonido, rehazla.
+2. **Dirección de arte**: elige una de las cuatro de FORMATO.md §10 según el tono del tema
+   (holográfica 3D, simbólica oscura, íconos 3D brillantes, ilustración plana), escríbela en
+   `direccion_arte` y mantenla en todo el video. Varía respecto a los últimos reels cuando el tema
+   lo permita. Las imágenes se inventan para este guion: nada copiado de las referencias ni de
+   reels anteriores (props nuevos en `src/Holo/kit/props3d.tsx` si sirven para otros reels).
+3. Escribe `scenes.tsx` y `cues.ts` siguiendo PRODUCCION.md §4–5: cada transformación anclada a
+   su palabra con `beat()`, un cambio visible cada 1–1,5 s, algo que se mueve desde el primer
+   frame, sujeto completo en los dos tercios inferiores, franja superior libre para subtítulos,
+   nada quemado, efectos bajo la voz.
+4. Revisa con stills (`node scripts/holo/stills.mjs reel-<slug> <dir> <frames…>`) cada escena a
+   mitad y en sus beats; mira las imágenes y corrige hasta que todas estén limpias y cuenten su
+   frase. `npx tsc --noEmit` sin errores.
 
 ## 5. Render y entrega
 

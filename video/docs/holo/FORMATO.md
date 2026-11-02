@@ -9,8 +9,9 @@ tabla de escenas o de editar uno de estos videos. Complementa la skill
 
 ## 1. Qué es el formato
 
-- Reel vertical 9:16 de **60–100 s**, narrado en segunda persona ("tu cerebro…"),
-  con una escena 3D por idea. Tema: "por qué pasa X", "qué pasaría si…",
+- Reel vertical 9:16 de **45–60 s** por defecto (largo de 75–105 s solo si el tema lo pide),
+  narrado en segunda persona ("tu cerebro…"), con un dibujo por frase (método en §10) y una
+  dirección de arte elegida por tema. Tema: "por qué pasa X", "qué pasaría si…",
   "cómo funciona…", misterios.
 - Referencia analizada: *"¿Por qué basta con apoyar la cabeza en su pecho para
   quedarte dormido en minutos?"* (cuenta DSUBIDA Scientific). 1:41, 267 palabras
@@ -139,27 +140,58 @@ tu cuerpo, tu cerebro, sueño, amor, ¿qué pasaría si…?, espacio, misterios,
 los días, animales y actualidad. Etiquetas: base, hipótesis, misterio, tendencia,
 verificar y ⭐ recomendadas para empezar.
 
-## 10. Principios de imagen (de las dos referencias)
+## 10. Narrar con dibujo (método de imagen de las 4 referencias)
 
-Análisis completos: referencia 1 (holográfica, arriba) y `referencias/02-triada-oscura.md`.
-Las imágenes de cada video se **inventan a partir de su guion**; ninguna referencia se copia.
+Referencias analizadas: 1 holográfica (arriba) · `referencias/02-triada-oscura.md` (máscaras
+oscuras, 27 s) · `referencias/03-marihuana-paranoia.md` (íconos 3D brillantes, 51 s) ·
+`referencias/04-correr-endorfinas.md` (ilustración plana, 51 s). Se aprende el **método**; las
+imágenes de cada video se inventan a partir de su guion y ninguna referencia se copia.
 
-1. **Elenco simbólico:** cada concepto del guion es un personaje u objeto con forma, color y
-   textura que expresan su significado (como las máscaras de oro, violeta y hielo de la ref. 2,
-   pero diseñados para cada historia). 2–4 por video, presentes en un mismo escenario.
-2. **Cámara-narradora:** viaja entre personajes siguiendo la voz y llega 0,3–0,6 s antes que la
-   palabra; los demás asoman por los bordes. Cortes con destello solo al cambiar de idea grande.
-3. **Verbo → transformación:** cada palabra clave cambia algo físico en su sílaba exacta (luz,
-   material, objeto que aparece). Los verbos de acción se hacen literales («aléjate» = la cámara
-   se aleja).
-4. **Un cambio visible cada 1–1,5 s**, aunque el plano no cambie.
-5. **Texturas orgánicas** (mármol, metal cepillado, piel de naranja, escarcha, madera, cristal,
-   humo) con halo del color del personaje; nada de plástico liso.
-6. **Paleta por video:** fondo casi negro (frío para ciencia, cálido para emociones) + un color
-   por personaje + un único color de alarma.
-7. **Cierre en símbolo:** el elenco se funde en un icono del tema para la última frase.
-8. **Subtítulos:** arriba, palabra activa destacada, término clave en recuadro (dorado o caja
-   de selección), 1–4 palabras por página.
-9. **Dos duraciones:** largo (75–105 s, 7 bloques) y corto (25–40 s, fórmula «lista de 3»:
-   gancho «¿Sabías que…?», nombre técnico, tres definiciones de una frase, lo que tienen en
-   común, consejo, CTA de seguir).
+### El método: cada frase es un dibujo que la cuenta
+
+Antes de construir nada, se hace el **storyboard** del guion, frase por frase:
+
+1. **¿Qué dice literalmente?** Si la frase trae una analogía, se dibuja la analogía tal cual:
+   «botones del cerebro» = botones sobre un cerebro; «bajas las luces de la casa» = una casa
+   que apaga las ventanas; «el cerebro tiene un portero» = portero de discoteca en una puerta;
+   «encaja en la cerradura» = gota que entra en una cerradura; «todos te miran» = ojos alrededor.
+2. **Si no trae analogía, se le inventa una de la vida diaria** que un niño entendería
+   (receptor = cerradura, bloqueo = jaula, hormona = gota o mensajero, dosis = pastilla con mg,
+   efecto = aguja de un medidor, cantidad = tubo que se llena, estadística = público que cambia
+   de color, palabra antigua = libro que se abre).
+3. **¿Qué cambia y en qué palabra?** Cada frase tiene al menos una transformación anclada a su
+   palabra clave (se enciende, se apaga, se llena, se rompe, se congela, encaja, se abre, se aleja).
+   Los verbos de acción se hacen literales («aléjate» = la cámara se aleja).
+4. **¿Qué etiqueta lo nombra?** Una píldora corta (1–2 palabras) para cada cosa nueva
+   (ENDORFINAS, PARANOIA, 7,5 mg, perro) y los números siempre visibles.
+5. **Continuidad:** un protagonista o un escenario recurrente (el corredor, la pantalla partida,
+   el trío de máscaras) que abre el video y **vuelve en el resumen final** → bucle.
+
+Un cambio visible cada 1–1,5 s. Comparaciones = pantalla partida o dos polos de color que se
+mantienen todo el video. Si una escena no se entiende sin sonido, el dibujo está mal.
+
+### Dirección de arte: se elige por tema, una por video
+
+| Tono del tema | Dirección | Rasgos |
+|---|---|---|
+| Ciencia del cuerpo y del cerebro, «cómo funciona» | **Holográfica 3D** (kit actual) | cápsulas de cristal, HUD, cian/dorado sobre azul noche |
+| Psicología oscura, miedo, misterio | **Simbólica oscura** | elenco de personajes-concepto (máscaras, figuras) con texturas orgánicas, halo granate, ojos que se encienden |
+| Drogas, química, contrastes, «por qué a unos sí y a otros no» | **Íconos 3D brillantes** | objetos con brillo especular, degradados saturados, pantalla partida, medidores, botones |
+| Deporte, hábitos, vida diaria, animales | **Ilustración plana** | vectores sin contorno con sombra desplazada, colores de día, protagonista recurrente |
+
+Lo que **no cambia** entre direcciones (identidad del canal): voz de David, subtítulos arriba
+tipo karaoke con el término en recuadro, estructura del guion, sin música, efectos en los
+movimientos, pregunta y CTA del cierre. Dentro de un video, una sola dirección de arte.
+
+### Guion: lo que suman las referencias 2–4
+
+- **Duración por defecto 45–60 s** (las tres referencias nuevas duran 27–51 s, ~175 palabras
+  por minuto). El formato largo de 75–105 s queda para temas que de verdad lo necesiten.
+- Gancho con **contraste o paradoja** («a unos paranoia y a otros sueño»).
+- **Mito roto** a los 3–6 s: «Casi todo el mundo te dirá que… Pues no.»
+- **Factores numerados** (primero, segundo, tercero) o fórmula «lista de 3», cada uno con su dibujo.
+- El estudio se cuenta **como una escena con acción** (dieron una pastilla → corrieron → ✓).
+- **Dato extra memorable** al final del desarrollo (etimología, otra especie, cifra).
+- Resumen que empieza con **«Así que…»** y vuelve a la imagen del gancho.
+- CTA de enviar a alguien concreto, mejor a quien **piensa lo contrario** («a quien dice que
+  correr no engancha») o a quien **le pasa** («a ese amigo que siempre se pone paranoico»).

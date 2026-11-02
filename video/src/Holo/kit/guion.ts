@@ -4,7 +4,7 @@
 export type Escena = {
   /** Narration of this scene, exactly as the voice reads it. */
   texto: string;
-  /** What the scene shows (Spanish, for the PDF and the reviewer). */
+  /** Storyboard of this sentence (Spanish): the drawing that tells it, what changes on which word, labels. */
   imagen: string;
 };
 
@@ -17,6 +17,8 @@ export type Guion = {
   idea: number;
   /** Why this idea, why now (trend, season, news). */
   por_que: string;
+  /** Art direction (FORMATO.md §10) and why it fits the topic. */
+  direccion_arte?: string;
   bloques: { nombre: string; escenas: Escena[] }[];
   /** Words shown in the gold caption box (bold in the PDF). */
   palabras_clave: string[];
