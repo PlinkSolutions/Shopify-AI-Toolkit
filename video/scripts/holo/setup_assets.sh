@@ -12,7 +12,7 @@ if ! "$PY" -c "import numpy, PIL, reportlab" 2>/dev/null; then
   "$PY" -m pip install --quiet numpy pillow reportlab
 fi
 
-if [[ ! -f public/holo/sfx/glitch.wav ]]; then
+if [[ ! -f public/holo/sfx/ding.wav ]]; then # newest sound: older libraries get regenerated too
   "$PY" scripts/holo/make_holo_sfx.py public/holo/sfx
   "$PY" scripts/holo/make_sfx_library.py public/holo/sfx
 fi

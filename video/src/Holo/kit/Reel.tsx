@@ -12,7 +12,7 @@ import { Scene, Timeline } from "./timeline";
 
 export type SceneComponent = React.FC<{ sc: Scene }>;
 
-const Overlays: React.FC<{ tl: Timeline }> = ({ tl }) => {
+const Overlays: React.FC<{ tl: Timeline; flash?: string }> = ({ tl, flash: tint = "#dfe8ff" }) => {
   const frame = useCurrentFrame();
   let flash = 0;
   for (const s of tl.SCENES.slice(1)) {
@@ -21,7 +21,7 @@ const Overlays: React.FC<{ tl: Timeline }> = ({ tl }) => {
   }
   return (
     <>
-      <AbsoluteFill style={{ background: "#dfe8ff", opacity: flash, mixBlendMode: "screen" }} />
+      <AbsoluteFill style={{ background: tint, opacity: flash, mixBlendMode: "screen" }} />
     </>
   );
 };
@@ -30,6 +30,14 @@ export type ReelOptions = {
   captions?: CaptionStyle;
   /** Instagram cover (9:16 still, rendered as composition portada-<slug>; keep text inside y 260–1660 for the 3:4 grid crop). */
   cover?: React.FC;
+  /** drawn over every scene, under the captions (e.g. a stopwatch that runs the whole reel); gets the global frame */
+  overlay?: React.FC;
+  /** dark edge vignette (holographic and glossy reels); false for flat illustration */
+  vignette?: boolean;
+  /** colour of the light flash on every cut */
+  flash?: string;
+  /** replaces the holographic end card */
+  endCard?: React.FC<{ question: string; keyword: string; cta: string }>;
 };
 
 export const HoloReel: React.FC<{ guion: Guion; tl: Timeline; scenes: SceneComponent[]; cues: Cue[]; options?: ReelOptions }> = ({ guion, tl, scenes, cues, options = {} }) => {
@@ -37,6 +45,8 @@ export const HoloReel: React.FC<{ guion: Guion; tl: Timeline; scenes: SceneCompo
   const [g0, g1] = tl.GLITCH;
   const g = frame >= g0 && frame < g1 && (frame - g0) % 3 !== 2;
   const shift = g ? 10 + random(`g${frame}`) * 18 : 0;
+  const Overlay = options.overlay;
+  const End = options.endCard ?? EndCard;
   return (
     <AbsoluteFill style={{ backgroundColor: NAVY }}>
       <svg width={0} height={0} style={{ position: "absolute" }}>
@@ -62,13 +72,18 @@ export const HoloReel: React.FC<{ guion: Guion; tl: Timeline; scenes: SceneCompo
             </Sequence>
           );
         })}
-        <AbsoluteFill style={{ background: "radial-gradient(120% 80% at 50% 55%, transparent 55%, rgba(3,6,14,0.75) 100%)" }} />
+        {options.vignette === false ? null : <AbsoluteFill style={{ background: "radial-gradient(120% 80% at 50% 55%, transparent 55%, rgba(3,6,14,0.75) 100%)" }} />}
+        {Overlay ? (
+          <Sequence durationInFrames={tl.END_FROM} layout="none">
+            <Overlay />
+          </Sequence>
+        ) : null}
         <Captions pages={tl.PAGES} {...options.captions} />
       </AbsoluteFill>
       <Sequence from={tl.END_FROM} durationInFrames={tl.END_DUR}>
-        <EndCard question={guion.cierre.pregunta} keyword={guion.cierre.clave} cta={guion.cierre.cta} />
+        <End question={guion.cierre.pregunta} keyword={guion.cierre.clave} cta={guion.cierre.cta} />
       </Sequence>
-      <Overlays tl={tl} />
+      <Overlays tl={tl} flash={options.flash} />
       {cues.map((c, i) => (
         <Sequence key={i} from={Math.max(0, c.at)} layout="none">
           <Audio src={staticFile(c.src)} volume={() => c.vol} />

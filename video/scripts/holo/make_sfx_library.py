@@ -3,7 +3,8 @@ samples). Reels pick them with sfx("<name>", frame, vol) in their cues.ts; add
 a new sound here when a story needs one.
 
 usage: make_sfx_library.py out_dir   (public/holo/sfx, next to make_holo_sfx.py's pad, whoosh, blip, thump)
-sfx: zap, laugh, notif, error, zip, glow, scan, servo, chirps, fear, rise, sent, glitch, boing, pop, stamp
+sfx: zap, laugh, notif, error, zip, glow, scan, servo, chirps, fear, rise, sent, glitch, boing, pop, stamp,
+     yawn, yawn2, tick, gulp, ding
 """
 import os, sys, wave
 import numpy as np
@@ -140,4 +141,57 @@ m = int(0.5 * SR); tt = np.arange(m) / SR
 thud = np.sin(2 * np.pi * (70 + 90 * np.exp(-tt / 0.03)) * tt) * env(m, 0.001, 0.12)
 slap = lp(rng.standard_normal(m), 3000) * env(m, 0.0005, 0.03)
 save("stamp", np.tanh(1.8 * thud) + 0.6 * slap, 0.85)
+
+# ------------------------------------------------------------------ voice-like
+def resonate(x, freq, bw):
+    """Two-pole resonator with a time-varying centre frequency (formant)."""
+    freq = np.broadcast_to(np.asarray(freq, np.float64), x.shape)
+    r = np.exp(-np.pi * bw / SR)
+    c = 2 * r * np.cos(2 * np.pi * freq / SR)
+    y = np.empty_like(x); y1 = y2 = 0.0
+    for i in range(len(x)):
+        yi = (1 - r) * x[i] + c[i] * y1 - r * r * y2
+        y[i] = yi; y2 = y1; y1 = yi
+    return y
+
+
+def yawn(dur, pitch, formant):
+    """Cartoon yawn: breathy inhale, rising 'haaAA', falling sigh (glottal buzz through vowel formants)."""
+    m = int(dur * SR); tt = np.arange(m) / SR; u = tt / dur
+    f0 = pitch * np.interp(u, [0, 0.15, 0.38, 0.55, 0.85, 1], [0.95, 1.1, 1.75, 1.7, 0.85, 0.7])
+    f0 *= 1 + 0.018 * np.sin(2 * np.pi * 5.5 * tt) + 0.006 * lp(rng.standard_normal(m), 30)
+    ph = 2 * np.pi * np.cumsum(f0) / SR
+    buzz = sum(np.sin(k * ph) / k ** 1.1 * (k * f0 < 9000) for k in range(1, 48))
+    amp = np.interp(u, [0, 0.12, 0.3, 0.55, 0.8, 1], [0, 0.15, 1, 0.95, 0.35, 0])
+    breath = np.interp(u, [0, 0.1, 0.25, 0.7, 0.9, 1], [0.05, 0.5, 0.12, 0.08, 0.35, 0])
+    exc = buzz * amp + rng.standard_normal(m) * breath * 1.4
+    F1 = formant * np.interp(u, [0, 0.3, 0.6, 1], [600, 820, 800, 560])
+    F2 = formant * np.interp(u, [0, 0.3, 0.6, 1], [1050, 1250, 1180, 880])
+    F3 = formant * 2550
+    x = resonate(exc, F1, 90) * 1.0 + resonate(exc, F2, 120) * 0.55 + resonate(exc, F3, 180) * 0.25
+    return x * np.minimum(1, (dur - tt) / 0.08)
+
+
+save("yawn", yawn(1.7, 150, 1.0), 0.8)
+save("yawn2", yawn(1.45, 235, 1.17), 0.8)
+
+# tick: stopwatch ticking (tick-tock every 0.2 s, fades after 1.6 s)
+m = int(2.4 * SR); x = np.zeros(m)
+for k in range(12):
+    i0 = int(k * 0.2 * SR); mm = int(0.03 * SR); tt = np.arange(mm) / SR
+    f = 3300 if k % 2 == 0 else 2500
+    click = (np.sin(2 * np.pi * f * tt) * 0.8 + rng.standard_normal(mm) * 0.5) * np.exp(-tt / 0.006)
+    x[i0:i0 + mm] += click * (1 if k < 8 else 1 - (k - 7) / 5)
+save("tick", x, 0.7)
+
+# gulp: the camera is swallowed (plop with falling pitch + low thump)
+m = int(0.45 * SR); tt = np.arange(m) / SR
+f = 520 * np.exp(-tt / 0.07) + 110
+gl = np.sin(2 * np.pi * np.cumsum(f) / SR) * env(m, 0.004, 0.12)
+th = np.sin(2 * np.pi * (60 + 60 * np.exp(-tt / 0.04)) * tt) * env(m, 0.002, 0.15)
+save("gulp", gl + 0.8 * th, 0.8)
+
+# ding: stopwatch stops (bright bell)
+m = int(1.4 * SR); tt = np.arange(m) / SR
+save("ding", sum(a * np.sin(2 * np.pi * f * tt) * np.exp(-tt / d) for f, a, d in [(1760, 1, 0.5), (2637, 0.5, 0.3), (3520, 0.3, 0.2), (5274, 0.15, 0.1)]) * env(m, 0.002, 2), 0.6)
 print("ok", sorted(os.listdir(out)))

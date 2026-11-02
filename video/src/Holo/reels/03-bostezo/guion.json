@@ -1,0 +1,192 @@
+{
+  "numero": 3,
+  "slug": "03-bostezo",
+  "titulo": "¿Por qué bostezamos… y por qué se contagia?",
+  "idea": 18,
+  "por_que": "Le pasa a todo el mundo y es un misterio que la ciencia no ha resuelto. Además es interactivo: ver bostezar provoca bostezos, así que el propio video reta al espectador (y llena los comentarios de «bostecé»).",
+  "direccion_arte": "Ilustración plana: vectores sin contorno con sombra dura desplazada, colores de casa por la tarde (pared crema, sofá mostaza, ventana con cielo celeste). Protagonista recurrente: Leo (pijama azul, pelo despeinado) y su perro.",
+  "voz": {
+    "voz": "Dan - Upbeat, Dynamic and Friendly",
+    "model_id": "eleven_multilingual_v2",
+    "voice_settings": {
+      "stability": 0.41,
+      "similarity_boost": 0.65,
+      "style": 0.3,
+      "use_speaker_boost": true,
+      "speed": 1.0
+    },
+    "output_format": "mp3_44100_128"
+  },
+  "bloques": [
+    {
+      "nombre": "Gancho (reto)",
+      "escenas": [
+        {
+          "texto": "Apuesto a que vas a bostezar antes de que termine este video.",
+          "imagen": "GANCHO VISUAL. Fotograma 0: primerísimo plano de Leo mirándote con ojos de sueño, llenando la pantalla; texto grande TE RETO: NO BOSTECES y un cronómetro que arranca en 00:00. A los 0,3 s abre la boca en un bostezo gigante que crece hasta llenar la pantalla y la cámara entra en la boca; desde la oscuridad aparece Leo en su sofá, con el cronómetro corriendo en la esquina. En «bostezar» etiqueta BOSTEZO."
+        },
+        {
+          "texto": "¿Pero por qué bostezamos… y por qué se contagia?",
+          "imagen": "Leo bosteza en el sofá; en «contagia» su pareja, sentada a su lado, bosteza igual: unas ondas saltan de una boca a la otra. Dos signos de interrogación flotan sobre ellos."
+        }
+      ]
+    },
+    {
+      "nombre": "El misterio",
+      "escenas": [
+        {
+          "texto": "Lo curioso es que lo hacemos desde antes de nacer… y la ciencia todavía no sabe para qué sirve.",
+          "imagen": "Una pizarra de laboratorio con la pregunta ¿PARA QUÉ SIRVE? y una científica rascándose la cabeza. En «nacer» se dibuja una cuna en la pizarra; en «no sabe» cae un sello SIN RESOLVER."
+        }
+      ]
+    },
+    {
+      "nombre": "Antes de nacer",
+      "escenas": [
+        {
+          "texto": "Con ecografías vieron bostezar a bebés de veinticuatro semanas… todavía dentro del vientre.",
+          "imagen": "Monitor de ecografía (abanico gris sobre fondo negro) con un bebé de perfil. En «bostezar» el bebé abre la boca; en «veinticuatro semanas» etiqueta 24 SEMANAS."
+        },
+        {
+          "texto": "No por sueño… ni por contagio.",
+          "imagen": "Dos íconos: una almohada con Zzz (SUEÑO) y dos bocas unidas por ondas (CONTAGIO). En «sueño» se tacha la almohada; en «contagio» se tachan las bocas."
+        }
+      ]
+    },
+    {
+      "nombre": "La teoría",
+      "escenas": [
+        {
+          "texto": "Los científicos creen que bostezar enfría el cerebro:",
+          "imagen": "Cabeza de perfil con el cerebro a la vista y un termómetro rojo alto al lado. En «enfría» entra aire azul por la boca abierta y el termómetro baja."
+        },
+        {
+          "texto": "con algo frío en la frente, la gente bosteza menos.",
+          "imagen": "Leo con una bolsa de hielo azul en la frente. En «menos» un contador BOSTEZOS baja de 5 a 2."
+        }
+      ]
+    },
+    {
+      "nombre": "El giro: se contagia más de quien quieres",
+      "escenas": [
+        {
+          "texto": "Pero aquí viene lo raro.",
+          "imagen": "Se apaga la luz y un foco ilumina un signo de interrogación gigante con la etiqueta DATO RARO."
+        },
+        {
+          "texto": "En la Universidad de Pisa observaron a más de cien personas durante un año:",
+          "imagen": "La torre inclinada de Pisa al fondo, un calendario que pasa sus hojas («un año») y una multitud de personitas que aparece fila a fila. Etiqueta UNIVERSIDAD DE PISA."
+        },
+        {
+          "texto": "el bostezo se contagiaba más entre familia y pareja… luego entre amigos… y mucho menos con desconocidos.",
+          "imagen": "Leo bosteza y a su lado tres grupos con su barra de CONTAGIO: en «familia y pareja» la barra se llena y bostezan; en «amigos» se llena a la mitad; en «desconocidos» apenas se mueve y el desconocido sigue serio."
+        }
+      ]
+    },
+    {
+      "nombre": "No solo humanos",
+      "escenas": [
+        {
+          "texto": "Y no solo pasa entre humanos: veintiuno de veintinueve perros bostezaron al ver bostezar a una persona.",
+          "imagen": "Leo bosteza frente a su perro y el perro bosteza también; luego una cuadrícula de 29 perritos donde 21 se iluminan bostezando. Etiqueta 21 DE 29."
+        }
+      ]
+    },
+    {
+      "nombre": "Lo que nadie sabe",
+      "escenas": [
+        {
+          "texto": "¿Es empatía? ¿O una alarma para que el grupo se mantenga despierto? Nadie lo sabe todavía.",
+          "imagen": "Pantalla partida: en «empatía» un corazón une las bocas de Leo y su pareja; en «alarma» una sirena gira sobre un grupo que se despierta; en «nadie lo sabe» aparece un signo de interrogación entre las dos mitades."
+        }
+      ]
+    },
+    {
+      "nombre": "Así que…",
+      "escenas": [
+        {
+          "texto": "Así que si bostezaste viendo esto… quizá tu cerebro ya me tiene confianza.",
+          "imagen": "Vuelve el primer plano de Leo mirándote, como al inicio. En «bostezaste» el cronómetro se detiene; en «confianza» Leo guiña un ojo y aparece un corazón."
+        }
+      ]
+    },
+    {
+      "nombre": "Compartir",
+      "escenas": [
+        {
+          "texto": "Envíaselo a quien siempre te contagia los bostezos.",
+          "imagen": "Un móvil plano comparte el video con «Mi persona»; en «bostezos» las fotos de perfil de los dos contactos bostezan."
+        }
+      ]
+    }
+  ],
+  "palabras_clave": [
+    "bostezar",
+    "contagia",
+    "nacer",
+    "vientre",
+    "sueño",
+    "contagio",
+    "enfría",
+    "frío",
+    "raro",
+    "pisa",
+    "familia",
+    "pareja",
+    "desconocidos",
+    "perros",
+    "empatía",
+    "alarma",
+    "confianza",
+    "bostezos"
+  ],
+  "cierre": {
+    "pregunta": "¿Bostezaste viendo esto?",
+    "clave": "Bostezaste",
+    "cta": "CONFIESA ↓ · SÍGUENOS PARA MÁS CIENCIA DE LO COTIDIANO"
+  },
+  "fuentes": [
+    {
+      "texto": "Fetos que bostezan en el vientre: frecuentes a las 24–28 semanas y casi desaparecen hacia las 36; no por sueño ni por contagio, quizá por maduración del cerebro (Reissland, Francis y Mason, Universidad de Durham, PLoS ONE 2012).",
+      "urls": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC3503956"
+      ]
+    },
+    {
+      "texto": "Hipótesis del enfriamiento cerebral: respirar por la nariz o poner algo frío en la frente reduce los bostezos contagiosos (Gallup y Gallup, 2007). Es una hipótesis, narrada como «los científicos creen».",
+      "urls": [
+        "https://www.nbcnews.com/news/amp/wbna28240615",
+        "https://davidson.weizmann.ac.il/en/node/23688"
+      ]
+    },
+    {
+      "texto": "Un año de observación a 109 adultos: el contagio es mayor entre familiares y parejas, luego amigos, conocidos y desconocidos (Norscia y Palagi, Universidad de Pisa, PLoS ONE 2011).",
+      "urls": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC3233580"
+      ]
+    },
+    {
+      "texto": "21 de 29 perros bostezaron al ver bostezar a una persona; ninguno con los movimientos de boca de control (Joly-Mascheroni, Senju y Shepherd, Biology Letters 2008).",
+      "urls": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC2610100"
+      ]
+    },
+    {
+      "texto": "Para qué sirve el bostezo y por qué se contagia sigue sin resolverse (empatía, alerta del grupo, activación).",
+      "urls": [
+        "https://davidson.weizmann.ac.il/en/node/23688"
+      ]
+    }
+  ],
+  "instagram": {
+    "descripcion": "Te reto: mira este video sin bostezar 😮‍💨⏱️\n\nBostezamos desde antes de nacer… y la ciencia todavía no sabe para qué sirve.\n\n🤰 Con ecografías vieron bostezar a bebés de 24 semanas dentro del vientre.\n🧊 Los científicos creen que bostezar enfría el cerebro: con algo frío en la frente se bosteza menos.\n❤️ En la Universidad de Pisa vieron que el bostezo se contagia más entre familia y pareja que con desconocidos.\n🐶 Y 21 de 29 perros bostezaron al ver bostezar a una persona.\n\n¿Empatía o alarma del grupo? Nadie lo sabe todavía.\n\n👇 ¿Bostezaste? Confiesa en qué segundo.\n📩 Envíaselo a quien siempre te contagia los bostezos.\n🔖 Guárdalo para retar a alguien.",
+    "hashtags": [
+      "#ciencia",
+      "#datoscuriosos",
+      "#bostezo",
+      "#cerebro",
+      "#curiosidades"
+    ],
+    "comentario_fijado": "Yo aguanté hasta el perro 🐶😮‍💨 ¿Y tú?"
+  }
+}

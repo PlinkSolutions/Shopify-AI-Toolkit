@@ -109,7 +109,7 @@ Estados: 🔒 en producción · ✅ hecha (con su reel). Se actualiza con `scrip
 - CTA: Mándaselo a quien siempre ve caras en todo.
 - Etiquetas: base
 
-**18. ¿Por qué bostezar es contagioso? ¿Y por qué se te contagia más de quien quieres?**
+**18. ¿Por qué bostezar es contagioso? ¿Y por qué se te contagia más de quien quieres?** 🔒 en producción (03-bostezo)
 - Respuesta: Se contagia más entre personas cercanas y se asocia a la empatía.
 - Visual: Señal wifi entre dos cápsulas: «CONEXIÓN EMOCIONAL: ALTA»
 - CTA: Mándaselo a quien bosteza cada vez que tú bostezas.

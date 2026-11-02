@@ -232,7 +232,9 @@
     "hipotesis"
    ],
    "n": 18,
-   "estado": "libre"
+   "estado": "reservada",
+   "slug": "03-bostezo",
+   "fecha": "2026-11-02"
   },
   {
    "cat": "cerebro",

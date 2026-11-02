@@ -38,6 +38,41 @@ export type CaptionStyle = {
   box?: "oro" | "seleccion";
   /** true: only the word being spoken is white (others grey) · false: karaoke, spoken words stay white */
   active?: boolean;
+  /** flat-illustration reels: dark translucent bar behind the line, words appear as they are spoken, keyword in a filled blue box */
+  bar?: boolean;
+};
+
+const BarCaptions: React.FC<{ pages: Page[] }> = ({ pages }) => {
+  const frame = useCurrentFrame();
+  const page = pages.find((p) => frame >= p.from && frame < p.to);
+  if (!page) return null;
+  const said = page.words.filter((w) => frame >= Math.round(w.start * 30));
+  return (
+    <div style={{ position: "absolute", top: 268, left: 0, right: 0, display: "flex", justifyContent: "center" }}>
+      <div style={{ minWidth: 760, maxWidth: 980, minHeight: 104, boxSizing: "border-box", padding: "14px 30px", borderRadius: 26, background: "rgba(38,46,58,0.66)", display: "flex", alignItems: "center", flexWrap: "wrap", gap: "4px 16px", fontFamily: SANS, fontWeight: 600, fontSize: 54, lineHeight: 1.25 }}>
+        {said.map((w, i) => {
+          const at = Math.round(w.start * 30);
+          const current = i === said.length - 1;
+          const k = interpolate(frame, [at, at + 4], [0.86, 1], { ...clamp, easing: Easing.out(Easing.back(2)) });
+          return (
+            <span
+              key={i}
+              style={{
+                display: "inline-block",
+                color: w.key || current ? "#ffffff" : "rgba(222,228,238,0.62)",
+                transform: `scale(${current ? k : 1})`,
+                background: w.key ? "#1f6f9f" : "transparent",
+                borderRadius: 10,
+                padding: w.key ? "0 12px" : 0,
+              }}
+            >
+              {w.text}
+            </span>
+          );
+        })}
+      </div>
+    </div>
+  );
 };
 
 const SELECT = "#3d7bff";
@@ -54,9 +89,10 @@ const Handles: React.FC = () => (
   </>
 );
 
-export const Captions: React.FC<{ pages: Page[] } & CaptionStyle> = ({ pages, box = "oro", active = false }) => {
+export const Captions: React.FC<{ pages: Page[] } & CaptionStyle> = ({ pages, box = "oro", active = false, bar = false }) => {
   const frame = useCurrentFrame();
   const page = pages.find((p) => frame >= p.from && frame < p.to);
+  if (bar) return <BarCaptions pages={pages} />;
   if (!page) return null;
   return (
     <div style={{ position: "absolute", top: 190, left: 70, right: 70, display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "6px 16px", fontFamily: SANS, fontWeight: 500, fontSize: 52, lineHeight: 1.3 }}>
