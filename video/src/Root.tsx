@@ -26,6 +26,9 @@ export const RemotionRoot: React.FC = () => {
       {REELS.map((r) => (
         <Composition key={r.id} id={r.id} component={r.component} durationInFrames={r.frames} fps={REEL_FPS} width={1080} height={1920} />
       ))}
+      {REELS.filter((r) => r.cover).map((r) => (
+        <Composition key={`portada-${r.slug}`} id={`portada-${r.slug}`} component={r.cover!} durationInFrames={60} fps={REEL_FPS} width={1080} height={1920} />
+      ))}
       <Composition id="HoloClip" component={HoloClip} durationInFrames={HOLO_FRAMES} fps={HOLO_FPS} width={1080} height={1920} />
       <Composition id="PlinkReel" component={PlinkReel} durationInFrames={PLINK_FRAMES} fps={24} width={1080} height={1920} />
       <Composition id="IconGallery" component={IconGallery} durationInFrames={ICONS.length} fps={24} width={600} height={600} />

@@ -28,7 +28,11 @@ const Overlays: React.FC<{ tl: Timeline }> = ({ tl }) => {
   );
 };
 
-export type ReelOptions = { captions?: CaptionStyle };
+export type ReelOptions = {
+  captions?: CaptionStyle;
+  /** Instagram cover (9:16 still, rendered as composition portada-<slug>; keep text inside y 260–1660 for the 3:4 grid crop). */
+  cover?: React.FC;
+};
 
 export const HoloReel: React.FC<{ guion: Guion; tl: Timeline; scenes: SceneComponent[]; cues: Cue[]; options?: ReelOptions }> = ({ guion, tl, scenes, cues, options = {} }) => {
   const frame = useCurrentFrame();
@@ -76,11 +80,11 @@ export const HoloReel: React.FC<{ guion: Guion; tl: Timeline; scenes: SceneCompo
   );
 };
 
-export type ReelDef = { id: string; slug: string; frames: number; component: React.FC };
+export type ReelDef = { id: string; slug: string; frames: number; component: React.FC; cover?: React.FC };
 
 /** Composition entry for src/Holo/reels/index.ts. */
 export function defineReel(guion: Guion, tl: Timeline, scenes: SceneComponent[], cues: Cue[], options: ReelOptions = {}): ReelDef {
   if (scenes.length !== tl.SCENES.length) throw new Error(`${guion.slug}: ${scenes.length} scene components for ${tl.SCENES.length} segments`);
   const component: React.FC = () => <HoloReel guion={guion} tl={tl} scenes={scenes} cues={cues} options={options} />;
-  return { id: `reel-${guion.slug}`, slug: guion.slug, frames: tl.TOTAL_FRAMES, component };
+  return { id: `reel-${guion.slug}`, slug: guion.slug, frames: tl.TOTAL_FRAMES, component, cover: options.cover };
 }
