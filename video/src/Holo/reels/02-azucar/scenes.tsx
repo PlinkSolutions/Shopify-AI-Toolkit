@@ -304,9 +304,9 @@ export const S09: React.FC<P> = ({ sc }) => {
       <GlossyStage cam={c} palette="caramelo" toPalette="menta" mixPalette={peel} glow={[0.5, 0.52]}>
         <ContactShadow size={1.6} opacity={0.45} />
         <Cup scale={1.05} frontText="AZÚCAR" frontColor="#ff3b8f" backText="SIN AZÚCAR" backColor="#13a59a" peel={peel} />
-        {pk > 0 ? <Packet position={[-0.42, 1.3 + Math.sin(frame * 0.15) * 0.05, 0.8]} rotation={[0, 0.4, 0.5]} scale={0.7 * pk} /> : null}
+        {pk > 0 ? <Packet position={[-0.32, 1.25 + Math.sin(frame * 0.15) * 0.05, 1.0]} rotation={[0, 0.4, 0.5]} scale={0.7 * pk} /> : null}
       </GlossyStage>
-      <Tag anchor={[-0.42, 0.9, 0.8]} cam={c} at={beat(sc, "endulzante")} text="ENDULZANTE" tone={MINT} size={34} />
+      <Tag anchor={[-0.32, 0.85, 1.0]} cam={c} at={beat(sc, "endulzante")} text="ENDULZANTE" tone={MINT} size={34} />
     </AbsoluteFill>
   );
 };
@@ -380,7 +380,7 @@ export const S11: React.FC<P> = ({ sc }) => {
           right={<Packet position={[0, 0.05, 0]} rotation={[-Math.PI / 2 + 0.2, 0, 0.3]} scale={0.75} />}
         />
       </GlossyStage>
-      <LineChart x={540} y={1300} at={level} progress={chart} title="CONDUCTA" result="SIN CAMBIOS" />
+      <LineChart x={540} y={1400} at={level} progress={chart} title="CONDUCTA" result="SIN CAMBIOS" />
     </AbsoluteFill>
   );
 };

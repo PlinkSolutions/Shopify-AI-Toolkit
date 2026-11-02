@@ -5,53 +5,123 @@
   "idea": 78,
   "por_que": "Justo después de Halloween y Día de Muertos, con dulces en todas las casas: un mito que casi todos creen, roto por estudios a ciegas muy fáciles de dibujar (familias con dietas secretas y mamás a las que engañaron).",
   "direccion_arte": "Íconos 3D brillantes: dulces, platos, medidores y personajes-bolita con brillo de caramelo; dos polos de color en todo el video: rosa caramelo (lo que creemos) y azul menta (lo que pasa de verdad).",
+  "voz": {
+    "voz": "Dan - Upbeat, Dynamic and Friendly",
+    "model_id": "eleven_multilingual_v2",
+    "voice_settings": {
+      "stability": 0.41,
+      "similarity_boost": 0.65,
+      "style": 0.3,
+      "use_speaker_boost": true,
+      "speed": 1.0
+    },
+    "output_format": "mp3_44100_128"
+  },
   "bloques": [
     {
       "nombre": "Gancho y mito roto",
       "escenas": [
-        { "texto": "¿Por qué los niños se vuelven locos después de comer dulces?", "imagen": "Fondo degradado rosa caramelo. Un niño-bolita brillante con disfraz de calabaza junto a una montaña de caramelos envueltos y piruletas. En «locos» rebota de un lado a otro dejando una estela; etiqueta HIPERACTIVO." },
-        { "texto": "Casi todo el mundo te dirá que es el azúcar.", "imagen": "Un cubo de azúcar gigante y brillante en el centro; flechas desde todos los lados lo señalan. En «azúcar» se le cuelga la etiqueta CULPABLE." },
-        { "texto": "Pues no.", "imagen": "Cae un sello rojo FALSO sobre la etiqueta CULPABLE; el cubo se encoge y el fondo pasa de rosa a azul menta." }
+        {
+          "texto": "¿Por qué los niños se vuelven locos después de comer dulces?",
+          "imagen": "Fondo degradado rosa caramelo. Un niño-bolita brillante con disfraz de calabaza junto a una montaña de caramelos envueltos y piruletas. En «locos» rebota de un lado a otro dejando una estela; etiqueta HIPERACTIVO."
+        },
+        {
+          "texto": "Casi todo el mundo te dirá que es el azúcar.",
+          "imagen": "Un cubo de azúcar gigante y brillante en el centro; flechas desde todos los lados lo señalan. En «azúcar» se le cuelga la etiqueta CULPABLE."
+        },
+        {
+          "texto": "Pues no.",
+          "imagen": "Cae un sello rojo FALSO sobre la etiqueta CULPABLE; el cubo se encoge y el fondo pasa de rosa a azul menta."
+        }
       ]
     },
     {
       "nombre": "El experimento de las dietas",
       "escenas": [
-        { "texto": "En un estudio, unas familias siguieron tres dietas, de tres semanas cada una:", "imagen": "Tres platos con campana brillante en fila, cada uno con su calendario (SEMANA 1, 2, 3). En «tres dietas» se levantan las tres campanas a la vez." },
-        { "texto": "una llena de azúcar y dos con endulzantes. Nadie sabía cuál le tocaba.", "imagen": "Dentro: un plato con cubos de azúcar rosas y dos con sobres de endulzante azul menta. En «nadie sabía» las campanas bajan y se barajan como en el juego del vasito, con un signo de interrogación encima." },
-        { "texto": "Ni los niños que, según sus papás, eran sensibles al azúcar… se portaron distinto.", "imagen": "Tres niños-bolita, cada uno bajo un medidor de CONDUCTA (una dieta por niño). En «sensibles» les aparece la etiqueta SENSIBLE AL AZÚCAR; en «distinto» las tres agujas se alinean en el mismo punto y aparece 39 MEDICIONES · SIN CAMBIOS." }
+        {
+          "texto": "En un estudio, unas familias siguieron tres dietas, de tres semanas cada una:",
+          "imagen": "Tres platos con campana brillante en fila, cada uno con su calendario (SEMANA 1, 2, 3). En «tres dietas» se levantan las tres campanas a la vez."
+        },
+        {
+          "texto": "una llena de azúcar y dos con endulzantes. Nadie sabía cuál le tocaba.",
+          "imagen": "Dentro: un plato con cubos de azúcar rosas y dos con sobres de endulzante azul menta. En «nadie sabía» las campanas bajan y se barajan como en el juego del vasito, con un signo de interrogación encima."
+        },
+        {
+          "texto": "Ni los niños que, según sus papás, eran sensibles al azúcar… se portaron distinto.",
+          "imagen": "Tres niños-bolita, cada uno bajo un medidor de CONDUCTA (una dieta por niño). En «sensibles» les aparece la etiqueta SENSIBLE AL AZÚCAR; en «distinto» las tres agujas se alinean en el mismo punto y aparece 39 MEDICIONES · SIN CAMBIOS."
+        }
       ]
     },
     {
       "nombre": "Pero entonces…",
       "escenas": [
-        { "texto": "Entonces, ¿qué está pasando?", "imagen": "Una lupa gigante barre la escena y se detiene sobre una mamá-bolita (más grande, con lentes) que mira a su hijo." },
-        { "texto": "Otros científicos les dijeron a unas mamás que sus hijos habían tomado mucha azúcar.", "imagen": "Le entregan a la mamá un vaso brillante con la etiqueta AZÚCAR. En «mucha azúcar» se le llena de cubos rosas la burbuja de pensamiento." },
-        { "texto": "Era mentira: todos tomaron un endulzante sin azúcar.", "imagen": "En «mentira» la etiqueta AZÚCAR del vaso se despega y debajo aparece SIN AZÚCAR en azul menta." },
-        { "texto": "Aun así, esas mamás vieron a sus hijos más inquietos… y los vigilaban más de cerca.", "imagen": "Pantalla partida. Arriba, a través de unas gafas rosas (lo que la mamá espera), el niño rebota sin parar y su medidor INQUIETO se dispara en «inquietos»; abajo, sin gafas, el mismo niño juega tranquilo. En «más de cerca» la mamá se pega al niño con un foco encima: CONTROL +." }
+        {
+          "texto": "Entonces, ¿qué está pasando?",
+          "imagen": "Una lupa gigante barre la escena y se detiene sobre una mamá-bolita (más grande, con lentes) que mira a su hijo."
+        },
+        {
+          "texto": "Otros científicos les dijeron a unas mamás que sus hijos habían tomado mucha azúcar.",
+          "imagen": "Le entregan a la mamá un vaso brillante con la etiqueta AZÚCAR. En «mucha azúcar» se le llena de cubos rosas la burbuja de pensamiento."
+        },
+        {
+          "texto": "Era mentira: todos tomaron un endulzante sin azúcar.",
+          "imagen": "En «mentira» la etiqueta AZÚCAR del vaso se despega y debajo aparece SIN AZÚCAR en azul menta."
+        },
+        {
+          "texto": "Aun así, esas mamás vieron a sus hijos más inquietos… y los vigilaban más de cerca.",
+          "imagen": "Pantalla partida. Arriba, a través de unas gafas rosas (lo que la mamá espera), el niño rebota sin parar y su medidor INQUIETO se dispara en «inquietos»; abajo, sin gafas, el mismo niño juega tranquilo. En «más de cerca» la mamá se pega al niño con un foco encima: CONTROL +."
+        }
       ]
     },
     {
       "nombre": "Todos los experimentos",
       "escenas": [
-        { "texto": "Y al juntar todos los experimentos, el azúcar no cambió la conducta de los niños.", "imagen": "Una pila de fichas de experimentos cae sobre una balanza con un cubo de azúcar en un plato y un sobre de endulzante en el otro. En «no cambió» la balanza queda perfectamente nivelada y una línea plana cruza la gráfica de CONDUCTA." }
+        {
+          "texto": "Y al juntar todos los experimentos, el azúcar no cambió la conducta de los niños.",
+          "imagen": "Una pila de fichas de experimentos cae sobre una balanza con un cubo de azúcar en un plato y un sobre de endulzante en el otro. En «no cambió» la balanza queda perfectamente nivelada y una línea plana cruza la gráfica de CONDUCTA."
+        }
       ]
     },
     {
       "nombre": "Así que…",
       "escenas": [
-        { "texto": "Así que los científicos creen que lo que los acelera no son los dulces: es la fiesta, los disfraces, los otros niños…", "imagen": "Vuelve el niño-calabaza del inicio sobre el degradado rosa. En «fiesta» aparecen globos y confeti; en «disfraces» capas y antifaces; en «otros niños» entran rebotando más niños-bolita." },
-        { "texto": "y lo que nosotros esperamos ver.", "imagen": "Las gafas rosas de la mamá bajan sobre toda la pantalla y la escena entera se tiñe de rosa caramelo." }
+        {
+          "texto": "Así que los científicos creen que lo que los acelera no son los dulces: es la fiesta, los disfraces, los otros niños…",
+          "imagen": "Vuelve el niño-calabaza del inicio sobre el degradado rosa. En «fiesta» aparecen globos y confeti; en «disfraces» capas y antifaces; en «otros niños» entran rebotando más niños-bolita."
+        },
+        {
+          "texto": "y lo que nosotros esperamos ver.",
+          "imagen": "Las gafas rosas de la mamá bajan sobre toda la pantalla y la escena entera se tiñe de rosa caramelo."
+        }
       ]
     },
     {
       "nombre": "Compartir",
       "escenas": [
-        { "texto": "Envíaselo a quien no deja que los niños coman dulces porque se ponen locos.", "imagen": "Un móvil brillante comparte el video con TÍA. En «locos» el sello FALSO cae dentro del chat." }
+        {
+          "texto": "Envíaselo a quien no deja que los niños coman dulces porque se ponen locos.",
+          "imagen": "Un móvil brillante comparte el video con TÍA. En «locos» el sello FALSO cae dentro del chat."
+        }
       ]
     }
   ],
-  "palabras_clave": ["locos", "azúcar", "dietas", "endulzantes", "sensibles", "distinto", "mamás", "mentira", "inquietos", "cerca", "experimentos", "fiesta", "disfraces", "ver", "dulces"],
+  "palabras_clave": [
+    "locos",
+    "azúcar",
+    "dietas",
+    "endulzantes",
+    "sensibles",
+    "distinto",
+    "mamás",
+    "mentira",
+    "inquietos",
+    "cerca",
+    "experimentos",
+    "fiesta",
+    "disfraces",
+    "ver",
+    "dulces"
+  ],
   "cierre": {
     "pregunta": "¿Tú también creías que era el azúcar?",
     "clave": "azúcar",
@@ -60,24 +130,40 @@
   "fuentes": [
     {
       "texto": "Tres dietas a ciegas (sacarosa, aspartame y sacarina) de tres semanas cada una; en los niños que sus padres consideraban sensibles al azúcar ninguna de las 39 medidas de conducta y cognición cambió entre dietas (Wolraich et al., New England Journal of Medicine, 1994).",
-      "urls": ["https://pubmed.ncbi.nlm.nih.gov/8277950/"]
+      "urls": [
+        "https://pubmed.ncbi.nlm.nih.gov/8277950/"
+      ]
     },
     {
       "texto": "A las madres que creían que su hijo había tomado mucha azúcar (todos tomaron aspartame) les pareció significativamente más hiperactivo, y se mantuvieron más cerca de él y más controladoras (Hoover y Milich, Journal of Abnormal Child Psychology, 1994).",
-      "urls": ["https://uknowledge.uky.edu/psychology_facpub/13", "https://www.popsci.com/does-sugar-make-kids-hyper"]
+      "urls": [
+        "https://uknowledge.uky.edu/psychology_facpub/13",
+        "https://www.popsci.com/does-sugar-make-kids-hyper"
+      ]
     },
     {
       "texto": "Metaanálisis de los ensayos a ciegas: el azúcar no afecta la conducta ni el rendimiento cognitivo de los niños; no se descarta un efecto pequeño en algunos niños (Wolraich, Wilson y White, JAMA, 1995).",
-      "urls": ["https://jamanetwork.com/journals/jama/article-abstract/397955", "https://livescience.com/55754-does-sugar-make-kids-hyper.html"]
+      "urls": [
+        "https://jamanetwork.com/journals/jama/article-abstract/397955",
+        "https://livescience.com/55754-does-sugar-make-kids-hyper.html"
+      ]
     },
     {
       "texto": "Que lo que los acelera sean las fiestas y las expectativas de los adultos es la explicación que proponen los investigadores (Wolraich); se narra como «los científicos creen».",
-      "urls": ["https://amp.cbc.ca/news/health/sugar-hyperactivity-kids-1.3306486"]
+      "urls": [
+        "https://amp.cbc.ca/news/health/sugar-hyperactivity-kids-1.3306486"
+      ]
     }
   ],
   "instagram": {
     "descripcion": "¿El azúcar pone locos a los niños? 🍬🎃\n\nCasi todos lo creemos… pero la ciencia dice que no.\n\n🍽️ Unas familias siguieron 3 dietas de 3 semanas (una llena de azúcar) sin saber cuál les tocaba: los niños se portaron igual, incluso los «sensibles al azúcar».\n🥤 A unas mamás les dijeron que sus hijos habían tomado mucha azúcar. Era mentira… y aun así los vieron más inquietos.\n📚 Al juntar todos los experimentos, el azúcar no cambió la conducta de los niños.\n\nLos científicos creen que lo que los acelera es la fiesta, los disfraces, los otros niños… y lo que nosotros esperamos ver. 👀\n(Ojo: esto es sobre la conducta. El azúcar sigue sin ser buena para los dientes ni para la salud.)\n\n👇 ¿Tú también lo creías? Cuéntame.\n📩 Envíaselo a quien dice que los dulces ponen locos a los niños.\n🔖 Guárdalo para la próxima fiesta.",
-    "hashtags": ["#ciencia", "#datoscuriosos", "#mitos", "#crianza", "#halloween"],
+    "hashtags": [
+      "#ciencia",
+      "#datoscuriosos",
+      "#mitos",
+      "#crianza",
+      "#halloween"
+    ],
     "comentario_fijado": "Mi mamá después de cada fiesta: «es el azúcar» 😂 ¿Y la tuya?"
   }
 }

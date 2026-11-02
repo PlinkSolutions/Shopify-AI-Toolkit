@@ -88,10 +88,15 @@ for (let i = 0; i < S; ) {
   if (out[i]) { i++; continue; }
   let k = i;
   while (k < S && !out[k]) k++;
-  const from = i > 0 ? out[i - 1][1] : 0, to = k < S ? out[k][0] : total / fmt.sr;
-  const lens = script.slice(i, k).map((w) => w.n.length + 1), sum = lens.reduce((a, c) => a + c, 0);
+  let from = i > 0 ? out[i - 1][1] : 0, to = k < S ? out[k][0] : total / fmt.sr;
+  // Whisper glued the run onto the next word ("con endulzantes" → "conendulzantes"):
+  // share that word's span by length instead of squeezing the run into no time.
+  const glued = k < S && to - from < 0.06 * (k - i);
+  const end = glued ? k + 1 : k;
+  if (glued) to = out[k][1];
+  const lens = script.slice(i, end).map((w) => w.n.length + 1), sum = lens.reduce((a, c) => a + c, 0);
   let t = from;
-  for (let q = i; q < k; q++) { const d = ((to - from) * lens[q - i]) / sum; out[q] = [t, t + d]; t += d; }
+  for (let q = i; q < end; q++) { const d = ((to - from) * lens[q - i]) / sum; out[q] = [t, t + d]; t += d; }
   console.log(`interpolated: ${script.slice(i, k).map((w) => w.text).join(" ")} → ${from.toFixed(2)}–${to.toFixed(2)} s`);
   i = k;
 }

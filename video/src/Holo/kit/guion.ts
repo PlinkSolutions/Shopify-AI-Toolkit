@@ -19,6 +19,8 @@ export type Guion = {
   por_que: string;
   /** Art direction (FORMATO.md §10) and why it fits the topic. */
   direccion_arte?: string;
+  /** Voice used for this reel when it differs from scripts/holo/voz.json (same shape). */
+  voz?: { voz: string; model_id: string; voice_settings: { stability: number; similarity_boost: number; style: number; use_speaker_boost: boolean; speed: number }; output_format?: string };
   bloques: { nombre: string; escenas: Escena[] }[];
   /** Words shown in the gold caption box (bold in the PDF). */
   palabras_clave: string[];

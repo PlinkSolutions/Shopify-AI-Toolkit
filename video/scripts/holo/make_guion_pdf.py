@@ -82,7 +82,7 @@ def mmss(s):
 
 def build(reel_dir, out):
     g = json.load(open(os.path.join(reel_dir, "guion.json"), encoding="utf8"))
-    voz = json.load(open(os.path.join(os.path.dirname(__file__), "voz.json"), encoding="utf8"))
+    voz = g.get("voz") or json.load(open(os.path.join(os.path.dirname(__file__), "voz.json"), encoding="utf8"))
     keys = {BARE.sub("", k.lower()) for k in g["palabras_clave"]}
     escenas = [e for b in g["bloques"] for e in b["escenas"]]
     segments = [e["texto"] for e in escenas]
@@ -133,7 +133,7 @@ def build(reel_dir, out):
     vs = voz["voice_settings"]
     rows = [["Voz", voz["voz"]], ["Modelo", voz["model_id"]],
             ["Stability · Similarity · Style", f"{round(vs['stability'] * 100)} · {round(vs['similarity_boost'] * 100)} · {round(vs['style'] * 100)}"],
-            ["Speaker boost · Velocidad", f"{'sí' if vs['use_speaker_boost'] else 'no'} · {vs['speed']:.2f}"], ["Formato", voz["output_format"]]]
+            ["Speaker boost · Velocidad", f"{'sí' if vs['use_speaker_boost'] else 'no'} · {vs['speed']:.2f}"], ["Formato", voz.get("output_format", "mp3_44100_128")]]
     t = Table([[Paragraph(f"<b>{a}</b>", st["small"]), Paragraph(clean(b), st["small"])] for a, b in rows], colWidths=[60 * mm, 114 * mm])
     t.setStyle(TableStyle([("LINEBELOW", (0, 0), (-1, -1), 0.4, LINE), ("TOPPADDING", (0, 0), (-1, -1), 3), ("BOTTOMPADDING", (0, 0), (-1, -1), 3)]))
     s.append(t)
