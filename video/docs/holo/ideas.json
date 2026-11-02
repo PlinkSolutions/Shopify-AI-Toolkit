@@ -983,7 +983,9 @@
     "verificar"
    ],
    "n": 78,
-   "estado": "libre"
+   "estado": "reservada",
+   "slug": "02-azucar",
+   "fecha": "2026-11-02"
   },
   {
    "cat": "cotidiano",
@@ -1268,6 +1270,51 @@
    ],
    "n": 100,
    "estado": "libre"
+  },
+  {
+   "cat": "cerebro",
+   "hook": "¿Por qué un olor te regresa a tu infancia en un segundo y una foto no?",
+   "gist": "El olfato llega directo a las zonas de emoción y memoria; los recuerdos que despierta un olor suelen ser de la primera década de vida (Willander y Larsson, 2006).",
+   "visual": "Recepcionista del cerebro que filtra la vista y el oído; el olor entra por una puerta trasera directo al archivo de recuerdos",
+   "cta": "Envíaselo a esa persona cuya cocina todavía hueles.",
+   "tags": [
+    "tendencia",
+    "verificar"
+   ],
+   "n": 101,
+   "estado": "libre",
+   "alta": "2026-11-02",
+   "fuente": "https://www.the-scientist.com/why-do-certain-smells-bring-back-old-memories-73491"
+  },
+  {
+   "cat": "cotidiano",
+   "hook": "¿Por qué te da tanto sueño después de la cena de Thanksgiving? Todos culpan al pavo. Pues no.",
+   "gist": "El pavo tiene el mismo triptófano que otras carnes (el queso tiene más); el sueño viene de la comida enorme, los carbohidratos y el alcohol.",
+   "visual": "Pavo en el banquillo de acusados; el verdadero culpable: montaña de puré, pan y postre",
+   "cta": "Envíaselo a quien cada año culpa al pavo.",
+   "tags": [
+    "tendencia",
+    "base"
+   ],
+   "n": 102,
+   "estado": "libre",
+   "alta": "2026-11-02",
+   "fuente": "https://www.npr.org/2008/11/27/97449569/a-myth-examined-can-turkey-make-you-tired"
+  },
+  {
+   "cat": "cotidiano",
+   "hook": "¿Por qué a algunos el cilantro les sabe a jabón y a otros les encanta?",
+   "gist": "Una variante genética cerca del receptor olfativo OR6A2 se asocia con notar su sabor a jabón (23andMe, 2012); es mucho más común en personas de origen europeo que en latinos.",
+   "visual": "Taco con cilantro que para unos es hoja verde y para otros una pastilla de jabón con burbujas",
+   "cta": "Envíaselo a ese amigo que le quita el cilantro a todo.",
+   "tags": [
+    "base",
+    "verificar"
+   ],
+   "n": 103,
+   "estado": "libre",
+   "alta": "2026-11-02",
+   "fuente": "https://arxiv.org/abs/1209.2096"
   }
  ]
 }

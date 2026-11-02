@@ -127,6 +127,12 @@ Estados: 🔒 en producción · ✅ hecha (con su reel). Se actualiza con `scrip
 - CTA: Mándaselo a quien no duerme pensando en lo que dijo en 2016.
 - Etiquetas: base
 
+**101. ¿Por qué un olor te regresa a tu infancia en un segundo y una foto no?**
+- Respuesta: El olfato llega directo a las zonas de emoción y memoria; los recuerdos que despierta un olor suelen ser de la primera década de vida (Willander y Larsson, 2006).
+- Visual: Recepcionista del cerebro que filtra la vista y el oído; el olor entra por una puerta trasera directo al archivo de recuerdos
+- CTA: Envíaselo a esa persona cuya cocina todavía hueles.
+- Etiquetas: tendencia, verificar · fuente: https://www.the-scientist.com/why-do-certain-smells-bring-back-old-memories-73491
+
 ## Sueño
 
 **21. ¿Por qué te despiertas un minuto antes de que suene la alarma?** ⭐
@@ -481,7 +487,7 @@ Estados: 🔒 en producción · ✅ hecha (con su reel). Se actualiza con `scrip
 - CTA: Mándaselo a quien deja la bolsa de pan abierta.
 - Etiquetas: base
 
-**78. ¿El azúcar pone hiperactivos a los niños?**
+**78. ¿El azúcar pone hiperactivos a los niños?** 🔒 en producción (02-azucar)
 - Respuesta: Los estudios no lo confirman; los padres que creen que sí ven más hiperactividad.
 - Visual: Mito tachado «AZÚCAR = HIPERACTIVIDAD» + «EXPECTATIVA: PADRES»
 - CTA: Mándaselo a la madre que no deja comer dulces.
@@ -498,6 +504,18 @@ Estados: 🔒 en producción · ✅ hecha (con su reel). Se actualiza con `scrip
 - Visual: Moléculas de agua vibrando «PROFUNDIDAD: 2–3 CM»
 - CTA: Mándaselo a quien siempre se quema con la primera cucharada.
 - Etiquetas: base
+
+**102. ¿Por qué te da tanto sueño después de la cena de Thanksgiving? Todos culpan al pavo. Pues no.**
+- Respuesta: El pavo tiene el mismo triptófano que otras carnes (el queso tiene más); el sueño viene de la comida enorme, los carbohidratos y el alcohol.
+- Visual: Pavo en el banquillo de acusados; el verdadero culpable: montaña de puré, pan y postre
+- CTA: Envíaselo a quien cada año culpa al pavo.
+- Etiquetas: tendencia, base · fuente: https://www.npr.org/2008/11/27/97449569/a-myth-examined-can-turkey-make-you-tired
+
+**103. ¿Por qué a algunos el cilantro les sabe a jabón y a otros les encanta?**
+- Respuesta: Una variante genética cerca del receptor olfativo OR6A2 se asocia con notar su sabor a jabón (23andMe, 2012); es mucho más común en personas de origen europeo que en latinos.
+- Visual: Taco con cilantro que para unos es hoja verde y para otros una pastilla de jabón con burbujas
+- CTA: Envíaselo a ese amigo que le quita el cilantro a todo.
+- Etiquetas: base, verificar · fuente: https://arxiv.org/abs/1209.2096
 
 ## Animales y naturaleza
 
