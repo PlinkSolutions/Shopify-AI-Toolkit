@@ -487,7 +487,7 @@ Estados: 🔒 en producción · ✅ hecha (con su reel). Se actualiza con `scrip
 - CTA: Mándaselo a quien deja la bolsa de pan abierta.
 - Etiquetas: base
 
-**78. ¿El azúcar pone hiperactivos a los niños?** 🔒 en producción (02-azucar)
+**78. ¿El azúcar pone hiperactivos a los niños?** ✅ hecha (02-azucar)
 - Respuesta: Los estudios no lo confirman; los padres que creen que sí ven más hiperactividad.
 - Visual: Mito tachado «AZÚCAR = HIPERACTIVIDAD» + «EXPECTATIVA: PADRES»
 - CTA: Mándaselo a la madre que no deja comer dulces.
