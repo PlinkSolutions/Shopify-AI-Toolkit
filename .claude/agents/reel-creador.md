@@ -64,6 +64,9 @@ sigue con `--sin-voz` y repórtalo como bloqueo.
    (si trae analogía, la analogía tal cual; si no, una metáfora de la vida diaria), qué cambia en
    qué palabra y qué etiquetas aparecen. Un protagonista o escenario recurrente que vuelve en el
    resumen final. Si una escena no se entendería sin sonido, rehazla.
+   La **escena 1 es el gancho visual** y se diseña aparte con las 5 reglas de FORMATO.md §10
+   («Gancho visual»): fotograma 0 ya en movimiento, algo grande y cerca, texto-gancho grande,
+   un cambio fuerte antes del primer segundo y sonido desde el fotograma 0.
 2. **Dirección de arte**: elige una de las cuatro de FORMATO.md §10 según el tono del tema
    (holográfica 3D, simbólica oscura, íconos 3D brillantes, ilustración plana), escríbela en
    `direccion_arte` y mantenla en todo el video. Varía respecto a los últimos reels cuando el tema

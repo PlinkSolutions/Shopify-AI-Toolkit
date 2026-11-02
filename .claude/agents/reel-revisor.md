@@ -24,7 +24,7 @@ Datos de tiempos: `node scripts/holo/reel_info.mjs <slug>`. Compara con los reel
 
 | # | Criterio | Peso | Qué miras |
 |---|---|---|---|
-| 1 | Gancho (0–3 s) | 3 | Pregunta íntima y universal; primera frase ≤ 10 palabras; algo se mueve desde el primer frame; deja una pregunta abierta que solo se cierra viendo hasta el final |
+| 1 | Gancho (0–3 s) | 3 | Mira `hook.png` fotograma a fotograma: el fotograma 0 ya engancha (sin fundido ni pantalla vacía), algo grande y cerca, texto-gancho grande desde el inicio, un cambio fuerte antes de 1 s y sonido desde el fotograma 0 (FORMATO.md §10 «Gancho visual»). Pregunta íntima y universal; primera frase ≤ 10 palabras; deja una pregunta abierta que solo se cierra viendo hasta el final |
 | 2 | Retención y ritmo | 2 | 45–60 s (75–105 solo si el tema lo justifica); escenas 2–6 s; un cambio visible cada 1–1,5 s; ninguna quieta (report: `static_stretches_s` vacío); escenas largas con cambios internos; cada idea entra en su palabra |
 | 3 | Historia | 2 | Gancho con contraste o paradoja; mito roto o reencuadre en los primeros 6 s; mecanismo con metáforas claras; estudio real contado como escena; dato extra memorable; «Así que…» que responde el gancho y vuelve a su imagen; CTA a una persona concreta |
 | 4 | Veracidad | filtro | Comprueba con WebSearch/WebFetch al menos 3 datos clave y todos los nombres propios contra las fuentes. Un dato falso o inventado = CAMBIOS obligatorio, aunque el resto sea perfecto |

@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Audio, interpolate, random, Sequence, staticFile, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Audio, random, Sequence, staticFile, useCurrentFrame } from "remotion";
 import { NAVY } from "../stage";
 import { Cue } from "./cues";
 import { Guion } from "./guion";
@@ -19,11 +19,9 @@ const Overlays: React.FC<{ tl: Timeline }> = ({ tl }) => {
     const d = frame - s.from;
     if (d >= 0 && d < 3) flash = Math.max(flash, [0.36, 0.13, 0.04][d]);
   }
-  const black = interpolate(frame, [0, 6], [1, 0], { extrapolateRight: "clamp" });
   return (
     <>
       <AbsoluteFill style={{ background: "#dfe8ff", opacity: flash, mixBlendMode: "screen" }} />
-      <AbsoluteFill style={{ background: "#000", opacity: black }} />
     </>
   );
 };

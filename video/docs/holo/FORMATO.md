@@ -170,6 +170,27 @@ Antes de construir nada, se hace el **storyboard** del guion, frase por frase:
 Un cambio visible cada 1–1,5 s. Comparaciones = pantalla partida o dos polos de color que se
 mantienen todo el video. Si una escena no se entiende sin sonido, el dibujo está mal.
 
+### Gancho visual: los primeros 1,5 segundos
+
+En el primer segundo se decide si la persona se queda. La escena 1 se diseña aparte, con estas
+cinco reglas:
+
+1. **El fotograma 0 ya engancha**: sin fundido desde negro, sin logo, sin entrada lenta. La
+   imagen ya está en movimiento cuando arranca el video.
+2. **Algo grande y cerca**: una cara u ojos mirando a cámara, o el objeto del tema en primer
+   plano llenando la pantalla. Nada pequeño en el centro de un fondo vacío.
+3. **Texto-gancho grande desde el fotograma 0** (3–5 palabras), aparte de los subtítulos: un
+   reto («TE RETO: NO BOSTECES»), una promesa o la contradicción del tema. Va en el centro de la
+   pantalla, dentro de la zona segura.
+4. **Un cambio fuerte entre 0,3 y 1 s** (ruptura de patrón): algo se abre, explota, se rompe, la
+   cámara se lanza dentro de algo o hay un corte inesperado.
+5. **Sonido en el fotograma 0**: un efecto reconocible del tema (bostezo, golpe, alarma), nunca
+   silencio.
+
+Mejor todavía si el gancho **reta al espectador** (contador, medidor «tu bostezómetro», «¿cuánto
+aguantas?») o le hace una pregunta sobre él mismo: así se queda para ver el final. La última
+escena puede repetir la imagen del gancho para que el video haga bucle.
+
 ### Dirección de arte: se elige por tema, una por video
 
 | Tono del tema | Dirección | Rasgos |
