@@ -329,12 +329,19 @@ export const Bar: React.FC<{ x: number; y: number; at: number; label: string; va
 };
 
 /** Floating phone hologram showing the reel (its question, one word boxed): share sheet → contact selected → sent. */
-export const Phone: React.FC<{ at: number; pickAt: number; sendAt: number; question: string; keyword: string }> = ({ at, pickAt, sendAt, question, keyword }) => {
+export const Phone: React.FC<{ at: number; pickAt: number; sendAt: number; question: string; keyword: string; people?: [string, string][]; pick?: number }> = ({
+  at,
+  pickAt,
+  sendAt,
+  question,
+  keyword,
+  people = [["A", "Ana"], ["♥", "Mi persona"], ["L", "Leo"], ["J", "Juli"]],
+  pick = 1,
+}) => {
   const frame = useCurrentFrame();
   const o = appear(frame, at, 10);
   const sheet = interpolate(frame, [at + 6, at + 18], [1, 0], { ...clamp, easing: Easing.out(Easing.cubic) });
   const sent = frame >= sendAt;
-  const people = [["A", "Ana"], ["♥", "Mi persona"], ["L", "Leo"], ["J", "Juli"]];
   return (
     <div style={{ position: "absolute", left: 540, top: 470, width: 560, height: 1060, transform: `translate(-50%, ${(1 - o) * 80}px) perspective(1600px) rotateX(8deg) rotateY(-10deg)`, opacity: o, borderRadius: 64, padding: 16, background: "linear-gradient(160deg, #2a3350, #0e1424)", boxShadow: "0 0 0 2px #3b4a78 inset, 0 40px 100px rgba(0,0,0,0.7), 0 0 120px rgba(79,130,255,0.25)" }}>
       <div style={{ position: "relative", width: "100%", height: "100%", borderRadius: 50, overflow: "hidden", background: "#0b1120", fontFamily: SANS, color: "#fff" }}>
@@ -351,10 +358,10 @@ export const Phone: React.FC<{ at: number; pickAt: number; sendAt: number; quest
           <div style={{ fontWeight: 600, fontSize: 30, marginBottom: 26 }}>Compartir con</div>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             {people.map(([ini, name], i) => {
-              const picked = i === 1 && frame >= pickAt;
+              const picked = i === pick && frame >= pickAt;
               return (
                 <div key={name} style={{ display: "grid", justifyItems: "center", gap: 10, width: 110 }}>
-                  <div style={{ width: 92, height: 92, borderRadius: 46, display: "grid", placeItems: "center", fontWeight: 700, fontSize: 34, background: i === 1 ? "rgba(245,184,61,0.18)" : "#22335c", color: i === 1 ? GOLD : "#cfdbff", border: picked ? `4px solid ${GOLD}` : "4px solid transparent", boxShadow: picked ? `0 0 24px ${GOLD}` : "none" }}>{ini}</div>
+                  <div style={{ width: 92, height: 92, borderRadius: 46, display: "grid", placeItems: "center", fontWeight: 700, fontSize: 34, background: i === pick ? "rgba(245,184,61,0.18)" : "#22335c", color: i === pick ? GOLD : "#cfdbff", border: picked ? `4px solid ${GOLD}` : "4px solid transparent", boxShadow: picked ? `0 0 24px ${GOLD}` : "none" }}>{ini}</div>
                   <span style={{ fontSize: 21, color: picked ? GOLD : "#aab6d8", whiteSpace: "nowrap" }}>{name}</span>
                 </div>
               );
