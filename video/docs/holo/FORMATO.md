@@ -138,3 +138,28 @@ estados libre · reservada · hecha, e ideas nuevas de tendencia). Empezó con 1
 tu cuerpo, tu cerebro, sueño, amor, ¿qué pasaría si…?, espacio, misterios, cosas de todos
 los días, animales y actualidad. Etiquetas: base, hipótesis, misterio, tendencia,
 verificar y ⭐ recomendadas para empezar.
+
+## 10. Principios de imagen (de las dos referencias)
+
+Análisis completos: referencia 1 (holográfica, arriba) y `referencias/02-triada-oscura.md`.
+Las imágenes de cada video se **inventan a partir de su guion**; ninguna referencia se copia.
+
+1. **Elenco simbólico:** cada concepto del guion es un personaje u objeto con forma, color y
+   textura que expresan su significado (como las máscaras de oro, violeta y hielo de la ref. 2,
+   pero diseñados para cada historia). 2–4 por video, presentes en un mismo escenario.
+2. **Cámara-narradora:** viaja entre personajes siguiendo la voz y llega 0,3–0,6 s antes que la
+   palabra; los demás asoman por los bordes. Cortes con destello solo al cambiar de idea grande.
+3. **Verbo → transformación:** cada palabra clave cambia algo físico en su sílaba exacta (luz,
+   material, objeto que aparece). Los verbos de acción se hacen literales («aléjate» = la cámara
+   se aleja).
+4. **Un cambio visible cada 1–1,5 s**, aunque el plano no cambie.
+5. **Texturas orgánicas** (mármol, metal cepillado, piel de naranja, escarcha, madera, cristal,
+   humo) con halo del color del personaje; nada de plástico liso.
+6. **Paleta por video:** fondo casi negro (frío para ciencia, cálido para emociones) + un color
+   por personaje + un único color de alarma.
+7. **Cierre en símbolo:** el elenco se funde en un icono del tema para la última frase.
+8. **Subtítulos:** arriba, palabra activa destacada, término clave en recuadro (dorado o caja
+   de selección), 1–4 palabras por página.
+9. **Dos duraciones:** largo (75–105 s, 7 bloques) y corto (25–40 s, fórmula «lista de 3»:
+   gancho «¿Sabías que…?», nombre técnico, tres definiciones de una frase, lo que tienen en
+   común, consejo, CTA de seguir).
