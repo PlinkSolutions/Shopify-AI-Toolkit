@@ -29,7 +29,17 @@ const guion = JSON.parse(readFileSync(join(reelDir, "guion.json"), "utf8"));
 const wavPath = join("public/holo/reels", guion.slug, "voice.wav");
 const outPath = join(reelDir, "voice.ts");
 const norm = (w) => w.toLowerCase().normalize("NFD").replace(/[^a-z0-9]/g, "");
-const script = scriptWords(segmentsOf(guion)).map((w) => ({ ...w, n: norm(w.text) }));
+// Whisper writes numbers as digits ("veintiuno" → "21"): give spelled-out numbers their digits too.
+const UNITS = ["cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce", "trece", "catorce", "quince", "dieciseis", "diecisiete", "dieciocho", "diecinueve", "veinte"];
+const TENS = { treinta: 30, cuarenta: 40, cincuenta: 50, sesenta: 60, setenta: 70, ochenta: 80, noventa: 90, cien: 100, ciento: 100, mil: 1000 };
+function digits(n) {
+  if (UNITS.includes(n)) return String(UNITS.indexOf(n));
+  if (n === "un" || n === "una") return "1";
+  if (n in TENS) return String(TENS[n]);
+  if (n.startsWith("veinti") && UNITS.includes(n.slice(6))) return String(20 + UNITS.indexOf(n.slice(6)));
+  return null;
+}
+const script = scriptWords(segmentsOf(guion)).map((w) => ({ ...w, n: norm(w.text), d: digits(norm(w.text)) }));
 const heard = JSON.parse(readFileSync(whisperPath, "utf8")).map((w) => ({ ...w, n: norm(w.text) })).filter((w) => w.n);
 
 function sim(a, b) {
@@ -40,6 +50,8 @@ function sim(a, b) {
   return 1 - d[a.length][b.length] / Math.max(a.length, b.length);
 }
 
+const simWord = (w, h) => (w.d !== null && w.d === h ? 1 : sim(w.n, h));
+
 // Global alignment (script words × heard words).
 const S = script.length, H = heard.length, GAP = -0.4;
 const M = Array.from({ length: S + 1 }, (_, i) => Float64Array.from({ length: H + 1 }, (_, j) => (i + j) * GAP));
@@ -48,7 +60,7 @@ for (let i = 1; i <= S; i++) P[i][0] = 2;
 for (let j = 1; j <= H; j++) P[0][j] = 3;
 for (let i = 1; i <= S; i++)
   for (let j = 1; j <= H; j++) {
-    const s = sim(script[i - 1].n, heard[j - 1].n);
+    const s = simWord(script[i - 1], heard[j - 1].n);
     const opts = [M[i - 1][j - 1] + (s >= 0.5 ? 1 + s : -1), M[i - 1][j] + GAP, M[i][j - 1] + GAP];
     const k = opts.indexOf(Math.max(...opts));
     M[i][j] = opts[k];
@@ -58,7 +70,7 @@ const match = new Array(S).fill(-1);
 for (let i = S, j = H; i > 0 || j > 0; ) {
   const p = P[i][j];
   if (p === 1) {
-    if (sim(script[i - 1].n, heard[j - 1].n) >= 0.5) match[i - 1] = j - 1;
+    if (simWord(script[i - 1], heard[j - 1].n) >= 0.5) match[i - 1] = j - 1;
     i--; j--;
   } else if (p === 2) i--;
   else j--;
