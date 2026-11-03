@@ -30,7 +30,7 @@ Datos de tiempos: `node scripts/holo/reel_info.mjs <slug>`. Compara con los reel
 | 4 | Veracidad | filtro | Comprueba con WebSearch/WebFetch al menos 3 datos clave y todos los nombres propios contra las fuentes. Un dato falso o inventado = CAMBIOS obligatorio, aunque el resto sea perfecto |
 | 5 | Narración visual | 3 | Cada frase tiene un dibujo que la cuenta literalmente y cambia en su palabra clave (método de FORMATO.md §10); dirección de arte coherente con el tema y única en todo el video; metáforas propias de esta historia (no copiadas de las referencias ni de otros reels); cada escena se entiende en 1 s sin sonido; sujeto completo, nada cortado ni quemado; franja superior libre para subtítulos; nada importante fuera de x 80–960, y 380–1560 (interfaz de IG); estilo consistente de principio a fin |
 | 6 | Subtítulos y audio | 1 | Karaoke sincronizado; palabras clave bien elegidas; `integrated_lufs` entre −16 y −12, `true_peak_dbfs` ≤ −0.5; ningún efecto tapa una palabra; sin música |
-| 7 | Compartibilidad | 1 | CTA para enviar a una persona concreta; pregunta del cierre que provoca comentarios; descripción de IG con gancho en la primera línea, 3 datos, CTA de enviar y guardar, 4–6 hashtags; comentario fijado |
+| 7 | Compartibilidad | 1 | CTA para enviar a una persona concreta; promo de Plink Academy como última frase y escena (aprender a crear estos videos, síguenos, pronto revelamos el método); pregunta del cierre que provoca comentarios; descripción de IG con gancho en la primera línea, 3 datos, CTA de enviar y guardar, 4–6 hashtags; comentario fijado |
 | 8 | Tendencia | 1 | ¿Por qué hoy? Conexión con algo actual o con una pregunta perenne muy buscada |
 
 Nota final = media ponderada (pesos de la tabla; la veracidad es un filtro, no suma).

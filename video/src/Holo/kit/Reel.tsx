@@ -36,6 +36,8 @@ export type ReelOptions = {
   vignette?: boolean;
   /** colour of the light flash on every cut */
   flash?: string;
+  /** RGB glitch into the end card (holographic reels); false for a clean cut */
+  glitch?: boolean;
   /** replaces the holographic end card */
   endCard?: React.FC<{ question: string; keyword: string; cta: string }>;
 };
@@ -43,7 +45,7 @@ export type ReelOptions = {
 export const HoloReel: React.FC<{ guion: Guion; tl: Timeline; scenes: SceneComponent[]; cues: Cue[]; options?: ReelOptions }> = ({ guion, tl, scenes, cues, options = {} }) => {
   const frame = useCurrentFrame();
   const [g0, g1] = tl.GLITCH;
-  const g = frame >= g0 && frame < g1 && (frame - g0) % 3 !== 2;
+  const g = options.glitch !== false && frame >= g0 && frame < g1 && (frame - g0) % 3 !== 2;
   const shift = g ? 10 + random(`g${frame}`) * 18 : 0;
   const Overlay = options.overlay;
   const End = options.endCard ?? EndCard;

@@ -36,7 +36,7 @@
       "escenas": [
         {
           "texto": "Lo curioso es que lo hacemos desde antes de nacer… y la ciencia todavía no sabe para qué sirve.",
-          "imagen": "Una pizarra de laboratorio con la pregunta ¿PARA QUÉ SIRVE? y una científica rascándose la cabeza. En «nacer» se dibuja una cuna en la pizarra; en «no sabe» cae un sello SIN RESOLVER."
+          "imagen": "Una pizarra de laboratorio con la pregunta ¿PARA QUÉ SIRVE? y una científica rascándose la cabeza. En «nacer» se dibuja en la pizarra un vientre con un bebé acurrucado y la etiqueta ANTES DE NACER; en «no sabe» cae un sello SIN RESOLVER."
         }
       ]
     },
@@ -118,6 +118,15 @@
           "imagen": "Un móvil plano comparte el video con «Mi persona»; en «bostezos» las fotos de perfil de los dos contactos bostezan."
         }
       ]
+    },
+    {
+      "nombre": "Academia",
+      "escenas": [
+        {
+          "texto": "¿Quieres aprender a crear videos como este? Síguenos… muy pronto revelamos el método.",
+          "imagen": "Promo de la academia: etiqueta PLINK ACADEMY y una tira de storyboard con cuatro miniaturas de este video (Leo bostezando, la ecografía, el cerebro, el perro) que aparecen en «crear». En «Síguenos» un botón SEGUIR se pulsa y pasa a SIGUIENDO. En «pronto» aparece una carpeta EL MÉTODO con candado; en «revelamos» la tapa se entreabre y sale luz; en «método» cae un sello MUY PRONTO."
+        }
+      ]
     }
   ],
   "palabras_clave": [
@@ -138,12 +147,13 @@
     "empatía",
     "alarma",
     "confianza",
-    "bostezos"
+    "bostezos",
+    "método"
   ],
   "cierre": {
     "pregunta": "¿Bostezaste viendo esto?",
     "clave": "Bostezaste",
-    "cta": "CONFIESA ↓ · SÍGUENOS PARA MÁS CIENCIA DE LO COTIDIANO"
+    "cta": "CONFIESA ↓ · SÍGUENOS: MUY PRONTO REVELAMOS EL MÉTODO"
   },
   "fuentes": [
     {
@@ -179,7 +189,7 @@
     }
   ],
   "instagram": {
-    "descripcion": "Te reto: mira este video sin bostezar 😮‍💨⏱️\n\nBostezamos desde antes de nacer… y la ciencia todavía no sabe para qué sirve.\n\n🤰 Con ecografías vieron bostezar a bebés de 24 semanas dentro del vientre.\n🧊 Los científicos creen que bostezar enfría el cerebro: con algo frío en la frente se bosteza menos.\n❤️ En la Universidad de Pisa vieron que el bostezo se contagia más entre familia y pareja que con desconocidos.\n🐶 Y 21 de 29 perros bostezaron al ver bostezar a una persona.\n\n¿Empatía o alarma del grupo? Nadie lo sabe todavía.\n\n👇 ¿Bostezaste? Confiesa en qué segundo.\n📩 Envíaselo a quien siempre te contagia los bostezos.\n🔖 Guárdalo para retar a alguien.",
+    "descripcion": "Te reto: mira este video sin bostezar 😮‍💨⏱️\n\nBostezamos desde antes de nacer… y la ciencia todavía no sabe para qué sirve.\n\n🤰 Con ecografías vieron bostezar a bebés de 24 semanas dentro del vientre.\n🧊 Los científicos creen que bostezar enfría el cerebro: con algo frío en la frente se bosteza menos.\n❤️ En la Universidad de Pisa vieron que el bostezo se contagia más entre familia y pareja que con desconocidos.\n🐶 Y 21 de 29 perros bostezaron al ver bostezar a una persona.\n\n¿Empatía o alarma del grupo? Nadie lo sabe todavía.\n\n🎬 ¿Quieres aprender a crear videos como este? Síguenos: muy pronto revelamos el método.\n\n👇 ¿Bostezaste? Confiesa en qué segundo.\n📩 Envíaselo a quien siempre te contagia los bostezos.\n🔖 Guárdalo para retar a alguien.",
     "hashtags": [
       "#ciencia",
       "#datoscuriosos",

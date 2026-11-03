@@ -45,7 +45,9 @@ Ejecuta `scripts/holo/setup_assets.sh` desde `video/`.
   PRODUCCION.md §3 y FORMATO.md §10): 10–16 escenas, 125–165 palabras (45–60 s; formato largo
   solo si el tema lo pide), gancho con contraste, mito roto o reencuadre, primera frase ≤ 10 palabras,
   frases cortas, puntos suspensivos donde respira, palabras clave, cierre, fuentes y la
-  publicación de Instagram completa.
+  publicación de Instagram completa. La **última escena es siempre la promo de Plink Academy**
+  (bloque 8 de FORMATO.md: «¿Quieres aprender a crear videos como este? Síguenos… muy pronto
+  revelamos el método», con otras palabras si quieres) y la descripción de IG lleva esa línea.
 - `node scripts/holo/new_reel.mjs <slug>` crea la carpeta, escenas provisionales y el registro.
 
 ## 3. Voz

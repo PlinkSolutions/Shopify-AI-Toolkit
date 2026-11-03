@@ -4,7 +4,7 @@ a new sound here when a story needs one.
 
 usage: make_sfx_library.py out_dir   (public/holo/sfx, next to make_holo_sfx.py's pad, whoosh, blip, thump)
 sfx: zap, laugh, notif, error, zip, glow, scan, servo, chirps, fear, rise, sent, glitch, boing, pop, stamp,
-     yawn, yawn2, tick, gulp, ding
+     yawn, yawn2, tick, gulp, ding, siren
 """
 import os, sys, wave
 import numpy as np
@@ -194,4 +194,9 @@ save("gulp", gl + 0.8 * th, 0.8)
 # ding: stopwatch stops (bright bell)
 m = int(1.4 * SR); tt = np.arange(m) / SR
 save("ding", sum(a * np.sin(2 * np.pi * f * tt) * np.exp(-tt / d) for f, a, d in [(1760, 1, 0.5), (2637, 0.5, 0.3), (3520, 0.3, 0.2), (5274, 0.15, 0.1)]) * env(m, 0.002, 2), 0.6)
+# siren: soft two-tone alarm (wee-woo ×2)
+m = int(1.3 * SR); tt = np.arange(m) / SR
+f = np.where((tt * 3.2) % 2 < 1, 960, 760) * (1 + 0.01 * np.sin(2 * np.pi * 6 * tt))
+x = np.tanh(1.5 * np.sin(2 * np.pi * np.cumsum(f) / SR)) * np.minimum(1, tt / 0.04) * np.minimum(1, (1.3 - tt) / 0.2)
+save("siren", lp(x, 3500), 0.6)
 print("ok", sorted(os.listdir(out)))

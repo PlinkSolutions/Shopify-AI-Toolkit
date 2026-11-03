@@ -31,6 +31,7 @@ tabla de escenas o de editar uno de estos videos. Complementa la skill
 | 5 | Giro | "Pero aquí viene lo curioso:" + investigador (nombre + institución) o estudio | 15–25 s |
 | 6 | Cierre emocional | Retoma el gancho: "Así que no es que… Es que tu cerebro…" | 6–10 s |
 | 7 | Compartir | "Mándaselo a esa persona que…" (con humor o emoción) | 4–6 s |
+| 8 | Academia | Promo de Plink Academy, siempre la última frase: "¿Quieres aprender a crear videos como este? Síguenos… muy pronto revelamos el método." (varía las palabras, mismo mensaje) con su escena: PLINK ACADEMY, miniaturas del propio video, botón SEGUIR → SIGUIENDO y la carpeta EL MÉTODO con sello MUY PRONTO | 4–6 s |
 
 Reglas:
 - **Verificar todo** antes de escribir. Si no está 100 % probado: "los científicos creen…".
@@ -130,6 +131,7 @@ tiempos por palabra → escenas nuevas para esa historia → render → revisió
 - [ ] Subtítulos sincronizados con la voz real; palabras clave en recuadro dorado.
 - [ ] Destello en cada corte; sin música; efectos bajo la voz.
 - [ ] CTA a una persona concreta; logo propio al final.
+- [ ] Última frase y escena: promo de Plink Academy (aprender a crear estos videos, síguenos, pronto revelamos el método); también en la descripción de IG.
 - [ ] Etiqueta "Hecho con IA" activada si hay imágenes generadas.
 
 ## 9. Banco de ideas
