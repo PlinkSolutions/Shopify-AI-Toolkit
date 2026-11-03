@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Render a holographic reel end to end and collect the deliverables:
-#   out/entregas/<slug>/<slug>.mp4          Instagram-ready video (H.264, 1080x1920)
+#   out/entregas/<slug>/<slug>.mp4          Instagram-ready video (H.264, 1080x1920, audio at -14 LUFS)
 #   out/entregas/<slug>/<slug>.pdf          guion: dialogue, voice text, scenes, sources, IG post
 #   out/entregas/<slug>/descripcion-ig.txt  caption + hashtags + pinned comment, with emojis
 #   out/entregas/<slug>/revision/           report.json + contact sheets for the reviewer
@@ -54,7 +54,7 @@ scripts/holo/render_chunks.sh "$ID" "$TOTAL" "out/$SLUG-master.mp4" 400 "$DIR/cu
 
 DEST=out/entregas/$SLUG
 mkdir -p "$DEST/revision"
-"$FF" -v error -y -i "out/$SLUG-master.mp4" -vf "scale=out_range=tv" -c:v libx264 -preset slow -crf 21 -pix_fmt yuv420p -profile:v high -c:a copy -movflags +faststart "$DEST/$SLUG.mp4"
+"$FF" -v error -y -i "out/$SLUG-master.mp4" -vf "scale=out_range=tv" -c:v libx264 -preset slow -crf 21 -pix_fmt yuv420p -profile:v high -af "loudnorm=I=-14:TP=-1.5:LRA=11" -ar 48000 -c:a aac -b:a 192k -movflags +faststart "$DEST/$SLUG.mp4"
 "$PY" scripts/holo/make_guion_pdf.py "$DIR" "$DEST/$SLUG.pdf"
 "$PY" -c "
 import json, sys
